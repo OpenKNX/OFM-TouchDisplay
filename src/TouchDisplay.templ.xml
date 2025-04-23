@@ -39,7 +39,7 @@
                 <!-- 4 bits free -->          
               </Union>
               <!-- Next Offset must be set to:
-                <op:part href="TouchRoundModule.CellDefintion.xml" name="CellDefintion" instances="4"> in shared 
+                <op:part href="TouchDisplay.CellDefintion.xml" name="CellDefintion" instances="4"> in shared 
                 All other page types
               -->
 
@@ -72,7 +72,7 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%017_R-%TT%%CC%01701" RefId="%AID%_UP-%TT%%CC%017" />
               
               <!-- Cell Page -->
-              <!-- TouchRoundModule.TouchRoundModule.CellDefintion.xml will be included here -->
+              <!-- TouchDisplay.TouchDisplay.CellDefintion.xml will be included here -->
               <op:usePart name="CellDefintion" xpath="//KNX/ManufacturerData/Manufacturer/ApplicationPrograms/ApplicationProgram/Static/ParameterRefs/*" /> 
           
             </ParameterRefs>
@@ -172,7 +172,7 @@
                           <!-- Number of fields-->
                           <ParameterRefRef RefId="%AID%_UP-%TT%%CC%004_R-%TT%%CC%00401" IndentLevel="1" HelpContext="%DOC%" />          
                             
-                          <!-- TouchRoundModule.TouchRoundModule.CellDefintion.xml will be included here -->
+                          <!-- TouchDisplay.TouchDisplay.CellDefintion.xml will be included here -->
                           <op:usePart name="CellDefintion" xpath="//KNX/ManufacturerData/Manufacturer/ApplicationPrograms/ApplicationProgram/Dynamic/ChannelIndependentBlock/*" /> 
                       
                           <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />

@@ -2,6 +2,7 @@
 #include "OpenKNX.h"
 #include <lvgl.h>
  
+bool touchIsPressedForLgvl();
 
 class Page;
 

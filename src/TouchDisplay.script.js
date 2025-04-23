@@ -1,4 +1,4 @@
-// OFM-TouchRoundModule --
+// OFM-TouchDisplay --
 // SPDX-License-Identifier: AGPL-3.0-only
 
 function tchAddChannel(device, online, progress, context) {
@@ -17,4 +17,4 @@ function tchAddChannel(device, online, progress, context) {
     }
 }
 
-// -- OFM-TouchRoundModule //
+// -- OFM-TouchDisplay //

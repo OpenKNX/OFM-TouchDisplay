@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "TouchDisplayModule.h"
 #include "lvgl.h"
-#include "lv_xiao_round_screen.h"
+//#include "lv_xiao_round_screen.h"
 #include "knxprod.h"
 #include "./Screens/CellScreen.h"
 #include "./Screens/MainFunctionScreen.h"
@@ -20,7 +20,18 @@
 #include "./Pages/ProgButtonPage.h"
 #include "./ImageLoader.h"
 
+extern bool touchIsPressed();
+extern void displayInit();
+extern void touchInit();
+extern void backgroundLight(bool on);
 
+bool touchIsPressedForLgvl()
+{
+    return openknxTouchDisplayModule.touchPressStateForLgvl;
+}
+
+
+extern uint8_t screen_rotation;
 
 const std::string TouchDisplayModule::name()
 {
@@ -354,8 +365,8 @@ void TouchDisplayModule::setup(bool configured)
     //lv_lodepng_init();
     ImageLoader::connectLittleFSwithLVGL();
   
-    lv_xiao_disp_init();
-    lv_xiao_touch_init();
+    displayInit();
+    touchInit();
    
     updateTheme();
     MessageScreen::instance = new MessageScreen();
@@ -536,7 +547,7 @@ void TouchDisplayModule::display(bool on)
         logDebug("Display", "Turn display on.");
         _displayOn = true;
         Page::handleLoop(knx.configured()); // Update page
-        digitalWrite(XIAO_BL, HIGH);
+        backgroundLight(true);
         if (_displayOffRectangle != nullptr)
             lv_obj_add_flag(_displayOffRectangle, LV_OBJ_FLAG_HIDDEN);
     }
@@ -546,7 +557,7 @@ void TouchDisplayModule::display(bool on)
         _displayOn = false;
         if (_displayOffRectangle != nullptr)
             lv_obj_clear_flag(_displayOffRectangle, LV_OBJ_FLAG_HIDDEN);
-        digitalWrite(XIAO_BL, LOW);
+        backgroundLight(false);
     }
     if (knx.configured())
         KoTCH_DisplayOnOffState.value(_displayOn, DPT_State);
@@ -590,15 +601,12 @@ void TouchDisplayModule::interruptTouchRight()
     _touchRightPressed = digitalRead(TOUCH_RIGHT_PIN) == HIGH;
 }
 
-bool isTouchPressed()
-{
-    return openknxTouchDisplayModule.touchPressStateForLgvl;
-}
+
 
 unsigned long lowReads = 0;
 void TouchDisplayModule::loop(bool configured)
 {
-    bool touchPressed = chsc6x_is_pressed();
+    bool touchPressed = touchIsPressed();
    
     if (touchPressed != _touchPressState)
     {
