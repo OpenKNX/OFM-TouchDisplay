@@ -7,6 +7,7 @@ class RGBScreen : public ScreenWithLabel
     void colorChanged(lv_event_t* e);
     void updateColor();
     void updateSlider(uint8_t r, uint8_t g, uint8_t b);
+    bool isDeviationGreaterThanOne(uint8_t current, uint8_t newValue);
 
 public:
     static RGBScreen* instance;
@@ -18,9 +19,10 @@ public:
     lv_obj_t* value;
     lv_obj_t* currentColor;
 
-    uint8_t red = 0;
+    uint8_t red = 255;
     uint8_t green = 0;
     uint8_t blue = 0;
+    bool initialized = false;
     bool isPressed = false;
   
     RGBScreen();

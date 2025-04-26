@@ -53,15 +53,15 @@ void RGBDeviceBridge::mainFunctionValueChanged()
 
 void RGBDeviceBridge::colorChanged()
 {
-    logErrorP("colorChanged from widget");
     auto& device = *(KnxChannelRGB*) _detailDevicePage.getDevice();
     auto rgb = _screen.red << 16 | _screen.green << 8 | _screen.blue;
+    logErrorP("colorChanged from widget %lu", (unsigned long) rgb);
     device.commandRGB(nullptr, rgb);
 }
 
 void RGBDeviceBridge::setRGB(uint32_t rgb)
 {
-    logErrorP("color changed from bus");
+    logErrorP("color changed from bus %lu", (unsigned long) rgb);
     // Logic to set the RGB color
     uint8_t r = (rgb >> 16) & 0xFF;
     uint8_t g = (rgb >> 8) & 0xFF;
