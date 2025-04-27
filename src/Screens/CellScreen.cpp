@@ -142,7 +142,7 @@ _height(height)
         if (isLeft)
         {
             // left side
-            lv_obj_align(value, LV_ALIGN_CENTER, -10, 0);
+            lv_obj_align(value, LV_ALIGN_CENTER, 10, 0);
             lv_obj_set_style_text_align(value, LV_TEXT_ALIGN_RIGHT, 0);
             if (isTop)
             {
