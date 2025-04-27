@@ -43,7 +43,11 @@ RGBScreen::RGBScreen()
     for (size_t i = 0; i < canvasHight; i++)
     {
         lv_obj_t* canvas = lv_canvas_create(screen);
+    #if LVGL_VERSION_MAJOR < 9
+        lv_canvas_set_buffer(canvas, canvas_buf, canvasWidth, 1, LV_IMG_CF_TRUE_COLOR);
+    #else
         lv_canvas_set_buffer(canvas, canvas_buf, canvasWidth, 1, LV_COLOR_FORMAT_NATIVE);
+    #endif
         lv_obj_align(canvas, LV_ALIGN_CENTER, 0, heuSliderPosY + i - canvasHight / 2);
 
         // Fill canvas with hue gradient
@@ -53,7 +57,11 @@ RGBScreen::RGBScreen()
             hsv.s = 100; 
             hsv.v = 100;
             lv_color_t color = lv_color_hsv_to_rgb(hsv.h, hsv.s, hsv.v);
+    #if LVGL_VERSION_MAJOR < 9
+            lv_canvas_set_px(canvas, x, 0, color);
+    #else
             lv_canvas_set_px(canvas, x, 0, color, LV_OPA_COVER);
+    #endif
         }
     }
 
