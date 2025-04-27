@@ -1,15 +1,15 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
-#include "Sensor/KnxChannelSensor.h"
+#include "Alarm/KnxChannelAlarm.h"
 #include "../Screens/AlarmScreen.h"
 
-class SensorDeviceBridge : public SensorBridge
+class AlarmDeviceBridge : public AlarmBridge
 {
     DetailDevicePage& _detailDevicePage;
     AlarmScreen& _screen = *AlarmScreen::instance;
 public:
-    SensorDeviceBridge(DetailDevicePage& detailDevicePage);
-    virtual ~SensorDeviceBridge() override;
+    AlarmDeviceBridge(DetailDevicePage& detailDevicePage);
+    virtual ~AlarmDeviceBridge() override;
     virtual void setup(uint8_t _channelIndex) override;
     virtual void setDetected(bool detected) override;
     virtual void mainFunctionValueChanged() override;

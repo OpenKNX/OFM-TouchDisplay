@@ -2,7 +2,7 @@
 #include "DeviceBridges/SwitchDeviceBridge.h"
 #include "DeviceBridges/DimmerDeviceBridge.h"
 #include "DeviceBridges/DisplayDeviceBridge.h"
-#include "DeviceBridges/SensorDeviceBridge.h"
+#include "DeviceBridges/AlarmDeviceBridge.h"
 #include "DeviceBridges/RolladenDeviceBridge.h"
 #include "DeviceBridges/JalousieDeviceBridge.h"
 #include "DeviceBridges/FanDeviceBridge.h"
@@ -51,9 +51,9 @@ DeviceBridge* DeviceBridgeFactory::createDisplay(KnxChannelDisplay& channel, uin
     return result;
 }
 
-SensorBridge* DeviceBridgeFactory::createSensor(KnxChannelSensor& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
+AlarmBridge* DeviceBridgeFactory::createSensor(KnxChannelAlarm& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
 {
-    auto result = new SensorDeviceBridge(*_currentDevicePage);
+    auto result = new AlarmDeviceBridge(*_currentDevicePage);
     channel.add(result);
     return result;
 }

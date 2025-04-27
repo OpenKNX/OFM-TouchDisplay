@@ -2,10 +2,18 @@
 #include "CellParameterDefines.h"
 #include "../Screens/CellScreen.h"
 #include "../ImageLoader.h"
+#include "../TouchDisplayModule.h"
+#include "SmartHomeBridgeModule.h"
 
 const char* DateTimeCell::cellType()
 {
     return "DateTime";
+}
+
+DateTimeCell::~DateTimeCell()
+{
+    if (_eventPressed != nullptr)
+        lv_obj_remove_event_cb_with_user_data(_cellObject->cell, _eventPressed, this);
 }
 
 DateTimeCell::DateTimeCell(bool showDate, bool showTime)
@@ -17,6 +25,9 @@ DateTimeCell::DateTimeCell(bool showDate, bool showTime)
 void DateTimeCell::setup()
 {
     CellObject& cellObject = *_cellObject;
+    _eventPressed = [](lv_event_t *e) {((DateTimeCell*)lv_event_get_user_data(e))->_clickStarted = true; };
+    lv_obj_add_event_cb(cellObject.cell, _eventPressed, LV_EVENT_PRESSED, this);
+ 
     if (_showDate && _showTime)
     {
         lv_label_set_text(cellObject.label, "Datum/Zeit");
@@ -99,4 +110,50 @@ void DateTimeCell::updateTime(bool forceUpdate)
         }
     }
 
+}
+
+void DateTimeCell::shortPressed()
+{
+    if (_clickStarted)
+        handleClick(ParamTCH_CHShortPress1, ParamTCH_CHJumpToShort1, ParamTCH_CHDeviceShort1);
+}
+
+void DateTimeCell::resetPressed()
+{
+    _clickStarted = false;
+}
+
+void DateTimeCell::longPressed()
+{
+    if (_clickStarted)
+        handleClick(ParamTCH_CHLongPress1, ParamTCH_CHJumpToLong1, ParamTCH_CHDeviceLong1);
+}
+
+void DateTimeCell::handleClick(int function, uint8_t jumpToPage, uint8_t device)
+{
+    // <Enumeration Text="Nichts" Value="0" Id="%ENID%" />          
+    // <Enumeration Text="Absprung zu Seite" Value="3" Id="%ENID%" />
+    // <Enumeration Text="Hauptfunktion Gerät ausführen" Value="4" Id="%ENID%" />
+    switch(function)
+    {
+    case 0:
+        logDebugP("Nichts");
+        return;
+    case 3:
+        logDebugP("Absprung zu Seite %d", jumpToPage);
+        openknxTouchDisplayModule.activatePage(jumpToPage);
+        return;
+    case 4:
+        logDebugP("Hauptfunktion von Geräte %d", device);
+        auto deviceBridge = openknxSmartHomeBridgeModule.getChannel(device - 1);
+        if (deviceBridge != nullptr)
+        {
+            deviceBridge->commandMainFunctionClick();
+        }
+        else
+        {
+            logErrorP("Device %d not found", device);
+        }
+        return;
+    }
 }

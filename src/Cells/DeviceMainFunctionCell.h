@@ -15,7 +15,7 @@ class DeviceMainFunctionCell : public Cell
     virtual void shortPressed() override;
     virtual void longPressed() override;
     virtual void resetPressed() override;
-    void handleClick(int function, int jumpToPage);
+    void handleClick(int function, uint8_t jumpToPage, uint8_t device);
    
 protected:
     virtual const char* cellType() override;

@@ -63,7 +63,7 @@ void DeviceMainFunctionCell::channelValueChanged(KnxChannelBase& channel)
 void DeviceMainFunctionCell::shortPressed()
 {
     if (_clickStarted)
-        handleClick(ParamTCH_CHShortPress1, ParamTCH_CHJumpToShort1);
+        handleClick(ParamTCH_CHShortPressDevice1, ParamTCH_CHJumpToShort1, ParamTCH_CHDeviceShort1);
 }
 
 void DeviceMainFunctionCell::resetPressed()
@@ -74,15 +74,16 @@ void DeviceMainFunctionCell::resetPressed()
 void DeviceMainFunctionCell::longPressed()
 {
     if (_clickStarted)
-        handleClick(ParamTCH_CHLongPress1, ParamTCH_CHJumpToLong1);
+        handleClick(ParamTCH_CHLongPressDevice1, ParamTCH_CHJumpToLong1, ParamTCH_CHDeviceLong1);
 }
 
-void DeviceMainFunctionCell::handleClick(int function, int jumpToPage)
+void DeviceMainFunctionCell::handleClick(int function, uint8_t jumpToPage, uint8_t device)
 {
     // <Enumeration Text="Nichts" Value="0" Id="%ENID%" />          
-    // <Enumeration Text="Hauptfunktion ausführen" Value="0" Id="%ENID%" />
-    // <Enumeration Text="Detailseite aufrufen" Value="1" Id="%ENID%" />
-    // <Enumeration Text="Absprung zu Seite" Value="2" Id="%ENID%" />
+    // <Enumeration Text="Hauptfunktion ausführen" Value="1" Id="%ENID%" />
+    // <Enumeration Text="Detailseite aufrufen" Value="2" Id="%ENID%" />
+    // <Enumeration Text="Absprung zu Seite" Value="3" Id="%ENID%" />
+    // <Enumeration Text="Hauptfunktion anderes Gerät ausführen" Value="4" Id="%ENID%" />
     switch(function)
     {
     case 0:
@@ -100,6 +101,18 @@ void DeviceMainFunctionCell::handleClick(int function, int jumpToPage)
     case 3:
         logDebugP("Absprung zu Seite %d", jumpToPage);
         openknxTouchDisplayModule.activatePage(jumpToPage);
+        return;
+    case 4:
+        logDebugP("Hauptfunktion von Geräte %d", device);
+        auto deviceBridge = openknxSmartHomeBridgeModule.getChannel(device - 1);
+        if (deviceBridge != nullptr)
+        {
+            deviceBridge->commandMainFunctionClick();
+        }
+        else
+        {
+            logErrorP("Device %d not found", device);
+        }
         return;
     }
 }

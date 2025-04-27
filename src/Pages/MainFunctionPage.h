@@ -19,7 +19,7 @@ private:
     void longPressed() override;
     void resetPressed() override;
    
-    void handleClick(int function, int jumpToPage);
+    void handleClick(int function, uint8_t jumpToPage, uint8_t device);
 
 public:
     virtual ~MainFunctionPage() override;

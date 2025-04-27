@@ -1,28 +1,28 @@
-#include "SensorDeviceBridge.h"
+#include "AlarmDeviceBridge.h"
 #include "../ImageLoader.h"
 
-SensorDeviceBridge::SensorDeviceBridge(DetailDevicePage& detailDevicePage)
+AlarmDeviceBridge::AlarmDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
 {
 }
 
-void SensorDeviceBridge::setup(uint8_t _channelIndex)
+void AlarmDeviceBridge::setup(uint8_t _channelIndex)
 {   
     lv_label_set_text(_screen.label, _channel->getNameInUTF8());
     mainFunctionValueChanged();
     _screen.show();
 }
 
-SensorDeviceBridge::~SensorDeviceBridge()
+AlarmDeviceBridge::~AlarmDeviceBridge()
 {
 }
 
-void SensorDeviceBridge::setDetected(bool detected)
+void AlarmDeviceBridge::setDetected(bool detected)
 {
     
 }
 
-void SensorDeviceBridge::mainFunctionValueChanged()
+void AlarmDeviceBridge::mainFunctionValueChanged()
 {
     auto& device = *_channel;
     ImageLoader::loadImage(_screen.image, device.mainFunctionImage().imageFile, device.mainFunctionImage().allowRecolor, device.mainFunctionValue());

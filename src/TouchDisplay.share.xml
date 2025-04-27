@@ -70,11 +70,20 @@
               <ParameterType Id="%AID%_PT-Text16Byte" Name="Text16Byte">
                 <TypeText SizeInBit="128" />
               </ParameterType>
-              <ParameterType Id="%AID%_PT-TCHClickFunction" Name="TCHClickFunction">
+              <ParameterType Id="%AID%_PT-TCHClickDeviceFunction" Name="TCHClickDeviceFunction">
                 <TypeRestriction Base="Value" SizeInBit="4">
                   <Enumeration Text="Nichts" Value="0" Id="%ENID%" />
                   <Enumeration Text="Hauptfunktion ausführen" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Hauptfunktion von anderem Gerät ausführen" Value="4" Id="%ENID%" />
                   <Enumeration Text="Detailseite aufrufen" Value="2" Id="%ENID%" />
+                  <Enumeration Text="Absprung zu Seite" Value="3" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+
+              <ParameterType Id="%AID%_PT-TCHClickFunction" Name="TCHClickFunction">
+                <TypeRestriction Base="Value" SizeInBit="4">
+                  <Enumeration Text="Nichts" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Hauptfunktion von Gerät ausführen" Value="4" Id="%ENID%" />
                   <Enumeration Text="Absprung zu Seite" Value="3" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>

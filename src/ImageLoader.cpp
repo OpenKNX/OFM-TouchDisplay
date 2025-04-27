@@ -20,13 +20,13 @@
 #include "../Images/Type60_4.c"
 #include "../Images/Type60_5.c"
 #include "../Images/Type60_9.c"
-#include "../Images/Type70.c"
-#include "../Images/Type71.c"
-#include "../Images/Type72.c"
-#include "../Images/Type73.c"
-#include "../Images/Type74.c"
-#include "../Images/Type75.c"
-#include "../Images/Type76.c"
+#include "../Images/Type70_0.c"
+#include "../Images/Type70_1.c"
+#include "../Images/Type70_2.c"
+#include "../Images/Type70_3.c"
+#include "../Images/Type70_4.c"
+#include "../Images/Type70_5.c"
+#include "../Images/Type70_6.c"
 #include "../Images/Type80.c"
 #include "../Images/Type90.c"
 #include "../Images/Type91.c"
@@ -283,33 +283,33 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &Type60_9);
     }
-    else if (fileName == "Type70.png")
+    else if (fileName == "Type70_0.png")
     {
-        lv_img_set_src(imageObject, &Type70);
+        lv_img_set_src(imageObject, &Type70_0);
     }
-    else if (fileName == "Type71.png")
+    else if (fileName == "Type70_1.png")
     {
-        lv_img_set_src(imageObject, &Type71);
+        lv_img_set_src(imageObject, &Type70_1);
     }
-    else if (fileName == "Type72.png")
+    else if (fileName == "Type70_2.png")
     {
-        lv_img_set_src(imageObject, &Type72);
+        lv_img_set_src(imageObject, &Type70_2);
     }
-    else if (fileName == "Type73.png")
+    else if (fileName == "Type70_3.png")
     {
-        lv_img_set_src(imageObject, &Type73);
+        lv_img_set_src(imageObject, &Type70_3);
     }
-    else if (fileName == "Type74.png")
+    else if (fileName == "Type70_4.png")
     {
-        lv_img_set_src(imageObject, &Type74);
+        lv_img_set_src(imageObject, &Type70_4);
     }
-    else if (fileName == "Type75.png")
+    else if (fileName == "Type70_5.png")
     {
-        lv_img_set_src(imageObject, &Type75);
+        lv_img_set_src(imageObject, &Type70_5);
     }
-    else if (fileName == "Type76.png")
+    else if (fileName == "Type70_6.png")
     {
-        lv_img_set_src(imageObject, &Type76);
+        lv_img_set_src(imageObject, &Type70_6);
     }
     else if (fileName == "Type80.png")
     {
