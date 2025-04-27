@@ -24,6 +24,7 @@ class TouchDisplayModule : public OpenKNX::Module
 	Page* _pageAtPressStart = nullptr;
 	lv_color_t _colorActive;
 	lv_color_t _colorInactive;
+	bool _setupDone = false;
 public:
 	bool touchPressStateForLgvl = false;
 

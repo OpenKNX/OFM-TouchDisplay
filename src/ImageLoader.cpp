@@ -150,7 +150,6 @@ const std::string ImageLoader::logPrefix()
 
 void ImageLoader::unloadImage(lv_obj_t* imageObject)
 {
-    lv_img_set_src(imageObject, nullptr);
     lv_obj_add_flag(imageObject, LV_OBJ_FLAG_HIDDEN);
 }
 

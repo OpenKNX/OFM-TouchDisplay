@@ -33,6 +33,8 @@ DoorWindowDeviceBridge::~DoorWindowDeviceBridge()
 {
     if (_eventIconPressed != nullptr)
         lv_obj_remove_event_cb_with_user_data(_screen.image, _eventIconPressed, this);
+    if (_eventSliderReleased != nullptr)
+        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventSliderReleased, this);
 }
 
 void DoorWindowDeviceBridge::setPosition(uint8_t position)

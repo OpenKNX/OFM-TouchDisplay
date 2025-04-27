@@ -423,6 +423,7 @@ void TouchDisplayModule::setup(bool configured)
         showProgButtonPage();
     }
     Module::setup(configured);
+    _setupDone = true;
 }
 
 void TouchDisplayModule::updateTheme()
@@ -496,7 +497,8 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection)
     // if (theme != nullptr)
     //     lv_disp_set_theme(lv_disp_get_default(), theme);
 
-  //  Page::showPage(Page::createPage(_channelIndex));
+    if (_setupDone)
+        Page::showPage(Page::createPage(_channelIndex));
 }
 
 lv_color_t TouchDisplayModule::getActiveColor()
