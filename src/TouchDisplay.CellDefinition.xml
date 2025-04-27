@@ -24,9 +24,9 @@
                                 <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%03" Name="CH%C%JumpToShort%N%" ParameterType="%AID%_PT-TCHNumChannels"  Text="Absprung zu" Value="1" />
                                 <!-- Jump To Long Press -->
                                 <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%04" Name="CH%C%JumpToLong%N%" ParameterType="%AID%_PT-TCHNumChannels"  Text="Absprung zu" Value="1" />
-                                <!-- Device Short Press-->
+                                <!-- Device Selection Short Press-->
                                 <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%06" Name="CH%C%DeviceShort%N%" ParameterType="%AID%_PT-TCHDeviceSelection"  Text="Gerät" Value="1" />
-                                <!-- Device Long Press -->
+                                <!-- Device Selection Long Press -->
                                 <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%07" Name="CH%C%DeviceLong%N%" ParameterType="%AID%_PT-TCHDeviceSelection"  Text="Gerät" Value="1" />
                                 <!-- Cell Type -->      
                                 <Parameter Offset="4" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%05" Name="CH%C%TCHCellType%N%" ParameterType="%AID%_PT-TCHCellType" Text="Funktion" Value="1" />    
@@ -46,10 +46,14 @@
                             <ParameterRef Id="%AID%_UP-%TT%%CC%%N%03_R-%TT%%CC%%N%0301" RefId="%AID%_UP-%TT%%CC%%N%03" />
                             <!-- Jump To Long Press -->
                             <ParameterRef Id="%AID%_UP-%TT%%CC%%N%04_R-%TT%%CC%%N%0401" RefId="%AID%_UP-%TT%%CC%%N%04" />
-                            <!-- Other Device Short Press -->
+                            <!-- Device Short Press -->
                             <ParameterRef Id="%AID%_UP-%TT%%CC%%N%06_R-%TT%%CC%%N%0601" RefId="%AID%_UP-%TT%%CC%%N%06" />
-                            <!-- Other Device Long Press -->
+                            <!-- Device Long Press -->
                             <ParameterRef Id="%AID%_UP-%TT%%CC%%N%07_R-%TT%%CC%%N%0701" RefId="%AID%_UP-%TT%%CC%%N%07" />
+                            <!-- Short Press (None Device) -->
+                            <ParameterRef Id="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" RefId="%AID%_UP-%TT%%CC%%N%08" />
+                            <!-- Long Press (Noe Device) -->
+                            <ParameterRef Id="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" RefId="%AID%_UP-%TT%%CC%%N%09" />
                             <!-- Cell Type -->
                             <ParameterRef Id="%AID%_UP-%TT%%CC%%N%05_R-%TT%%CC%%N%0501" RefId="%AID%_UP-%TT%%CC%%N%05" />
                         </ParameterRefs>
@@ -111,26 +115,26 @@
                                             <when test="3" >
                                                 <!-- Time  -->
                                                 <!-- Short Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%01_R-%TT%%CC%%N%0101" IndentLevel="1" HelpContext="%DOC%" />
-                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%01_R-%TT%%CC%%N%0101">
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="%DOC%" />
+                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801">
                                                     <when test="3" >
                                                         <!-- Jump To Short Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%03_R-%TT%%CC%%N%0301" HelpContext="%DOC%" />                                   
                                                     </when>
                                                     <when test="4">
-                                                        <!-- Device main function Short Press -->
+                                                        <!-- Short Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%06_R-%TT%%CC%%N%0601" HelpContext="%DOC%" />
                                                     </when>
                                                 </choose>
                                                 <!-- Long Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%02_R-%TT%%CC%%N%0201" IndentLevel="1" HelpContext="%DOC%" />
-                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%02_R-%TT%%CC%%N%0201">
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="%DOC%" />
+                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901">
                                                     <when test="3" >
                                                         <!-- Jump To Long Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%04_R-%TT%%CC%%N%0401" HelpContext="%DOC%" />
                                                     </when>
                                                     <when test="4" >
-                                                        <!-- Device main function  Press -->
+                                                        <!-- Long Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%07_R-%TT%%CC%%N%0701" HelpContext="%DOC%" />
                                                     </when>
                                                 </choose>
@@ -138,26 +142,26 @@
                                             <when test="4" >
                                                 <!-- Date -->
                                                 <!-- Short Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%01_R-%TT%%CC%%N%0101" IndentLevel="1" HelpContext="%DOC%" />
-                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%01_R-%TT%%CC%%N%0101">
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="%DOC%" />
+                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801">
                                                     <when test="3" >
                                                         <!-- Jump To Short Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%03_R-%TT%%CC%%N%0301" HelpContext="%DOC%" />                                   
                                                     </when>
                                                     <when test="4">
-                                                        <!-- Device main function Short Press -->
+                                                        <!-- Short Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%06_R-%TT%%CC%%N%0601" HelpContext="%DOC%" />
                                                     </when>
                                                 </choose>
                                                 <!-- Long Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%02_R-%TT%%CC%%N%0201" IndentLevel="1" HelpContext="%DOC%" />
-                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%02_R-%TT%%CC%%N%0201">
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="%DOC%" />
+                                                <choose ParamRefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901">
                                                     <when test="3" >
                                                         <!-- Jump To Long Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%04_R-%TT%%CC%%N%0401" HelpContext="%DOC%" />
                                                     </when>
                                                     <when test="4" >
-                                                        <!-- Device main function  Press -->
+                                                        <!-- Long Press -->
                                                         <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%%N%07_R-%TT%%CC%%N%0701" HelpContext="%DOC%" />
                                                     </when>
                                                 </choose>

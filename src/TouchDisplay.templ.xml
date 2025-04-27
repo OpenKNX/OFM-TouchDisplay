@@ -203,26 +203,26 @@
                         <when test="3">
                             <!-- Date Time Page -->
                             <!-- Short Press -->
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101" IndentLevel="1" HelpContext="%DOC%" />
-                            <choose ParamRefId="%AID%_UP-%TT%%CC%101_R-%TT%%CC%10101">
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%108_R-%TT%%CC%10801" IndentLevel="1" HelpContext="%DOC%" />
+                            <choose ParamRefId="%AID%_UP-%TT%%CC%108_R-%TT%%CC%10801">
                                 <when test="3" >
                                     <!-- Jump To Short Press -->
                                     <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%103_R-%TT%%CC%10301" HelpContext="%DOC%" />                                   
                                 </when>
                                 <when test="4">
-                                  <!-- Device main function Short Press -->
+                                  <!-- Short Press -->
                                   <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%106_R-%TT%%CC%10601" HelpContext="%DOC%" />
                               </when>
                             </choose>
                             <!-- Long Press -->
-                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201" IndentLevel="1" HelpContext="%DOC%" />
-                            <choose ParamRefId="%AID%_UP-%TT%%CC%102_R-%TT%%CC%10201">
+                            <ParameterRefRef RefId="%AID%_UP-%TT%%CC%109_R-%TT%%CC%10901" IndentLevel="1" HelpContext="%DOC%" />
+                            <choose ParamRefId="%AID%_UP-%TT%%CC%109_R-%TT%%CC%10901">
                                 <when test="3" >
                                     <!-- Jump To Long Press -->
                                     <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%104_R-%TT%%CC%10401" HelpContext="%DOC%" />
                                 </when>
                                 <when test="4">
-                                  <!-- Device main function Short Press -->
+                                  <!-- Long Press -->
                                   <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%%CC%107_R-%TT%%CC%10701" HelpContext="%DOC%" />
                               </when>
                             </choose>    

@@ -16,6 +16,9 @@ DateTimePage::~DateTimePage()
 
 void DateTimePage::setup()
 {
+    _eventPressed = [](lv_event_t *e) { ((DateTimePage*) lv_event_get_user_data(e))->_clickStarted = true; };
+        lv_obj_add_event_cb(_screen.screen, _eventPressed, LV_EVENT_PRESSED, this);
+  
     updateTime(true);
     _screen.show();
 }
