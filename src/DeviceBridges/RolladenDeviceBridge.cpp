@@ -23,8 +23,6 @@ void RolladenDeviceBridge::setup(uint8_t _channelIndex)
     lv_obj_add_event_cb(_screen.image, _eventButtonMainFunctionPressed, LV_EVENT_CLICKED, this);  
     _eventSliderReleased = [](lv_event_t *e) { ((RolladenDeviceBridge*) lv_event_get_user_data(e))->sliderReleased(); };  
     lv_obj_add_event_cb(_screen.sliderPosition, _eventSliderReleased, LV_EVENT_RELEASED, this);
-    _evnetSliderClicked = [](lv_event_t *e) { logError("Slider","clicked");  };
-    lv_obj_add_event_cb(_screen.sliderPosition, _evnetSliderClicked, LV_EVENT_CLICKED, this);
     
     mainFunctionValueChanged();
     _screen.show();
@@ -40,8 +38,6 @@ RolladenDeviceBridge::~RolladenDeviceBridge()
         lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonMainFunctionPressed, this);
     if (_eventSliderReleased != nullptr)
         lv_obj_remove_event_cb_with_user_data(_screen.sliderPosition, _eventSliderReleased, this);
-    if (_evnetSliderClicked != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.sliderPosition, _evnetSliderClicked, this);
 }
 
 void RolladenDeviceBridge::mainFunctionValueChanged() 
@@ -89,7 +85,6 @@ void RolladenDeviceBridge::sliderReleased()
 #else
     uint8_t value = lv_slider_get_value(_screen.sliderPosition);
 #endif
-logErrorP("RolladenDeviceBridge::sliderReleased %d", (int) value);
 _channel->commandPosition(nullptr, value);
 }
 
@@ -107,6 +102,5 @@ void RolladenDeviceBridge::buttonDownPressed()
 
 void RolladenDeviceBridge::buttonMainFunctionPressed()
 {    
-    logErrorP("RolladenDeviceBridge::buttonMainFunctionPressed");
     _channel->commandMainFunctionClick();
 }

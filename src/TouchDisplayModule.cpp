@@ -219,7 +219,6 @@ void TouchDisplayModule::showErrorPage(const char *message)
 {
     display(true);
     _lastTimeoutReset = 0;
-    logErrorP("Error Screen: %s", message);
     Page::showPage(Page::createErrorPage(message, _channelIndex));
 }
 
@@ -461,22 +460,26 @@ void TouchDisplayModule::updateTheme()
 
 
 
-void TouchDisplayModule::setTheme(uint8_t theme)
+void TouchDisplayModule::setTheme(uint8_t themeSelection)
 {
     lv_disp_t *display = lv_disp_get_default();
     // <Enumeration Text="Light" Value="0" Id="%ENID%" />
     // <Enumeration Text="Dark" Value="1" Id="%ENID%" />
-    switch (theme)
+    lv_theme_t *theme = nullptr;
+    switch (themeSelection)
     {
     case 0:
-        _theme = theme;
+        _themeSelection = themeSelection;
+        logDebugP("Theme: Light");
         lv_theme_default_init(display, lv_palette_main(LV_PALETTE_GREY), lv_palette_main(LV_PALETTE_AMBER), 0, LV_FONT_DEFAULT);
         break;
     case 1:
-        _theme = theme;
+        _themeSelection = themeSelection;
+        logDebugP("Theme: Dark");
         lv_theme_default_init(display, lv_palette_main(LV_PALETTE_GREY), lv_palette_main(LV_PALETTE_AMBER), 1, LV_FONT_DEFAULT);
         break;
     }
+
     lv_obj_t *label = lv_label_create(lv_scr_act());
     _colorInactive = lv_obj_get_style_text_color(label, LV_PART_MAIN);
     lv_obj_del(label);
@@ -489,7 +492,11 @@ void TouchDisplayModule::setTheme(uint8_t theme)
     _colorActive = lv_obj_get_style_bg_color(btn, LV_PART_MAIN | LV_STATE_CHECKED);
 #endif
     lv_obj_del(btn); 
-    Page::showPage(Page::createPage(_channelIndex));
+
+    // if (theme != nullptr)
+    //     lv_disp_set_theme(lv_disp_get_default(), theme);
+
+  //  Page::showPage(Page::createPage(_channelIndex));
 }
 
 lv_color_t TouchDisplayModule::getActiveColor()

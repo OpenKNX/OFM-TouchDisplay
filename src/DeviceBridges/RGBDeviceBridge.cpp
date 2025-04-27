@@ -22,7 +22,6 @@ RGBDeviceBridge::~RGBDeviceBridge()
 
 void RGBDeviceBridge::setup(uint8_t channelIndex)
 {
-    logError("RGBDeviceBridge", "Show");
     lv_label_set_text(_screen.label, _channel->getNameInUTF8());
    
     _eventColorChanged =[](lv_event_t *e) { ((RGBDeviceBridge*) lv_event_get_user_data(e))->colorChanged(); };
@@ -55,18 +54,15 @@ void RGBDeviceBridge::colorChanged()
 {
     auto& device = *(KnxChannelRGB*) _detailDevicePage.getDevice();
     auto rgb = _screen.red << 16 | _screen.green << 8 | _screen.blue;
-    logErrorP("colorChanged from widget %lu", (unsigned long) rgb);
     device.commandRGB(nullptr, rgb);
 }
 
 void RGBDeviceBridge::setRGB(uint32_t rgb)
 {
-    logErrorP("color changed from bus %lu", (unsigned long) rgb);
     // Logic to set the RGB color
     uint8_t r = (rgb >> 16) & 0xFF;
     uint8_t g = (rgb >> 8) & 0xFF;
     uint8_t b = rgb & 0xFF;
-    logErrorP("RGB: %d %d %d", r, g, b);
     _screen.setRGB(r, g, b);
 }
 

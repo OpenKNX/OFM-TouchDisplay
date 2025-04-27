@@ -150,21 +150,16 @@ void RGBScreen::colorChanged(lv_event_t* e)
     uint8_t b = color.ch.blue;
 #endif
     if (isDeviationGreaterThanOne(red, r) || isDeviationGreaterThanOne(green, g) || isDeviationGreaterThanOne(blue, b)) {
-        logError("RGBScreen", "Color changed: %d %d %d", (int) static_cast<int>(red) - static_cast<int>(r), (int) static_cast<int>(green) - static_cast<int>(g), (int) static_cast<int>(blue) - static_cast<int>(b));
         red = r;
         green = g;
         blue = b;
         updateColor();
-    }
-    else {
-        logError("RGBScreen", "Color not changed");
     }
 }
 
 void RGBScreen::updateSlider(uint8_t r, uint8_t g, uint8_t b)
 {
     auto hsv = lv_color_rgb_to_hsv(r, g, b);
-    logError("RGBScreen", "RGB: %d %d %d, HSV: %d %d %d", (int) r, (int)g, (int)b, (int)hsv.h, (int)hsv.s, (int)hsv.v);
     lv_arc_set_value(brightnessSlider, 100 - hsv.v);
     lv_arc_set_value(saturationSlider, 100 - hsv.s);
     if (initialized)

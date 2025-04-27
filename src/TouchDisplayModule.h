@@ -15,7 +15,7 @@ class TouchDisplayModule : public OpenKNX::Module
 	unsigned long _lastTimeoutReset = 0;
 	bool _displayOn = false;
 	lv_obj_t* _displayOffRectangle = nullptr;
-	uint8_t _theme = 0;
+	uint8_t _themeSelection = 0;
 	bool _detailDevicePageActive = false;
 	unsigned long _waitForEnablePageWhichWasRequested = 0;
 	
