@@ -8,6 +8,7 @@ class RGBScreen : public ScreenWithLabel
     void updateColor();
     void updateSlider(uint8_t r, uint8_t g, uint8_t b);
     bool isDeviationGreaterThanOne(uint8_t current, uint8_t newValue);
+    void updateColorOfHueKnob();
 
 public:
     static RGBScreen* instance;
