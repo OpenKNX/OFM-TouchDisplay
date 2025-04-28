@@ -9,7 +9,7 @@ ButtonMessageScreen::ButtonMessageScreen()
     lv_obj_set_height(message, LV_SIZE_CONTENT); 
     lv_obj_set_align(message, LV_ALIGN_CENTER);
     lv_obj_set_style_text_align(message, LV_TEXT_ALIGN_CENTER, 0);
-    lv_obj_align(message, LV_ALIGN_CENTER, 0, -30);  
+    lv_obj_align(message, LV_ALIGN_CENTER, 0, -40);  
  
     button = lv_btn_create(screen);
     lv_obj_align(button, LV_ALIGN_CENTER, 0, 40);  

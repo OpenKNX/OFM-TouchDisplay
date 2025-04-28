@@ -47,15 +47,13 @@ void ProgButtonPage::setup()
         label = "Keine Adresse";
     lv_label_set_text(_screen.label, label.c_str());
     
-    if (knx.configured())
-    {
-        lv_label_set_text(_screen.message, "OpenKNX Touch Round");
-    }
-    else
-    {
-        lv_label_set_text(_screen.message, "OpenKNX Touch Round\n\nBitte übertragen Sie die\nETS Applikation");
-    }
-
+    std::string message;
+    if (openknx.info.applicationNumber() > 0)
+        message += "v" + openknx.info.humanApplicationVersion() + "   " + openknx.info.humanApplicationNumber();
+    message += "\nOpenKNX Touch Round";
+    if (!knx.configured())
+        message += "\n\nBitte übertragen Sie die\nETS Applikation";
+    lv_label_set_text(_screen.message, message.c_str());
     lv_label_set_text(_screen.buttonText, "Programmier Modus");
   
     _eventButtonPressed = [](lv_event_t *e) { ((ProgButtonPage*) lv_event_get_user_data(e))->buttonClicked(); };

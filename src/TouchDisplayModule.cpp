@@ -522,8 +522,8 @@ void TouchDisplayModule::lv_log(
 
 void TouchDisplayModule::showInformations()
 {
-#ifdef MODULE_TouchDisplayModule_Version
-    openknx.logger.logWithPrefixAndValues(logPrefix(), "Touch Display %s", MODULE_TouchDisplayModule_Version);
+#ifdef MODULE_TouchDisplay_Version
+    openknx.logger.logWithPrefixAndValues(logPrefix(), "Touch Display %s", MODULE_TouchDisplay_Version);
 #else
     openknx.logger.logWithPrefix(logPrefix(), "Touch Display");
 #endif
