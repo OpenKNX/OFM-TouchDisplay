@@ -466,7 +466,6 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection)
     lv_disp_t *display = lv_disp_get_default();
     // <Enumeration Text="Light" Value="0" Id="%ENID%" />
     // <Enumeration Text="Dark" Value="1" Id="%ENID%" />
-    lv_theme_t *theme = nullptr;
     switch (themeSelection)
     {
     case 0:
