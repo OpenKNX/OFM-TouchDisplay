@@ -682,8 +682,8 @@ void TouchDisplayModule::loop(bool configured)
   
     if (_lastTimeoutReset != 0)
     {
-        unsigned int now = millis();
-        unsigned int pastMs = now - _lastTimeoutReset;
+        unsigned long now = millis();
+        unsigned long pastMs = now - _lastTimeoutReset;
 
         if (_displayTimeoutMs && _displayOn && pastMs > _displayTimeoutMs)
         {
