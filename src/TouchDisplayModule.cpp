@@ -107,7 +107,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
     break;
     case TCH_KoDefaultPage:
     {
-        bool isDefaultPageActive = _defaultPage != _channelIndex;
+        bool isDefaultPageActive = _defaultPage == activePage();
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         if (isDefaultPageActive)
             activatePage(_defaultPage);
@@ -168,8 +168,12 @@ void TouchDisplayModule::showFirstPage()
     } 
 }
 
+uint8_t TouchDisplayModule::activePage()
+{
+    return _channelIndex + 1;
+}       
 
-void TouchDisplayModule::activatePage(uint8_t page, bool displayOn)
+void TouchDisplayModule::activatePage(uint8_t page, bool displayOnAndResetTimeout)
 {
     bool enabled = pageEnabled(page);
     if (!enabled)
@@ -182,10 +186,9 @@ void TouchDisplayModule::activatePage(uint8_t page, bool displayOn)
         _waitForEnablePageWhichWasRequested = 0;
         logDebugP("Stop waiting for requested page because a page is activated");
     }
-    if (displayOn)
+    if (displayOnAndResetTimeout)
         display(true);
-    else
-        resetDisplayTimeout();
+   
     auto current = _channelIndex;
     _channelIndex = page - 1;
     if (current == _channelIndex && Page::currentPage() != nullptr && !_detailDevicePageActive)
@@ -690,7 +693,7 @@ void TouchDisplayModule::loop(bool configured)
             logDebugP("Display timeout %d", _displayTimeoutMs);
             display(false);
         }
-        if (_pageTimeout && _defaultPage != _channelIndex && pastMs > _pageTimeout)
+        if (_pageTimeout && _defaultPage != activePage() && pastMs > _pageTimeout)
         {
             logDebugP("Default page timeout %d", _pageTimeout);
             activatePage(_defaultPage, false);

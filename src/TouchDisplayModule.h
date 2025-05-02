@@ -55,12 +55,13 @@ private:
 	void resetDisplayTimeout();
 	bool pageEnabled(uint8_t page);
 	void checkPageEnabledChanged();
+	uint8_t activePage();
 	
 	inline volatile static bool _touchLeftPressed = false;
 	inline volatile static bool _touchRightPressed = false;
 
 public:
-	void activatePage(uint8_t channel, bool displayOn = true);
+	void activatePage(uint8_t channel, bool displayOnAndResetTimeout = true);
 	void display(bool on);
 	bool isDisplayOn();
 	void nextPage();
