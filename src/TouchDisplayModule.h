@@ -10,8 +10,8 @@ class TouchDisplayModule : public OpenKNX::Module
 {
 	uint8_t _channelIndex = 255; // current active channel, do not rename, because var name is used in macros
 	uint8_t _defaultPage = 0;
-	uint16_t _displayTimeoutMs = 0;
-	uint16_t _pageTimeout = 0;
+	unsigned long _displayTimeoutMs = 0;
+	unsigned long _pageTimeout = 0;
 	unsigned long _lastTimeoutReset = 0;
 	bool _displayOn = false;
 	lv_obj_t* _displayOffRectangle = nullptr;
