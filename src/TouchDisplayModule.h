@@ -14,6 +14,7 @@ class TouchDisplayModule : public OpenKNX::Module
 	unsigned long _pageTimeout = 0;
 	unsigned long _lastTimeoutReset = 0;
 	bool _displayOn = false;
+	bool _progMode = false;
 	lv_obj_t* _displayOffRectangle = nullptr;
 	uint8_t _themeSelection = 0;
 	bool _detailDevicePageActive = false;
@@ -56,6 +57,7 @@ private:
 	bool pageEnabled(uint8_t page);
 	void checkPageEnabledChanged();
 	uint8_t activePage();
+	lv_palette_t getPaletteFromConfig(uint8_t config);
 	
 	inline volatile static bool _touchLeftPressed = false;
 	inline volatile static bool _touchRightPressed = false;
@@ -78,7 +80,7 @@ public:
 	bool processCommand(const std::string cmd, bool diagnoseKo) override;
 	void showHelp() override;
 	void updateTheme();
-	void setTheme(uint8_t theme);
+	void setTheme(uint8_t theme, bool day);
 
 };
 

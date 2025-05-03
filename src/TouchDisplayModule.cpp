@@ -432,7 +432,7 @@ void TouchDisplayModule::setup(bool configured)
 void TouchDisplayModule::updateTheme()
 {
     if (!knx.configured())
-        setTheme(0);
+        setTheme(0, true);
     else
     {
         // <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
@@ -443,45 +443,59 @@ void TouchDisplayModule::updateTheme()
             if (KoTCH_DayNight.value(DPT_Switch))
             {
                 if (ParamTCH_DayNightObject == 1)
-                    setTheme(ParamTCH_ThemeNight);
+                    setTheme(ParamTCH_ThemeNight, false);
                 else
-                    setTheme(ParamTCH_ThemeDay);
+                    setTheme(ParamTCH_ThemeDay, true);
             }
             else
             {
                 if (ParamTCH_DayNightObject == 1)
-                    setTheme(ParamTCH_ThemeDay);
+                    setTheme(ParamTCH_ThemeDay, true);
                 else
-                    setTheme(ParamTCH_ThemeNight);
+                    setTheme(ParamTCH_ThemeNight, false);
             }
         }
         else
         {
-            setTheme(ParamTCH_ThemeDay);
+            setTheme(ParamTCH_ThemeDay, true);
         }
     }
 }
 
 
 
-void TouchDisplayModule::setTheme(uint8_t themeSelection)
+void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
 {
     lv_disp_t *display = lv_disp_get_default();
     // <Enumeration Text="Light" Value="0" Id="%ENID%" />
     // <Enumeration Text="Dark" Value="1" Id="%ENID%" />
+    _themeSelection = themeSelection;
+    bool dark = false;
     switch (themeSelection)
     {
     case 0:
-        _themeSelection = themeSelection;
-        logDebugP("Theme: Light");
-        lv_theme_default_init(display, lv_palette_main(LV_PALETTE_GREY), lv_palette_main(LV_PALETTE_AMBER), 0, LV_FONT_DEFAULT);
         break;
     case 1:
-        _themeSelection = themeSelection;
-        logDebugP("Theme: Dark");
-        lv_theme_default_init(display, lv_palette_main(LV_PALETTE_GREY), lv_palette_main(LV_PALETTE_AMBER), 1, LV_FONT_DEFAULT);
+        dark = true;
         break;
     }
+    lv_palette_t main = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDay) : getPaletteFromConfig(ParamTCH_ColorPaletteNight);
+    lv_palette_t secondary = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDayOn) : getPaletteFromConfig(ParamTCH_ColorPaletteNightOn);
+    logDebugP("Main: %d, Secondary: %d, Dark: %d", (int) main, (int) secondary, (int) dark);
+    auto theme = lv_theme_default_init(display, 
+        lv_palette_main(main),
+        lv_palette_main(secondary), 
+        dark, LV_FONT_DEFAULT);
+    // lv_theme_set_apply_cb(theme, [](lv_theme_t *th, lv_obj_t *obj)
+    // {
+    //     // Prüfen, ob es sich um den Screen handelt (obj ohne Eltern -> Screen)
+    // if (lv_obj_get_parent(obj) == NULL && lv_obj_get_class(obj) == &lv_obj_class) {
+    //     lv_obj_set_style_bg_color(obj, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+    //     lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    // }
+     
+    // });
+  
 
     lv_obj_t *label = lv_label_create(lv_scr_act());
     _colorInactive = lv_obj_get_style_text_color(label, LV_PART_MAIN);
@@ -496,9 +510,7 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection)
 #endif
     lv_obj_del(btn); 
 
-    // if (theme != nullptr)
-    //     lv_disp_set_theme(lv_disp_get_default(), theme);
-
+        
     if (_setupDone)
         Page::showPage(Page::createPage(_channelIndex));
 }
@@ -511,6 +523,73 @@ lv_color_t TouchDisplayModule::getActiveColor()
 lv_color_t TouchDisplayModule::getInactiveColor()
 {
     return _colorInactive;
+}
+
+lv_palette_t TouchDisplayModule::getPaletteFromConfig(uint8_t config)
+{
+    logErrorP("getPaletteFromConfig %d", (int) config);
+// <Enumeration Text="Rot" Value="1" Id="%ENID%" />
+// <Enumeration Text="Pink" Value="2" Id="%ENID%" />
+// <Enumeration Text="Lila" Value="3" Id="%ENID%" />
+// <Enumeration Text="Dunkel Lila" Value="4" Id="%ENID%" />
+// <Enumeration Text="Indigo" Value="5" Id="%ENID%" />
+// <Enumeration Text="Blau" Value="6" Id="%ENID%" />
+// <Enumeration Text="Hellblau" Value="7" Id="%ENID%" />
+// <Enumeration Text="Cyan" Value="8" Id="%ENID%" />
+// <Enumeration Text="Türkis" Value="9" Id="%ENID%" />
+// <Enumeration Text="Grün" Value="10" Id="%ENID%" />
+// <Enumeration Text="Hellgrün" Value="11" Id="%ENID%" />
+// <Enumeration Text="Limette" Value="12" Id="%ENID%" />
+// <Enumeration Text="Gelb" Value="13" Id="%ENID%" />
+// <Enumeration Text="Orange Gelb" Value="14" Id="%ENID%" />
+// <Enumeration Text="Orange" Value="15" Id="%ENID%" />
+// <Enumeration Text="Dunkel Orange" Value="16" Id="%ENID%" />
+// <Enumeration Text="Braun" Value="17" Id="%ENID%" />
+// <Enumeration Text="Blau-Grau" Value="18" Id="%ENID%" />
+// <Enumeration Text="Grau" Value="19" Id="%ENID%" /> 
+switch (config)
+{
+    case 1:
+        return LV_PALETTE_RED;
+    case 2:
+        return LV_PALETTE_PINK;
+    case 3:
+        return LV_PALETTE_PURPLE;
+    case 4:
+        return LV_PALETTE_DEEP_PURPLE;
+    case 5:
+        return LV_PALETTE_INDIGO;
+    case 6:
+        return LV_PALETTE_BLUE;
+    case 7:
+        return LV_PALETTE_LIGHT_BLUE;
+    case 8:
+        return LV_PALETTE_CYAN;
+    case 9:
+        return LV_PALETTE_TEAL;
+    case 10:
+        return LV_PALETTE_GREEN;
+    case 11:
+        return LV_PALETTE_LIGHT_GREEN;
+    case 12:
+        return LV_PALETTE_LIME;
+    case 13:
+        return LV_PALETTE_YELLOW;
+    case 14:
+        return LV_PALETTE_AMBER;
+    case 15:
+        return LV_PALETTE_ORANGE;
+    case 16:
+        return LV_PALETTE_DEEP_ORANGE;
+    case 17:
+        return LV_PALETTE_BROWN;
+    case 18:
+        return LV_PALETTE_BLUE_GREY;
+    case 19:
+        return LV_PALETTE_GREY;
+    default:
+        return LV_PALETTE_GREY;
+    }
 }
 
 void TouchDisplayModule::lv_log(
@@ -613,10 +692,18 @@ void TouchDisplayModule::interruptTouchRight()
 }
 
 
-
-unsigned long lowReads = 0;
 void TouchDisplayModule::loop(bool configured)
 {
+    bool progMode = knx.progMode();
+    if (progMode != _progMode)
+    {
+        _progMode = progMode;
+        if (_progMode)
+            showProgButtonPage();
+        else
+            showFirstPage();
+    }
+
     bool touchPressed = touchIsPressed();
    
     if (touchPressed != _touchPressState)
@@ -796,12 +883,12 @@ bool TouchDisplayModule::processCommand(const std::string cmd, bool diagnoseKo)
     }
     if (cmd == "t0")
     {
-        openknxTouchDisplayModule.setTheme(0);
+        openknxTouchDisplayModule.setTheme(0, true);
         return true;
     }
     if (cmd == "t1")
     {
-        openknxTouchDisplayModule.setTheme(1);
+        openknxTouchDisplayModule.setTheme(1, true);
         return true;
     }
     return false;

@@ -174,13 +174,38 @@
                   </TypeRestriction>
                 </ParameterType>
 
+
+                <ParameterType Id="%AID%_PT-TCHColorPalette" Name="TCHColorPalette">
+                  <TypeRestriction Base="Value" SizeInBit="8">
+                    <Enumeration Text="Rot" Value="1" Id="%ENID%" />
+                    <Enumeration Text="Pink" Value="2" Id="%ENID%" />
+                    <Enumeration Text="Lila" Value="3" Id="%ENID%" />
+                    <Enumeration Text="Dunkel Lila" Value="4" Id="%ENID%" />
+                    <Enumeration Text="Indigo" Value="5" Id="%ENID%" />
+                    <Enumeration Text="Blau" Value="6" Id="%ENID%" />
+                    <Enumeration Text="Hellblau" Value="7" Id="%ENID%" />
+                    <Enumeration Text="Cyan" Value="8" Id="%ENID%" />
+                    <Enumeration Text="Türkis" Value="9" Id="%ENID%" />
+                    <Enumeration Text="Grün" Value="10" Id="%ENID%" />
+                    <Enumeration Text="Hellgrün" Value="11" Id="%ENID%" />
+                    <Enumeration Text="Limette" Value="12" Id="%ENID%" />
+                    <Enumeration Text="Gelb" Value="13" Id="%ENID%" />
+                    <Enumeration Text="Orange Gelb" Value="14" Id="%ENID%" />
+                    <Enumeration Text="Orange" Value="15" Id="%ENID%" />
+                    <Enumeration Text="Dunkel Orange" Value="16" Id="%ENID%" />
+                    <Enumeration Text="Braun" Value="17" Id="%ENID%" />
+                    <Enumeration Text="Blau-Grau" Value="18" Id="%ENID%" />
+                    <Enumeration Text="Grau" Value="19" Id="%ENID%" /> 
+                  </TypeRestriction>
+                </ParameterType>
+
               </ParameterTypes>
 
             <Parameters>
               <!-- Add not allowed -->
 							<Parameter Id="%AID%_P-%TT%00010" Name="AddNotAllowed" ParameterType="%AID%_PT-OnOffYesNo" Text="AddNotAllowed" Value="0"  Access="None"/> 
           
-              <Union SizeInBit="72">
+              <Union SizeInBit="104">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <!-- Visible Channels -->
                 <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%00000" Name="VisibleChannels" ParameterType="%AID%_PT-TCHNumChannels"  Text="Verfügbare Seiten" Value="0" SuffixText=" von %N%" />
@@ -208,13 +233,21 @@
                 <Parameter Offset="5" BitOffset="2" Id="%AID%_UP-%TT%00006" Name="SwitchOffDelayTime" ParameterType="%AID%_PT-DelayTime"    Text="Anzeige aus nach Zeit" Value="2" />
                 <!-- ^^^  Need 2 Bytes ^^^ -->             
                 <!-- Theme Day -->
-                <Parameter Offset="7" BitOffset="0"  Id="%AID%_UP-%TT%00007" Name="ThemeDay" ParameterType="%AID%_PT-TCHTheme" Text="Standard" Value="0" />
+                <Parameter Offset="7" BitOffset="0"  Id="%AID%_UP-%TT%00007" Name="ThemeDay" ParameterType="%AID%_PT-TCHTheme" Text="Stil" Value="0" />
                 <!-- Theme Night -->
-                <Parameter Offset="7" BitOffset="4"  Id="%AID%_UP-%TT%00008" Name="ThemeNight" ParameterType="%AID%_PT-TCHTheme" Text="Nacht" Value="1" />               
+                <Parameter Offset="7" BitOffset="4"  Id="%AID%_UP-%TT%00008" Name="ThemeNight" ParameterType="%AID%_PT-TCHTheme" Text="Stil" Value="1" />               
                 <!-- Display Rotation -->
                 <Parameter Offset="8" BitOffset="0"  Id="%AID%_UP-%TT%00013" Name="DisplayRotation" ParameterType="%AID%_PT-TCHRotateDisplay" Text="Anzeige drehen" Value="0" />
-
-                <!-- Next Id="%AID%_UP-%TT%00015" -->
+                <!--  4 bits free -->
+                <!-- Color Palette Day -->
+                <Parameter Offset="9" BitOffset="0"  Id="%AID%_UP-%TT%00015" Name="ColorPaletteDay" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bedienelemente" Value="19" />
+                <!-- Color Palette Day ON  -->
+                <Parameter Offset="10" BitOffset="0" Id="%AID%_UP-%TT%00016" Name="ColorPaletteDayOn" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bild EIN" Value="14" />
+                <!-- Color Palette Night -->
+                <Parameter Offset="11" BitOffset="0"  Id="%AID%_UP-%TT%00017" Name="ColorPaletteNight" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bedienelemente" Value="19" />
+                <!-- Color Palette Night ON  -->
+                <Parameter Offset="12" BitOffset="0"  Id="%AID%_UP-%TT%00018" Name="ColorPaletteNightOn" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bild EIN" Value="14" />
+                <!-- Next Id="%AID%_UP-%TT%00019" -->
               </Union>
 
             </Parameters>
@@ -249,6 +282,14 @@
               <ParameterRef Id="%AID%_UP-%TT%00013_R-%TT%0001301" RefId="%AID%_UP-%TT%00013" />
               <!-- Slide -->
               <ParameterRef Id="%AID%_UP-%TT%00014_R-%TT%0001401" RefId="%AID%_UP-%TT%00014" />
+              <!-- Color Palette Day -->
+              <ParameterRef Id="%AID%_UP-%TT%00015_R-%TT%0001501" RefId="%AID%_UP-%TT%00015" />
+              <!-- Color Palette Day ON  -->
+              <ParameterRef Id="%AID%_UP-%TT%00016_R-%TT%0001601" RefId="%AID%_UP-%TT%00016" />
+              <!-- Color Palette Night -->
+              <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" />
+              <!-- Color Palette Night ON  -->
+              <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" />
             </ParameterRefs>
             <ComObjectTable>
             	<!-- Display On/Off -->
@@ -412,23 +453,44 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Anzeigemodus" UIHint="Headline" />
 
-                <!-- Theme Day -->
-                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00007_R-%TT%0000701" />
                 <!-- Day/Night Object -->
                 <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00009_R-%TT%0000901" />
                 <choose ParamRefId="%AID%_UP-%TT%00009_R-%TT%0000901">
+                  <when test="0">
+                    <!-- No day night switch -->
+                    <!-- Theme Day -->
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00007_R-%TT%0000701" />
+                    <!-- Color Palette Day -->
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00015_R-%TT%0001501" />
+                    <!-- Color Palette Day ON  -->
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00016_R-%TT%0001601" />
+                  </when>
                   <when test="1">
                     <!-- Display Tag = 0 Nacht = 1 -->
-                    <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />                    
-                    <!-- Theme Night -->
-                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00008_R-%TT%0000801" />
+                    <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000601" />             
                   </when>
                    <when test="2">
                     <!-- Display Tag = 1 Nacht = 0 -->
                     <ComObjectRefRef RefId="%AID%_O-%TT%00006_R-%TT%0000611" />
+                  </when> 
+                  <when test="1 2">
+                    <!-- Day / Night switchable-->
+                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Tag" />
+                    <!-- Theme Day -->
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00007_R-%TT%0000701" />
+                    <!-- Color Palette Day -->
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00015_R-%TT%0001501" />
+                    <!-- Color Palette Day ON  -->
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00016_R-%TT%0001601" />
+                 
+                    <ParameterSeparator Id="%AID%_PS-nnn" Text="Nacht" />
                     <!-- Theme Night -->
-                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00008_R-%TT%0000801" />
-                  </when>   
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00008_R-%TT%0000801" />
+                    <!-- Color Palette Night -->
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00017_R-%TT%0001701" />
+                    <!-- Color Palette Night ON  -->
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00018_R-%TT%0001801" />
+                  </when>  
                 </choose>
 
                 <!-- Page Enabled A -->
