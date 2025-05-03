@@ -95,22 +95,23 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
             logDebugP("Requested Page: %d not enabled", page);
             _waitForEnablePageWhichWasRequested = max(millis(), 1L);
         }
+        break;
     }
-    break;
     case TCH_KoPrevNext:
     {
         if (ko.value(DPT_UpDown))
             nextPage();
         else
             previousPage();
+        break;
     }
-    break;
     case TCH_KoDefaultPage:
     {
         bool isDefaultPageActive = _defaultPage == activePage();
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         if (isDefaultPageActive)
             activatePage(_defaultPage);
+        break;
     }
     case TCH_KoDisplayOnOff:
     {
@@ -482,7 +483,8 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
     lv_palette_t main = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDay) : getPaletteFromConfig(ParamTCH_ColorPaletteNight);
     lv_palette_t secondary = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDayOn) : getPaletteFromConfig(ParamTCH_ColorPaletteNightOn);
     logDebugP("Main: %d, Secondary: %d, Dark: %d", (int) main, (int) secondary, (int) dark);
-    auto theme = lv_theme_default_init(display, 
+    /*auto theme = */
+    lv_theme_default_init(display, 
         lv_palette_main(main),
         lv_palette_main(secondary), 
         dark, LV_FONT_DEFAULT);
