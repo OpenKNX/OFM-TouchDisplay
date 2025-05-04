@@ -6,11 +6,7 @@
 
       <ApplicationPrograms>
         <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="TCH" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
-          
-          <op:part href="TouchDisplay.DeviceEnumValue.xml" name="DeviceEnumValue" instances="50">
-						<!-- Enum value number -->
-						<op:param name="%Pn%" value="1" />
-					</op:part>
+        
           <op:part href="TouchDisplay.CellDefinition.xml" name="CellDefintion" instances="4">
 				    <op:param name="%N%" value="1" />
             <op:param name="%OFFSET%" value="39" increment="5"/>
@@ -37,13 +33,7 @@
               </ParameterType>
 
 
-             <ParameterType Id="%AID%_PT-TCHDeviceSelection" Name="TCHDeviceSelection">
-                <TypeRestriction Base="Value" SizeInBit="8">
-                  <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
-                  	<!-- TouchDisplay.DeviceEnumValue.xml will be included here -->
-									  <op:usePart name="DeviceEnumValue" xpath="//TypeRestriction/*" />
-                </TypeRestriction>
-              </ParameterType>
+    
 
               <ParameterType Id="%AID%_PT-TCHCellType" Name="TCHCellType">
                 <TypeRestriction Base="Value" SizeInBit="8">

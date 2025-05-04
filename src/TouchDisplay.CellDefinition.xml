@@ -11,7 +11,7 @@
                             <Union SizeInBit="40">
                                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="%OFFSET%" BitOffset="0" />
                                 <!-- Device Selection Field -->      
-                                <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%00" Name="CH%C%DeviceSelection%N%" ParameterType="%AID%_PT-TCHDeviceSelection" Text="Gerät" Value="1" />    
+                                <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%00" Name="CH%C%DeviceSelection%N%" ParameterType="%AID%_PT-BRINumChannels" Text="Gerät" Value="1" />    
                                 <!-- Short Press -->      
                                 <Parameter Offset="1" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%01" Name="CH%C%ShortPressDevice%N%" ParameterType="%AID%_PT-TCHClickDeviceFunction" Text="Kurzer Druck" Value="1" />    
                                 <!-- Long Press -->      
@@ -25,9 +25,9 @@
                                 <!-- Jump To Long Press -->
                                 <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%04" Name="CH%C%JumpToLong%N%" ParameterType="%AID%_PT-TCHNumChannels"  Text="Absprung zu" Value="1" />
                                 <!-- Device Selection Short Press-->
-                                <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%06" Name="CH%C%DeviceShort%N%" ParameterType="%AID%_PT-TCHDeviceSelection"  Text="Gerät" Value="1" />
+                                <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%06" Name="CH%C%DeviceShort%N%" ParameterType="%AID%_PT-BRINumChannels"  Text="Gerät" Value="1" />
                                 <!-- Device Selection Long Press -->
-                                <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%07" Name="CH%C%DeviceLong%N%" ParameterType="%AID%_PT-TCHDeviceSelection"  Text="Gerät" Value="1" />
+                                <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%07" Name="CH%C%DeviceLong%N%" ParameterType="%AID%_PT-BRINumChannels"  Text="Gerät" Value="1" />
                                 <!-- Cell Type -->      
                                 <Parameter Offset="4" BitOffset="0" Id="%AID%_UP-%TT%%CC%%N%05" Name="CH%C%TCHCellType%N%" ParameterType="%AID%_PT-TCHCellType" Text="Funktion" Value="1" />    
                                 <!-- 4 bits free -->
