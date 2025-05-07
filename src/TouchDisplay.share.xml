@@ -86,8 +86,9 @@
 
               <ParameterType Id="%AID%_PT-TCHTheme" Name="TCHTheme">
                 <TypeRestriction Base="Value" SizeInBit="4">
-                  <Enumeration Text="Light" Value="0" Id="%ENID%" />
-                  <Enumeration Text="Dark" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Hell" Value="0" Id="%ENID%" />
+                  <Enumeration Text="Dunkel" Value="1" Id="%ENID%" />
+                  <Enumeration Text="Schwarz" Value="2" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
 

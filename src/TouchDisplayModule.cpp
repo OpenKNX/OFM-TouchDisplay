@@ -389,15 +389,12 @@ void TouchDisplayModule::setup(bool configured)
     DoorWindowScreen::instance = new DoorWindowScreen();
     ThermostatScreen::instance = new ThermostatScreen();
 
-    if (configured)
+    if (!configured || ParamTCH_SensorKeys)
     {
-        if (ParamTCH_SensorKeys)
-        {
-            pinMode(TOUCH_LEFT_PIN, INPUT);
-            pinMode(TOUCH_RIGHT_PIN, INPUT);
-            attachInterrupt(digitalPinToInterrupt(TOUCH_LEFT_PIN), TouchDisplayModule::interruptTouchLeft, CHANGE);
-            attachInterrupt(digitalPinToInterrupt(TOUCH_RIGHT_PIN), TouchDisplayModule::interruptTouchRight, CHANGE);
-        }
+        pinMode(TOUCH_LEFT_PIN, INPUT);
+        pinMode(TOUCH_RIGHT_PIN, INPUT);
+        attachInterrupt(digitalPinToInterrupt(TOUCH_LEFT_PIN), TouchDisplayModule::interruptTouchLeft, CHANGE);
+        attachInterrupt(digitalPinToInterrupt(TOUCH_RIGHT_PIN), TouchDisplayModule::interruptTouchRight, CHANGE);
     }
 
     if (configured)
@@ -411,7 +408,6 @@ void TouchDisplayModule::setup(bool configured)
             lv_obj_set_size(gestureLayer, LV_HOR_RES, gestureLayerHeight);
             lv_obj_set_style_border_width(gestureLayer, 0, 0);
             lv_obj_set_style_opa(gestureLayer, LV_OPA_0, 0);
-            lv_obj_set_style_bg_color(gestureLayer, lv_color_make(10, 10, 10), 0);
             lv_obj_clear_flag(gestureLayer, LV_OBJ_FLAG_GESTURE_BUBBLE);
             lv_obj_add_event_cb(gestureLayer, [](lv_event_t *e)
             { ((TouchDisplayModule *)lv_event_get_user_data(e))->handleGesture(e); }, LV_EVENT_GESTURE, this);
@@ -478,26 +474,21 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
         break;
     case 1:
         dark = true;
+        Screen::blackBackground(false);
+        break;
+    case 2:
+        dark = true;
+        Screen::blackBackground(true);
         break;
     }
     lv_palette_t main = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDay) : getPaletteFromConfig(ParamTCH_ColorPaletteNight);
     lv_palette_t secondary = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDayOn) : getPaletteFromConfig(ParamTCH_ColorPaletteNightOn);
     logDebugP("Main: %d, Secondary: %d, Dark: %d", (int) main, (int) secondary, (int) dark);
-    /*auto theme = */
     lv_theme_default_init(display, 
         lv_palette_main(main),
         lv_palette_main(secondary), 
         dark, LV_FONT_DEFAULT);
-    // lv_theme_set_apply_cb(theme, [](lv_theme_t *th, lv_obj_t *obj)
-    // {
-    //     // Prüfen, ob es sich um den Screen handelt (obj ohne Eltern -> Screen)
-    // if (lv_obj_get_parent(obj) == NULL && lv_obj_get_class(obj) == &lv_obj_class) {
-    //     lv_obj_set_style_bg_color(obj, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
-    //     lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    // }
-     
-    // });
-  
+
 
     lv_obj_t *label = lv_label_create(lv_scr_act());
     _colorInactive = lv_obj_get_style_text_color(label, LV_PART_MAIN);
@@ -696,14 +687,17 @@ void TouchDisplayModule::interruptTouchRight()
 
 void TouchDisplayModule::loop(bool configured)
 {
-    bool progMode = knx.progMode();
-    if (progMode != _progMode)
+    if (configured)
     {
-        _progMode = progMode;
-        if (_progMode)
-            showProgButtonPage();
-        else
-            showFirstPage();
+        bool progMode = knx.progMode();
+        if (progMode != _progMode)
+        {
+            _progMode = progMode;
+            if (_progMode)
+                showProgButtonPage();
+            else
+                showFirstPage();
+        }
     }
 
     bool touchPressed = touchIsPressed();
@@ -795,40 +789,53 @@ void TouchDisplayModule::loop(bool configured)
 
     if (_touchLeftPressed)
     {
-        if (_displayOn)
+        _touchLeftPressed = false;
+        if (configured)
         {
-            if (ParamTCH_LeftRightChanged)
-            { 
-                nextPage(); 
+            if (_displayOn)
+            {
+                if (ParamTCH_LeftRightChanged)
+                { 
+                    nextPage(); 
+                }
+                else 
+                { 
+                    previousPage();
+                }
             }
-            else 
-            { 
-                previousPage();
-            }
+            else
+                display(true);
         }
         else
-            display(true);
+        {
+            knx.progMode(!knx.progMode());
+        }
       
-        _touchLeftPressed = false;
     }
 
     if (_touchRightPressed)
     {
-        if (_displayOn)
+        _touchRightPressed = false;
+        if (configured)
         {
-            if (ParamTCH_LeftRightChanged)
-            { 
-                previousPage(); 
+            if (_displayOn)
+            {
+                if (ParamTCH_LeftRightChanged)
+                { 
+                    previousPage(); 
+                }
+                else 
+                { 
+                    nextPage();
+                }
             }
-            else 
-            { 
-                nextPage();
-            }
+            else
+                display(true);
         }
         else
-            display(true);
-            
-        _touchRightPressed = false;
+        {
+            knx.progMode(!knx.progMode());
+        }
     }
 
     if (_waitForEnablePageWhichWasRequested > 0 && millis() - _waitForEnablePageWhichWasRequested > 1000)
@@ -891,6 +898,11 @@ bool TouchDisplayModule::processCommand(const std::string cmd, bool diagnoseKo)
     if (cmd == "t1")
     {
         openknxTouchDisplayModule.setTheme(1, true);
+        return true;
+    }
+    if (cmd == "t2")
+    {
+        openknxTouchDisplayModule.setTheme(2, true);
         return true;
     }
     return false;

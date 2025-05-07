@@ -363,7 +363,7 @@ void ImageLoader::colorImage(lv_obj_t* imageObject, uint8_t red, uint8_t green, 
 
 void ImageLoader::colorImage(lv_obj_t* imageObject, lv_color_t color)
 {
-    lv_obj_set_style_img_recolor_opa(imageObject, LV_OPA_50, 0);
+    lv_obj_set_style_img_recolor_opa(imageObject, LV_OPA_COVER, 0);
     lv_obj_set_style_img_recolor(imageObject, color, 0);
 }
 
