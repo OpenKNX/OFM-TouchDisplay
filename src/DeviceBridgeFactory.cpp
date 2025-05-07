@@ -7,6 +7,7 @@
 #include "DeviceBridges/JalousieDeviceBridge.h"
 #include "DeviceBridges/FanDeviceBridge.h"
 #include "DeviceBridges/RGBDeviceBridge.h"
+#include "DeviceBridges/SceneDeviceBridge.h"
 #include "DeviceBridges/DoorWindowDeviceBridge.h"
 #include "DeviceBridges/ThermostatDeviceBridge.h"
 
@@ -39,6 +40,14 @@ RolladenBridge* DeviceBridgeFactory::createRolladen(KnxChannelRolladen& channel,
 RolladenBridge* DeviceBridgeFactory::createJalousien(KnxChannelJalousie& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
 {
     auto result = new JalousieDeviceBridge(*_currentDevicePage);
+    channel.add(result);
+    return result;
+}
+
+
+SceneBridge* DeviceBridgeFactory::createScene(KnxChannelScene& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
+{
+    auto result = new SceneDeviceBridge(*_currentDevicePage);
     channel.add(result);
     return result;
 }

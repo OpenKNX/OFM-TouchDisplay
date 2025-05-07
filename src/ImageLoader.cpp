@@ -12,6 +12,7 @@
 #include "../Images/Type30.c"
 #include "../Images/Type31.c"
 #include "../Images/Type32.c"
+#include "../Images/Type40.c"
 #include "../Images/Type50.c"
 #include "../Images/Type60_0.c"
 #include "../Images/Type60_1.c"
@@ -249,6 +250,10 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (fileName == "Type32.png")
     {
         lv_img_set_src(imageObject, &Type32);
+    }
+    else if (fileName == "Type40.png")
+    {
+        lv_img_set_src(imageObject, &Type40);
     }
     else if (fileName == "Type50.png")
     {
