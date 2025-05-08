@@ -522,7 +522,6 @@ lv_color_t TouchDisplayModule::getInactiveColor()
 
 lv_palette_t TouchDisplayModule::getPaletteFromConfig(uint8_t config)
 {
-    logErrorP("getPaletteFromConfig %d", (int) config);
 // <Enumeration Text="Rot" Value="1" Id="%ENID%" />
 // <Enumeration Text="Pink" Value="2" Id="%ENID%" />
 // <Enumeration Text="Lila" Value="3" Id="%ENID%" />
