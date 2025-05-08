@@ -32,7 +32,7 @@ DimmerDeviceBridge::~DimmerDeviceBridge()
 
 void DimmerDeviceBridge::setBrightness(uint8_t brightness)
 {
-    if (_isSliderPressed)
+    if (_lastSliderPressing != 0)
         return;
     lv_arc_set_value(_screen.slider, brightness);  
     ImageLoader::loadImage(_screen.image, _channel->mainFunctionImage().imageFile, _channel->mainFunctionImage().allowRecolor, brightness != 0); 
@@ -46,7 +46,7 @@ void DimmerDeviceBridge::updateText()
 
 void DimmerDeviceBridge::sliderReleased()
 {    
-    _isSliderPressed = false;
+    _lastSliderPressing = 0;
     auto value = lv_arc_get_value(_screen.slider);
     _channel->commandBrightness(nullptr,  value);
     updateText();
@@ -54,7 +54,10 @@ void DimmerDeviceBridge::sliderReleased()
 
 void DimmerDeviceBridge::sliderPressing()
 {    
-    _isSliderPressed = true;
+    if (_lastSliderPressing != 0 && millis() - _lastSliderPressing < 200)
+        return;
+    _lastSliderPressing = max(1L, millis());
+    logErrorP("Pressing %lu", _lastSliderPressing);
     auto value = lv_arc_get_value(_screen.slider);
     _channel->commandBrightness(nullptr,  value);
     updateText();

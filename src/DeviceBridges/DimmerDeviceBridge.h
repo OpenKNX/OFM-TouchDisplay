@@ -12,7 +12,7 @@ class DimmerDeviceBridge : public DimmerBridge
     lv_event_cb_t _eventButtonPressed = nullptr;
     DetailDevicePage& _detailDevicePage;
     DimmerScreen& _screen = *DimmerScreen::instance;
-    bool _isSliderPressed = false;
+    unsigned long _lastSliderPressing = 0;
 public:
     DimmerDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~DimmerDeviceBridge() override;
