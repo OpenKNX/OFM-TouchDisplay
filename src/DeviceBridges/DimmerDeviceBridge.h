@@ -13,6 +13,7 @@ class DimmerDeviceBridge : public DimmerBridge
     DetailDevicePage& _detailDevicePage;
     DimmerScreen& _screen = *DimmerScreen::instance;
     unsigned long _lastSliderPressing = 0;
+    uint8_t _lastSendValue = 255;
 public:
     DimmerDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~DimmerDeviceBridge() override;

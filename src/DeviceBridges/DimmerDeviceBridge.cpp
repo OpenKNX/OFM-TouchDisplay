@@ -48,6 +48,9 @@ void DimmerDeviceBridge::sliderReleased()
 {    
     _lastSliderPressing = 0;
     auto value = lv_arc_get_value(_screen.slider);
+    if (_lastSendValue == value)
+        return;
+    _lastSendValue = 255;
     _channel->commandBrightness(nullptr,  value);
     updateText();
 }
@@ -59,6 +62,9 @@ void DimmerDeviceBridge::sliderPressing()
     _lastSliderPressing = max(1L, millis());
     logErrorP("Pressing %lu", _lastSliderPressing);
     auto value = lv_arc_get_value(_screen.slider);
+    if (_lastSendValue == value)
+        return;
+    _lastSendValue = value;
     _channel->commandBrightness(nullptr,  value);
     updateText();
 }
