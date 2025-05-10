@@ -11,17 +11,13 @@ RolladenScreen::RolladenScreen()
     lv_obj_align(image, LV_ALIGN_CENTER, 0, -10);  
  
     buttonUp = lv_img_create(screen);
-    ImageLoader::loadImage(buttonUp, "up.png", false, false);
+    ImageLoader::loadImage(buttonUp, "up.png", true, false);
     lv_obj_add_flag(buttonUp, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_set_style_img_recolor_opa(buttonUp, 255, 0);
-    lv_obj_set_style_img_recolor(buttonUp, lv_color_make(128, 128, 128), 0);
     lv_obj_align(buttonUp, LV_ALIGN_TOP_MID, 0, 34);  
    
     buttonDown = lv_img_create(screen);
-    ImageLoader::loadImage(buttonDown, "down.png", false, false);
+    ImageLoader::loadImage(buttonDown, "down.png", true, false);
     lv_obj_add_flag(buttonDown, LV_OBJ_FLAG_CLICKABLE);
-    lv_obj_set_style_img_recolor_opa(buttonDown, 255, 0);
-    lv_obj_set_style_img_recolor(buttonDown, lv_color_make(128, 128, 128), 0);
     lv_obj_align(buttonDown, LV_ALIGN_BOTTOM_MID, 0, -56);  
 
     sliderPosition = lv_slider_create(screen);

@@ -24,7 +24,7 @@ ThermostatScreen::ThermostatScreen()
     buttonUp = lv_img_create(screen);
     lv_obj_align(buttonUp, LV_ALIGN_TOP_LEFT, 42, 73);
     lv_obj_add_flag(buttonUp, LV_OBJ_FLAG_CLICKABLE); 
-    ImageLoader::loadImage(buttonUp, "up.png", false, 0);
+    ImageLoader::loadImage(buttonUp, "up.png", false, false);
 
     buttonDown = lv_img_create(screen);
     lv_obj_align(buttonDown, LV_ALIGN_TOP_LEFT, 42, 132);

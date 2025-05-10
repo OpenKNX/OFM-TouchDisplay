@@ -17,6 +17,7 @@
 #include "./Screens/SceneScreen.h"
 #include "./Screens/ThermostatScreen.h"
 #include "./Screens/RGBScreen.h"
+#include "./Screens/MediaScreen.h"
 #include "./Pages/Page.h"
 #include "./Pages/ProgButtonPage.h"
 #include "./ImageLoader.h"
@@ -390,6 +391,7 @@ void TouchDisplayModule::setup(bool configured)
     DoorWindowScreen::instance = new DoorWindowScreen();
     SceneScreen::instance = new SceneScreen();
     ThermostatScreen::instance = new ThermostatScreen();
+    MediaScreen::instance = new MediaScreen();
 
     if (!configured || ParamTCH_SensorKeys)
     {

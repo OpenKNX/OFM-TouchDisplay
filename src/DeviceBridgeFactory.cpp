@@ -10,6 +10,7 @@
 #include "DeviceBridges/SceneDeviceBridge.h"
 #include "DeviceBridges/DoorWindowDeviceBridge.h"
 #include "DeviceBridges/ThermostatDeviceBridge.h"
+#include "DeviceBridges/MediaDeviceBridge.h"
 
 const std::string DeviceBridgeFactory::name()
 {
@@ -91,6 +92,13 @@ DoorWindowBridge* DeviceBridgeFactory::createDoorWindow(KnxChannelDoorWindow& ch
 ThermostatBridge* DeviceBridgeFactory::createThermostat(KnxChannelThermostat& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
 {
     auto result = new ThermostatDeviceBridge(*_currentDevicePage);
+    channel.add(result);
+    return result;
+}
+
+MediaBridge* DeviceBridgeFactory::createMedia(KnxChannelMedia& channel, uint8_t _channelIndex /* this parameter is used in macros, do not rename */, uint8_t deviceType)
+{
+    auto result = new MediaDeviceBridge(*_currentDevicePage);
     channel.add(result);
     return result;
 }

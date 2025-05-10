@@ -5,6 +5,8 @@
 
 #include "../Images/up.c"
 #include "../Images/down.c"
+#include "../Images/left.c"
+#include "../Images/right.c"
 #include "../Images/stop.c"
 #include "../Images/Type10.c"
 #include "../Images/Type11.c"
@@ -13,6 +15,7 @@
 #include "../Images/Type31.c"
 #include "../Images/Type32.c"
 #include "../Images/Type40.c"
+#include "../Images/Type41.c"
 #include "../Images/Type50.c"
 #include "../Images/Type60_0.c"
 #include "../Images/Type60_1.c"
@@ -20,6 +23,7 @@
 #include "../Images/Type60_3.c"
 #include "../Images/Type60_4.c"
 #include "../Images/Type60_5.c"
+#include "../Images/Type60_6.c"
 #include "../Images/Type60_9.c"
 #include "../Images/Type70_0.c"
 #include "../Images/Type70_1.c"
@@ -187,6 +191,14 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &down);
     }
+    else if (fileName == "left.png")
+    {
+        lv_img_set_src(imageObject, &left);
+    }
+    else if (fileName == "right.png")
+    {
+        lv_img_set_src(imageObject, &right);
+    }
     else if (fileName == "stop.png")
     {
         lv_img_set_src(imageObject, &stop);
@@ -255,6 +267,14 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &Type40);
     }
+    else if (fileName == "Type41.png")
+    {
+        lv_img_set_src(imageObject, &Type41);
+    }
+    else if (fileName == "Type50.png")
+    {
+        lv_img_set_src(imageObject, &Type50);
+    }
     else if (fileName == "Type50.png")
     {
         lv_img_set_src(imageObject, &Type50);
@@ -282,6 +302,10 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (fileName == "Type60_5.png")
     {
         lv_img_set_src(imageObject, &Type60_5);
+    }
+    else if (fileName == "Type60_6.png")
+    {
+        lv_img_set_src(imageObject, &Type60_6);
     }
     else if (fileName == "Type60_9.png")
     {
