@@ -51,8 +51,19 @@
 #include "../Images/thermostatCooling.c"
 #include "../Images/thermostatAuto.c"
 #include "../Images/thermostatOff.c"
-#include "../Images/opening.c"
-#include "../Images/closing.c"
+#include "../Images/opening_lr.c"
+#include "../Images/closing_lr.c"
+#include "../Images/opening_l.c"
+#include "../Images/closing_l.c"
+#include "../Images/opening_r.c"
+#include "../Images/closing_r.c"
+#include "../Images/opening_ud.c"
+#include "../Images/closing_ud.c"
+#include "../Images/opening_u.c"
+#include "../Images/closing_u.c"
+#include "../Images/opening_d.c"
+#include "../Images/closing_d.c"
+
 
 
 #include "LittleFS.h"
@@ -204,13 +215,53 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &stop);
     }
-    else if (fileName == "opening.png")
+    else if (fileName == "opening_lr.png")
     {
-        lv_img_set_src(imageObject, &opening);
+        lv_img_set_src(imageObject, &opening_lr);
     }
-    else if (fileName == "closing.png")
+    else if (fileName == "closing_lr.png")
     {
-        lv_img_set_src(imageObject, &closing);
+        lv_img_set_src(imageObject, &closing_lr);
+    }
+    else if (fileName == "opening_l.png")
+    {
+        lv_img_set_src(imageObject, &opening_l);
+    }
+    else if (fileName == "closing_l.png")
+    {
+        lv_img_set_src(imageObject, &closing_l);
+    }
+    else if (fileName == "opening_r.png")
+    {
+        lv_img_set_src(imageObject, &opening_r);
+    }
+    else if (fileName == "closing_r.png")
+    {
+        lv_img_set_src(imageObject, &closing_r);
+    }
+    else if (fileName == "opening_ud.png")
+    {
+        lv_img_set_src(imageObject, &opening_ud);
+    }
+    else if (fileName == "closing_ud.png")
+    {
+        lv_img_set_src(imageObject, &closing_ud);
+    }
+    else if (fileName == "opening_u.png")
+    {
+        lv_img_set_src(imageObject, &opening_u);
+    }
+    else if (fileName == "closing_u.png")
+    {
+        lv_img_set_src(imageObject, &closing_u);
+    }
+    else if (fileName == "opening_d.png")
+    {
+        lv_img_set_src(imageObject, &opening_d);
+    }
+    else if (fileName == "closing_d.png")
+    {
+        lv_img_set_src(imageObject, &closing_d);
     }
     else if (fileName == "thermostatHeading.png")
     {

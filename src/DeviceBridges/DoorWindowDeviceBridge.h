@@ -10,6 +10,7 @@ class DoorWindowDeviceBridge : public DoorWindowBridge
     DetailDevicePage& _detailDevicePage;
     DoorWindowScreen& _screen = *DoorWindowScreen::instance;
     bool _automatic = false;
+    uint8_t _doorWindowOpenDirection = 0;
  public:
     DoorWindowDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~DoorWindowDeviceBridge() override;
