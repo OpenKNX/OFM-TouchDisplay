@@ -24,6 +24,7 @@
 #include "../Images/Type60_4.c"
 #include "../Images/Type60_5.c"
 #include "../Images/Type60_6.c"
+#include "../Images/Type60_8.c"
 #include "../Images/Type60_9.c"
 #include "../Images/Type70_0.c"
 #include "../Images/Type70_1.c"
@@ -306,6 +307,10 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (fileName == "Type60_6.png")
     {
         lv_img_set_src(imageObject, &Type60_6);
+    }   
+    else if (fileName == "Type60_8.png")
+    {
+        lv_img_set_src(imageObject, &Type60_8);
     }
     else if (fileName == "Type60_9.png")
     {
