@@ -106,7 +106,7 @@ void DoorWindowDeviceBridge::setMovement(DoorWindowMoveState movement)
                     ImageLoader::loadImage(_screen.movement, "opening_d.png", true, true);
                     break;
                 case 5:
-                    ImageLoader::loadImage(_screen.movement, "opening_up.png", true, true);
+                    ImageLoader::loadImage(_screen.movement, "opening_ud.png", true, true);
                     break;
             }
             break;
@@ -114,22 +114,22 @@ void DoorWindowDeviceBridge::setMovement(DoorWindowMoveState movement)
             switch (_doorWindowOpenDirection)
             {
                 case 0:
-                    ImageLoader::loadImage(_screen.movement, "closing_l.png", true, true);
+                    ImageLoader::loadImage(_screen.movement, "closing_r.png", true, true);
                     break;
                 case 1:
-                    ImageLoader::loadImage(_screen.movement, "closing_r.png", true, true);
+                    ImageLoader::loadImage(_screen.movement, "closing_l.png", true, true);
                     break;
                 case 2:
                     ImageLoader::loadImage(_screen.movement, "closing_lr.png", true, true);
                     break;
                 case 3:
-                    ImageLoader::loadImage(_screen.movement, "closing_u.png", true, true);
-                    break;
-                case 4:
                     ImageLoader::loadImage(_screen.movement, "closing_d.png", true, true);
                     break;
+                case 4:
+                    ImageLoader::loadImage(_screen.movement, "closing_u.png", true, true);
+                    break;
                 case 5:
-                    ImageLoader::loadImage(_screen.movement, "closing_up.png", true, true);
+                    ImageLoader::loadImage(_screen.movement, "closing_ud.png", true, true);
                     break;
             }
             break;

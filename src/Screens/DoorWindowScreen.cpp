@@ -11,10 +11,8 @@ DoorWindowScreen::DoorWindowScreen()
     lv_obj_add_flag(image, LV_OBJ_FLAG_CLICKABLE); 
 
     obstruction = lv_img_create(screen);  
-    lv_obj_align(obstruction, LV_ALIGN_CENTER, 73, -15);  
-
+  
     movement = lv_img_create(screen);  
-    lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
    
     value = lv_label_create(screen);
     lv_obj_set_width(value, LV_SIZE_CONTENT);  
@@ -35,31 +33,44 @@ void DoorWindowScreen::setSliderDirection(DoorWindowSliderDirection direction)
             lv_obj_align(slider, LV_ALIGN_TOP_MID, 0, 40);  
             lv_obj_set_size(slider, 138, 25);
             lv_slider_set_range(slider, 0, 100);
+            lv_obj_align(obstruction, LV_ALIGN_CENTER, 73, -15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
         case DOOR_WINDOW_SLIDER_RIGHT:
             lv_obj_align(slider, LV_ALIGN_TOP_MID, 0, 40);  
             lv_obj_set_size(slider, 138, 25);
             lv_slider_set_range(slider, 100, 0);
+            lv_obj_align(obstruction, LV_ALIGN_CENTER, 73, -15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
         case DOOR_WINDOW_SLIDER_LEFT_RIGHT:
             lv_obj_align(slider, LV_ALIGN_TOP_MID, 0, 40); 
             lv_obj_set_size(slider, 138, 25);
             lv_slider_set_range(slider, 0, 100);
+            lv_slider_set_mode(slider, LV_SLIDER_MODE_SYMMETRICAL);
+            lv_obj_align(obstruction, LV_ALIGN_CENTER, 73, -15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
         case DOOR_WINDOW_SLIDER_UP:
-            lv_obj_align(slider, LV_ALIGN_LEFT_MID, 40, -10);  
-            lv_obj_set_size(slider, 25, 110);
+            lv_obj_align(slider, LV_ALIGN_RIGHT_MID, -40, -40);  
+            lv_obj_set_size(slider, 25, 80);
             lv_slider_set_range(slider, 0, 100);
+            lv_obj_align(obstruction, LV_ALIGN_TOP_MID, 0, 15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
         case DOOR_WINDOW_SLIDER_DOWN:
-            lv_obj_align(slider, LV_ALIGN_LEFT_MID, 40, -10);  
-            lv_obj_set_size(slider, 25, 110);
+            lv_obj_align(slider, LV_ALIGN_RIGHT_MID, 40, -40);  
+            lv_obj_set_size(slider, 25, 80);
             lv_slider_set_range(slider, 100, 0);
+            lv_obj_align(obstruction, LV_ALIGN_TOP_MID, 0, 15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
         case DOOR_WINDOW_SLIDER_UP_DOWN:
-            lv_obj_align(slider, LV_ALIGN_LEFT_MID, 40, -10); 
-            lv_obj_set_size(slider, 25, 110); 
+            lv_obj_align(slider, LV_ALIGN_RIGHT_MID, 40, -40); 
+            lv_obj_set_size(slider, 25, 80);
             lv_slider_set_range(slider, 0, 100);
+            lv_obj_align(obstruction, LV_ALIGN_TOP_MID, 0, 15);  
+            lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
             break;
     }
 }
