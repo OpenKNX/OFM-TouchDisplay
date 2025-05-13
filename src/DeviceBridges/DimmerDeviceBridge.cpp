@@ -60,7 +60,6 @@ void DimmerDeviceBridge::sliderPressing()
     if (_lastSliderPressing != 0 && millis() - _lastSliderPressing < 200)
         return;
     _lastSliderPressing = max(1L, millis());
-    logErrorP("Pressing %lu", _lastSliderPressing);
     auto value = lv_arc_get_value(_screen.slider);
     if (_lastSendValue == value)
         return;

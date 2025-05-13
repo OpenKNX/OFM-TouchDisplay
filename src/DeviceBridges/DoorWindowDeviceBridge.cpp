@@ -41,9 +41,15 @@ void DoorWindowDeviceBridge::setup(uint8_t _channelIndex)
     {
         lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
         if (ParamBRI_CHDoorWindowUsePercent)
+        {
             lv_obj_set_style_bg_opa(_screen.slider, LV_OPA_COVER, LV_PART_KNOB);
+            lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_CLICKABLE);
+        }
         else
+        {
             lv_obj_set_style_bg_opa(_screen.slider, LV_OPA_TRANSP, LV_PART_KNOB);
+            lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_CLICKABLE);
+        }
     }
     else
         lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
@@ -61,7 +67,6 @@ void DoorWindowDeviceBridge::setup(uint8_t _channelIndex)
     ImageLoader::unloadImage(_screen.movement);
     mainFunctionValueChanged();
     _screen.show();
-
 }
 
 DoorWindowDeviceBridge::~DoorWindowDeviceBridge()
@@ -69,7 +74,7 @@ DoorWindowDeviceBridge::~DoorWindowDeviceBridge()
     if (_eventIconPressed != nullptr)
         lv_obj_remove_event_cb_with_user_data(_screen.image, _eventIconPressed, this);
     if (_eventSliderReleased != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventSliderReleased, this);
+        lv_obj_remove_event_cb_with_user_data(_screen.slider, _eventSliderReleased, this);
 }
 
 void DoorWindowDeviceBridge::setPosition(uint8_t position)
