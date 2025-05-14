@@ -1,20 +1,16 @@
-// OFM-TouchDisplay --
-// SPDX-License-Identifier: AGPL-3.0-only
-
-
 // OFM-ConfigTransfer -- OpenKNX -- (c) 2024-2025 by Cornelius Köpp --
 // SPDX-License-Identifier: AGPL-3.0-only
 
-var tchFormatVer = "cv1";
-var tchFormatVerMultiPreview = "cv1multi"; // TODO remove preview, when finale format is defined and processed
-var tchGenVer = "0.1.0";
-var tchGen = "tch";
-var tchAppId = uctVersionInformation[0];
-var tchAppVer = uctVersionInformation[1];
-// var tchAppName = null;
+var uctFormatVer = "cv1";
+var uctFormatVerMultiPreview = "cv1multi"; // TODO remove preview, when finale format is defined and processed
+var uctGenVer = "0.1.0";
+var uctGen = "uct";
+var uctAppId = uctVersionInformation[0];
+var uctAppVer = uctVersionInformation[1];
+// var uctAppName = null;
 
 
-function tchBtnExport(device, online, progress, context) {
+function uctBtnExport(device, online, progress, context) {
     Log.info("OpenKNX ConfigTransfer: Handle Channel Export ...")
     var module = uctModuleOrder[device.getParameterByName(context.p_moduleSelection).value];
     var channelSource = device.getParameterByName(context.p_channelSource).value;
@@ -30,11 +26,11 @@ function tchBtnExport(device, online, progress, context) {
     // TODO add p_messageOutput again?
 
     var param_exportOutput = device.getParameterByName(context.p_exportOutput);
-    param_exportOutput.value = tchExportModuleChannelToString(device, module, channelSource, exportFormat, multiLine, includeHidden, includeDefault);
+    param_exportOutput.value = uctExportModuleChannelToString(device, module, channelSource, exportFormat, multiLine, includeHidden, includeDefault);
     Log.info("OpenKNX ConfigTransfer: Handle Channel Export [DONE]")
 }
 
-function tchBtnImport(device, online, progress, context) {
+function uctBtnImport(device, online, progress, context) {
     Log.info("OpenKNX ConfigTransfer: Handle Channel Import ...")
     var module = null; // auto-detection; module is part of export-string!
     var channelTarget = device.getParameterByName(context.p_channelTarget).value;
@@ -42,17 +38,17 @@ function tchBtnImport(device, online, progress, context) {
     var importCheck = device.getParameterByName(context.p_importCheck).value;
     
     var param_messageOutput = device.getParameterByName(context.p_messageOutput);
-    param_messageOutput.value = tchImportModuleChannelFromString(device, module, channelTarget, importLine, importCheck);
+    param_messageOutput.value = uctImportModuleChannelFromString(device, module, channelTarget, importLine, importCheck);
     Log.info("OpenKNX ConfigTransfer: Handle Channel Import [DONE]")
 }
 
-function tchBtnCopy(device, online, progress, context) {
+function uctBtnCopy(device, online, progress, context) {
     Log.info("OpenKNX ConfigTransfer: Handle Channel Copy ...")
     var module = uctModuleOrder[device.getParameterByName(context.p_moduleSelection).value];
     var channelSource = device.getParameterByName(context.p_channelSource).value;
     var channelTarget = device.getParameterByName(context.p_channelTarget).value;
     var param_messageOutput = device.getParameterByName(context.p_messageOutput);
-    param_messageOutput.value = tchCopyModuleChannel(device, module, channelSource, channelTarget);
+    param_messageOutput.value = uctCopyModuleChannel(device, module, channelSource, channelTarget);
     Log.info("OpenKNX ConfigTransfer: Handle Channel Copy [DONE]")
 }
 
@@ -72,59 +68,59 @@ function tchBtnCopy(device, online, progress, context) {
  * @param {string} [context.p_messageOutput] - Optional Parameter name for result message output
  * @returns {void}
  */
-function tchBtnSwap(device, online, progress, context) {
+function uctBtnSwap(device, online, progress, context) {
     Log.info("OpenKNX ConfigTransfer: Handle Channel Swap ...");
     var module = context.module ? context.module : uctModuleOrder[device.getParameterByName(context.p_moduleSelection).value];
     var channelA = context.channelA ? context.channelA : device.getParameterByName(context.p_channelA).value;
     var channelB = context.channelB ? context.channelB : device.getParameterByName(context.p_channelB).value;
     var param_messageOutput = context.p_messageOutput ? device.getParameterByName(context.p_messageOutput) : undefined;
-    var resultMessage = tchSwapModuleChannel(device, progress, module, channelA, channelB);
+    var resultMessage = uctSwapModuleChannel(device, progress, module, channelA, channelB);
     if (param_messageOutput) {
         param_messageOutput.value = resultMessage;
     }
     Log.info("OpenKNX ConfigTransfer: Handle Channel Swap [DONE]");
 }
 
-function tchBtnReset(device, online, progress, context) {
+function uctBtnReset(device, online, progress, context) {
     Log.info("OpenKNX ConfigTransfer: Handle Channel Reset ...")
     var module = uctModuleOrder[device.getParameterByName(context.p_moduleSelection).value];
     var channelTarget = device.getParameterByName(context.p_channelTarget).value;
     var param_messageOutput = device.getParameterByName(context.p_messageOutput);
-    param_messageOutput.value = tchResetModuleChannel(device, module, channelTarget);
+    param_messageOutput.value = uctResetModuleChannel(device, module, channelTarget);
     Log.info("OpenKNX ConfigTransfer: Handle Channel Reset [DONE]")
 }
 
 
 
 
-function tchSerializeParamValue(paramValue) {
+function uctSerializeParamValue(paramValue) {
     /* TODO check inclusion of ` ` and common characters without encoding */
     return encodeURIComponent(paramValue);
 }
 
-function tchUnserializeParamValue(encodedParamValue) {
+function uctUnserializeParamValue(encodedParamValue) {
     return decodeURIComponent(encodedParamValue);
 }
 
-function tchCreateHeader(module, channel) {
-    var version = [tchFormatVer];
+function uctCreateHeader(module, channel) {
+    var version = [uctFormatVer];
     /* TODO make optional */
     /*
-    version.push(tchGen);
-    version.push(tchGenVer);
+    version.push(uctGen);
+    version.push(uctGenVer);
     */
 
-    var pathApp = [tchHexNumberStr(tchAppId), tchHexNumberStr(tchAppVer)];
+    var pathApp = [uctHexNumberStr(uctAppId), uctHexNumberStr(uctAppVer)];
     /* TODO check inclusion of app name
-    if (tchAppName) {
-        pathApp.push(tchAppName);
+    if (uctAppName) {
+        pathApp.push(uctAppName);
     }
     */
 
     var moduleVersion = uctChannelParams[module].version;
     var pathModule = [
         module,
-        ((moduleVersion != undefined) ? tchHexNumberStr(moduleVersion) : '-')
+        ((moduleVersion != undefined) ? uctHexNumberStr(moduleVersion) : '-')
     ];
 
     var path =  [pathApp.join(":"), pathModule.join(":"), channel];
@@ -133,7 +129,7 @@ function tchCreateHeader(module, channel) {
     return header.join(",");
 }
 
-function tchGetModuleParamsDef(module, channel) {
+function uctGetModuleParamsDef(module, channel) {
     var module_params = uctChannelParams[module];
     if (channel>0 && (!module_params.channels || (channel > module_params.channels))) {
         throw new Error("Kanal " + channel + " NICHT verfügbar im Modul " + module + "!");
@@ -141,7 +137,7 @@ function tchGetModuleParamsDef(module, channel) {
     return module_params[channel==0 ? "share" : "templ"];
 }
 
-function tchGetDeviceParameter(device, paramFullName, paramRefIdSuffix) {
+function uctGetDeviceParameter(device, paramFullName, paramRefIdSuffix) {
     var paramObj = device.getParameterByName(paramFullName);
     var paramObjRefId = paramObj.parameterRefId;
     if (paramObjRefId.length>2 && paramObjRefId.slice(-2)!=paramRefIdSuffix) {
@@ -160,8 +156,8 @@ function tchGetDeviceParameter(device, paramFullName, paramRefIdSuffix) {
  * @param {boolean} includeDefault - export parameters with default-value
  * @returns {string[]} - string representations of channel-configuration, different from default value each of format "{$index}={$value}"
  */
-function tchExportModuleChannelToStrings(device, module, channel, keyFormat, exportHidden, exportDefault) {
-    var params = tchGetModuleParamsDef(module, channel);
+function uctExportModuleChannelToStrings(device, module, channel, keyFormat, exportHidden, exportDefault) {
+    var params = uctGetModuleParamsDef(module, channel);
 
     var result = [];
     var errors = [];
@@ -175,12 +171,12 @@ function tchExportModuleChannelToStrings(device, module, channel, keyFormat, exp
             /* TODO extract to function! */
             var paramNameDef = params.names[i].split(":");
             var paramFullName = module + "_" + paramNameDef[0].replace('~', channel);
-            var paramObj = tchGetDeviceParameter(device, paramFullName, (paramNameDef.length>1) ? parseInt(paramNameDef[1]) : 1);
+            var paramObj = uctGetDeviceParameter(device, paramFullName, (paramNameDef.length>1) ? parseInt(paramNameDef[1]) : 1);
 
             if (exportHidden || paramObj.isActive) {
                 var paramValue = paramObj.value;
                 if (exportDefault || paramValue != params.defaults[i]) {
-                    result.push(paramKey + "=" +  tchSerializeParamValue(paramValue));
+                    result.push(paramKey + "=" +  uctSerializeParamValue(paramValue));
                 }
             }
         } catch (e) {
@@ -206,19 +202,19 @@ function tchExportModuleChannelToStrings(device, module, channel, keyFormat, exp
  * @param {boolean} includeDefault - export parameters with default-value
  * @returns {string} - a string representation of channel-configuration, different from default value "{$index}={$value}§..§{$index}={$value}"
  */
-function tchExportModuleChannelToString(device, module, channel, keyFormat, multiLine, includeHidden, includeDefault) {
-    var lines = tchExportModuleChannelToStrings(device, module, channel, keyFormat, includeHidden, includeDefault);
+function uctExportModuleChannelToString(device, module, channel, keyFormat, multiLine, includeHidden, includeDefault) {
+    var lines = uctExportModuleChannelToStrings(device, module, channel, keyFormat, includeHidden, includeDefault);
     lines.push(";OpenKNX");
     var separator = multiLine ? '\n' : '§';
-    return tchCreateHeader(module, channel) + separator + lines.join(separator);
+    return uctCreateHeader(module, channel) + separator + lines.join(separator);
 }
 
 
-function tchHexNumberStr(x) {
+function uctHexNumberStr(x) {
     return "0x"+x.toString(16).toUpperCase();
 }
 
-function tchParseHeader(headerStr) {
+function uctParseHeader(headerStr) {
     var header = {
         "prefix": undefined,
         "format": undefined,
@@ -253,12 +249,12 @@ function tchParseHeader(headerStr) {
         throw new Error('Format-Version NICHT definiert!');
     }
     var versionParts = headerParts[1].split(":");
-    if (versionParts[0] == tchFormatVerMultiPreview) {
+    if (versionParts[0] == uctFormatVerMultiPreview) {
         throw new Error('Multi-Kanal Format-Version ("' + versionParts[0] + '") NICHT unterstützt! Geplant für zukünftige Versionen von Konfigurationstransfer!');
     }
-    var tchFormatVerDev = "ck-dev0"; // legacy support for version id used in development and internal testing; never use in new transfer-strings; can be removed in later versions without notice!
-    if (versionParts[0] != tchFormatVer && versionParts[0] != tchFormatVerDev) {
-        throw new Error('Format-Version NICHT unterstützt! Version "'+tchFormatVer+'" erwartet, aber "' + versionParts[0] + '" gefunden!');
+    var uctFormatVerDev = "ck-dev0"; // legacy support for version id used in development and internal testing; never use in new transfer-strings; can be removed in later versions without notice!
+    if (versionParts[0] != uctFormatVer && versionParts[0] != uctFormatVerDev) {
+        throw new Error('Format-Version NICHT unterstützt! Version "'+uctFormatVer+'" erwartet, aber "' + versionParts[0] + '" gefunden!');
     }
     header.format = versionParts[0];
 
@@ -306,7 +302,7 @@ function tchParseHeader(headerStr) {
     return header;
 }
 
-function tchFindIndexByParamName(params, paramKey, paramRefSuffix) {
+function uctFindIndexByParamName(params, paramKey, paramRefSuffix) {
     var paramName = paramKey;
 
     // TODO FIXME: replace with a implementation of better runtime!
@@ -334,7 +330,7 @@ function tchFindIndexByParamName(params, paramKey, paramRefSuffix) {
  * @param {number} channel - the channel number starting with 1; maximum range [1;99]
  * @param {string} exportStr - a previously exported configuration in the format "{$index}={$value}§..§{$index}={$value}"
  */
-function tchImportModuleChannelFromString(device, module, channel, exportStr, importCheck) {
+function uctImportModuleChannelFromString(device, module, channel, exportStr, importCheck) {
     Log.info("OpenKNX ConfigTransfer: ImportModuleChannelFromString ...")
 
     var allowMissing = (importCheck == 0);
@@ -345,7 +341,7 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
 
     var importLines = exportStr.split("§");
 
-    var header = tchParseHeader(importLines[0]);
+    var header = uctParseHeader(importLines[0]);
 
     /* check for completeness */
     var importEnd = importLines[importLines.length-1];
@@ -362,8 +358,8 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
     }
     module = header.modul.key;
 
-    var isDifferentAppId = (header.app.id != tchAppId);
-    var isDifferentAppVer = (header.app.ver != tchAppVer);
+    var isDifferentAppId = (header.app.id != uctAppId);
+    var isDifferentAppVer = (header.app.ver != uctAppVer);
 
     // check module version
     if (checkModuleVersion) {
@@ -393,10 +389,10 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
     // '*' will not be accepted when app should be the same
     if (checkAppId) {
         if (isDifferentAppId) {
-            throw new Error('Applikation '+tchAppId+' erwartet, aber '+header.app.id+' gefunden!');
+            throw new Error('Applikation '+uctAppId+' erwartet, aber '+header.app.id+' gefunden!');
         }
         if (checkAppVersion && isDifferentAppVer) {
-            throw new Error('Applikations-Version '+tchAppVer+' erwartet, aber '+header.app.ver+' gefunden!');
+            throw new Error('Applikations-Version '+uctAppVer+' erwartet, aber '+header.app.ver+' gefunden!');
         }
     }
 
@@ -416,7 +412,7 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
         throw new Error('Kanaleinstellungen können nicht in Basiseinstellungen importiert werden!');
     }
 
-    var params = tchGetModuleParamsDef(module, channel);
+    var params = uctGetModuleParamsDef(module, channel);
     if (!params) {
         throw new Error('Keine Parameter definiert für Modul "'+module+'" und Kanal "'+channel+'"!');
     }
@@ -433,11 +429,11 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
         'warnings': 0,
         'errors': 0
     };
-    var newValues = tchPrepareParamValues(params, importContent, result, merge, allowMissing);
+    var newValues = uctPrepareParamValues(params, importContent, result, merge, allowMissing);
 
     /* write new values */
     Log.info("OpenKNX ConfigTransfer: ImportModuleChannelFromString - Write Params ...")
-    var writeClean = tchWriteParams(device, module, channel, params, newValues, result);
+    var writeClean = uctWriteParams(device, module, channel, params, newValues, result);
     if (!writeClean) {
         Log.error("OpenKNX ConfigTransfer: ImportModuleChannelFromString - Write Params produced Errors!")
     }
@@ -470,7 +466,7 @@ function tchImportModuleChannelFromString(device, module, channel, exportStr, im
  * @param {boolean} allowMissing - defines behaviour when unkown paramter is found: `false` = throw Error, `true` = add warning-message to result
  * @returns {array} - new param values, or `null` to keep current, by index of param-definition
  */
-function tchPrepareParamValues(params, importContent, result, merge, allowMissing) {
+function uctPrepareParamValues(params, importContent, result, merge, allowMissing) {
     var newValues = [];
     if (merge) {
         // use empty values - to ignore in writing
@@ -511,7 +507,7 @@ function tchPrepareParamValues(params, importContent, result, merge, allowMissin
             var paramIndex = -1;
             if (isNaN(paramKey)) {
                 // param is given by name
-                paramIndex = tchFindIndexByParamName(params, paramKey, paramRefSuffix);
+                paramIndex = uctFindIndexByParamName(params, paramKey, paramRefSuffix);
             } else if (paramKey < newValues.length) {
                 // valid index
                 // TODO FIXME: Ensure same version!
@@ -521,7 +517,7 @@ function tchPrepareParamValues(params, importContent, result, merge, allowMissin
             }
 
             if (paramIndex >=0) {
-                var paramValue = tchUnserializeParamValue(paramValuePair.slice(1).join("="));
+                var paramValue = uctUnserializeParamValue(paramValuePair.slice(1).join("="));
                 newValues[paramIndex] = paramValue;
             } else if (allowMissing) {
                 // TODO handling of invalid parameters!
@@ -540,7 +536,7 @@ function tchPrepareParamValues(params, importContent, result, merge, allowMissin
     return newValues;
 }
 
-function tchWriteParams(device, module, channel, params, newValues, result) {
+function uctWriteParams(device, module, channel, params, newValues, result) {
     var clean = true;
     for (var i = 0; i < params.names.length; i++) {
         var paramNameDef = params.names[i].split(":");
@@ -552,7 +548,7 @@ function tchWriteParams(device, module, channel, params, newValues, result) {
             /* TODO set paramValue to channel-specific value */
             if (paramValue !=null) {
                 var paramFullName = module + "_" + paramName.replace('~', channel);
-                var param = tchGetDeviceParameter(device, paramFullName, paramRefIdSuffix);
+                var param = uctGetDeviceParameter(device, paramFullName, paramRefIdSuffix);
                 if (typeof param.value == "number") {
                     // At least in German Localisation with ',' as decimal separator: 
                     // using string with '.' as decimal separator would remove decimal separtor a all
@@ -581,13 +577,13 @@ function tchWriteParams(device, module, channel, params, newValues, result) {
  * @param {number} channelSource 
  * @param {number} channelTarget 
  */
-function tchCopyModuleChannel(device, module, channelSource, channelTarget) {
+function uctCopyModuleChannel(device, module, channelSource, channelTarget) {
     if (channelTarget == channelSource) {
         throw new Error('Quell- und Ziel-Kanal dürfen NICHT identisch sein!');
     }
     /* TODO copy without serialize/deserialize */
-    var exportStr = tchExportModuleChannelToString(device, module, channelSource, "", false, true);
-    tchImportModuleChannelFromString(device, module, channelTarget, exportStr, 7);
+    var exportStr = uctExportModuleChannelToString(device, module, channelSource, "", false, true);
+    uctImportModuleChannelFromString(device, module, channelTarget, exportStr, 7);
     return module + "/" + channelSource + " -> " + module + "/" + channelTarget + " [OK]";
 }
 
@@ -598,15 +594,15 @@ function tchCopyModuleChannel(device, module, channelSource, channelTarget) {
  * @param {number} channelA
  * @param {number} channelB
  */
-function tchSwapModuleChannel(device, progress, module, channelA, channelB) {
+function uctSwapModuleChannel(device, progress, module, channelA, channelB) {
     if (channelB == channelA) {
         throw new Error('Zu tauschende Kanäle dürfen NICHT identisch sein!');
     }
     /* TODO check swap without serialize/deserialize */
-    var exportStrA = tchExportModuleChannelToString(device, /* TODO progress,*/ module, channelA, "", false, true, false);
-    var exportStrB = tchExportModuleChannelToString(device, /* TODO progress,*/ module, channelB, "", false, true, false);
-    tchImportModuleChannelFromString(device, /* TODO progress,*/ module, channelB, exportStrA, 7);
-    tchImportModuleChannelFromString(device, /* TODO progress,*/ module, channelA, exportStrB, 7);
+    var exportStrA = uctExportModuleChannelToString(device, /* TODO progress,*/ module, channelA, "", false, true, false);
+    var exportStrB = uctExportModuleChannelToString(device, /* TODO progress,*/ module, channelB, "", false, true, false);
+    uctImportModuleChannelFromString(device, /* TODO progress,*/ module, channelB, exportStrA, 7);
+    uctImportModuleChannelFromString(device, /* TODO progress,*/ module, channelA, exportStrB, 7);
     return module + "/" + channelA + " <--> " + module + "/" + channelB + " [OK]";
 }
 
@@ -617,46 +613,24 @@ function tchSwapModuleChannel(device, progress, module, channelA, channelB) {
  * @param {string} module 
  * @param {number} channel 
  */
-function tchResetModuleChannel(device, module, channel) {
-    tchImportModuleChannelFromString(device, module, channel, tchCreateHeader(module, channel) + '§' + ";OpenKNX", 7);
+function uctResetModuleChannel(device, module, channel) {
+    uctImportModuleChannelFromString(device, module, channel, uctCreateHeader(module, channel) + '§' + ";OpenKNX", 7);
     return module + "/" + channel+" Reset [OK]";
 }
 
-function tchParamResetResult(input, output, context) {
+function uctParamResetResult(input, output, context) {
     // reset `result` parameter
     output.result = '';
 }
 
-function tchParamResetSelection(input, output, context) {
-    Log.info("OpenKNX ConfigTransfer: tchParamResetSelection")
+function uctParamResetSelection(input, output, context) {
+    Log.info("OpenKNX ConfigTransfer: uctParamResetSelection")
     // reset `selection` parameter
     output.selection = 255;
 }
 
-function tchParamResetNothing(input, output, context) {
+function uctParamResetNothing(input, output, context) {
     // do nothing
 } 
 
 // -- OFM-ConfigTransfer //
-
-
-
-
-
-function tchAddChannel(device, online, progress, context) {
-    var numberOfChannelds = device.getParameterByName('TCH_VisibleChannels');
-    var newNumberOfChannels = numberOfChannelds.value + 1;
-    var channelType = device.getParameterByName('TCH_CH' + newNumberOfChannels + 'PageType');
-    var notAllowed = device.getParameterByName('TCH_AddNotAllowed');
-    if (channelType == 0)
-    {
-        notAllowed.value = 1;
-    }
-    else
-    {
-        notAllowed.value = 0;
-        numberOfChannelds.value = newNumberOfChannels;
-    }
-}
-
-// -- OFM-TouchDisplay //

@@ -196,6 +196,9 @@
               <!-- Add not allowed -->
 							<Parameter Id="%AID%_P-%TT%00010" Name="AddNotAllowed" ParameterType="%AID%_PT-OnOffYesNo" Text="AddNotAllowed" Value="0"  Access="None"/> 
           
+              <!-- Always 0 -->
+							<Parameter Id="%AID%_P-%TT%00019" Name="Always0" ParameterType="%AID%_PT-OnOffYesNo" Text="Always0" Value="0"  Access="None"/> 
+          
               <Union SizeInBit="104">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <!-- Visible Channels -->
@@ -238,7 +241,7 @@
                 <Parameter Offset="11" BitOffset="0"  Id="%AID%_UP-%TT%00017" Name="ColorPaletteNight" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bedienelemente" Value="19" />
                 <!-- Color Palette Night ON  -->
                 <Parameter Offset="12" BitOffset="0"  Id="%AID%_UP-%TT%00018" Name="ColorPaletteNightOn" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bild EIN" Value="14" />
-                <!-- Next Id="%AID%_UP-%TT%00019" -->
+                <!-- Next Id="%AID%_UP-%TT%00020" -->
               </Union>
 
             </Parameters>
@@ -281,6 +284,8 @@
               <ParameterRef Id="%AID%_UP-%TT%00017_R-%TT%0001701" RefId="%AID%_UP-%TT%00017" />
               <!-- Color Palette Night ON  -->
               <ParameterRef Id="%AID%_UP-%TT%00018_R-%TT%0001801" RefId="%AID%_UP-%TT%00018" />
+              <!-- Always 0 -->
+              <ParameterRef Id="%AID%_P-%TT%00019_R-%TT%0001901" RefId="%AID%_P-%TT%00019" />
             </ParameterRefs>
             <ComObjectTable>
             	<!-- Display On/Off -->
@@ -500,9 +505,10 @@
                 <ComObjectRefRef RefId="%AID%_O-%TT%00013_R-%TT%0001301" />
                 <!-- Page Enabled H -->
                 <ComObjectRefRef RefId="%AID%_O-%TT%00014_R-%TT%0001401" />
+               </ParameterBlock>
+               <ParameterBlock Id="%AID%_PB-nnn" Name="SHCPageDefintion" Text="Seiten" Icon="vector-arrange-below">	
 
-     					  <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Kanalauswahl" UIHint="Headline" />
+     					  <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
                 <!-- Visible Channels -->
                 <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
                 

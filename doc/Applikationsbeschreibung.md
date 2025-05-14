@@ -50,6 +50,10 @@ Die Smart Home Bridge besteht aus folgenden Modulen:
 <!-- DOC -->
 #### Standardseite nach Zeitbasis 
 
+
+<!-- DOC HelpContext="MovePageButtons" -->
+#### Seitenreihenfolge anpassen
+
 <!-- DOC -->
 ### Seitentyp
 
