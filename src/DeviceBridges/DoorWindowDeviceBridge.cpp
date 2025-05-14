@@ -39,16 +39,13 @@ void DoorWindowDeviceBridge::setup(uint8_t _channelIndex)
 
     if (ParamBRI_CHDoorWindowMotor)
     {
-        lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
         if (ParamBRI_CHDoorWindowUsePercent)
         {
-            lv_obj_set_style_bg_opa(_screen.slider, LV_OPA_COVER, LV_PART_KNOB);
-            lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_CLICKABLE);
+            lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
         }
         else
         {
-            lv_obj_set_style_bg_opa(_screen.slider, LV_OPA_TRANSP, LV_PART_KNOB);
-            lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_CLICKABLE);
+            lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
         }
     }
     else
