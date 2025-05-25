@@ -1,1 +1,1 @@
-OpenKNXproducer baggages -d doc/Applikationsbeschreibung.md -b src/Baggages/Help_de -p TCH
+OpenKNXproducer baggages -d doc/Applikationsbeschreibung-TouchDisplay.md -b src/Baggages/Help_de -p TCH
