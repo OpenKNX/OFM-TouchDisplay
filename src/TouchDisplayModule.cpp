@@ -90,13 +90,8 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
     {
         uint8_t page = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         logDebugP("Requested Page: %d", page);
-        if (pageEnabled(page))
-            activatePage(page);
-        else
-        {
-            logDebugP("Requested Page: %d not enabled", page);
-            _waitForEnablePageWhichWasRequested = max(millis(), 1L);
-        }
+        _setPageDelayed = page;
+        _waitForSetPageDelayed = max(millis(), 1L);
         break;
     }
     case TCH_KoPrevNext:
@@ -112,7 +107,10 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         bool isDefaultPageActive = _defaultPage == activePage();
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         if (isDefaultPageActive)
-            activatePage(_defaultPage);
+        {
+            _setPageDelayed = _defaultPage;
+            _waitForSetPageDelayed = max(millis(), 1L);;
+        }
         break;
     }
     case TCH_KoDisplayOnOff:
@@ -134,13 +132,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
     case TCH_KoPageEnabledG:    
     case TCH_KoPageEnabledH:
     {
-        if (_waitForEnablePageWhichWasRequested > 0)
-        {
-            uint8_t page = 1 + (uint8_t) KoTCH_Page.value(DPT_SceneNumber);
-            if (pageEnabled(page))
-                activatePage(page);
-        }
-
+        
         if (_channelIndex != 255)
         {
             uint8_t page = _channelIndex + 1;
@@ -184,11 +176,7 @@ void TouchDisplayModule::activatePage(uint8_t page, bool displayOnAndResetTimeou
         logDebugP("Page: %d not enabled", page);
         return;
     }
-    if (_waitForEnablePageWhichWasRequested > 0)
-    {
-        _waitForEnablePageWhichWasRequested = 0;
-        logDebugP("Stop waiting for requested page because a page is activated");
-    }
+    _waitForSetPageDelayed = 0; 
     if (displayOnAndResetTimeout)
         display(true);
    
@@ -690,6 +678,21 @@ void TouchDisplayModule::interruptTouchRight()
 
 void TouchDisplayModule::loop(bool configured)
 {
+    if (_waitForSetPageDelayed > 0 && millis() - _waitForSetPageDelayed > 100)
+    {
+        _waitForSetPageDelayed = 0;
+        if (_channelIndex != _setPageDelayed - 1)
+        {
+            logDebugP("Activate delayed page: %d", _setPageDelayed);
+            activatePage(_setPageDelayed);
+        }
+        else
+        {
+            logDebugP("Delayed page %d already active", _setPageDelayed);
+        }
+       
+    }
+    
     if (configured)
     {
         bool progMode = knx.progMode();
@@ -839,12 +842,6 @@ void TouchDisplayModule::loop(bool configured)
         {
             knx.progMode(false);
         }
-    }
-
-    if (_waitForEnablePageWhichWasRequested > 0 && millis() - _waitForEnablePageWhichWasRequested > 1000)
-    {
-        _waitForEnablePageWhichWasRequested = 0;
-        logDebugP("Stop waiting for requested page because of timeout");
     }
 }
 #ifdef OPENKNX_DUALCORE

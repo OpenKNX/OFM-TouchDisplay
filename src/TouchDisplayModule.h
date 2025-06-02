@@ -9,6 +9,7 @@ class Page;
 class TouchDisplayModule : public OpenKNX::Module
 {
 	uint8_t _channelIndex = 255; // current active channel, do not rename, because var name is used in macros
+	uint8_t _setPageDelayed = 255;
 	uint8_t _defaultPage = 0;
 	unsigned long _displayTimeoutMs = 0;
 	unsigned long _pageTimeout = 0;
@@ -18,7 +19,7 @@ class TouchDisplayModule : public OpenKNX::Module
 	lv_obj_t* _displayOffRectangle = nullptr;
 	uint8_t _themeSelection = 0;
 	bool _detailDevicePageActive = false;
-	unsigned long _waitForEnablePageWhichWasRequested = 0;
+	unsigned long _waitForSetPageDelayed = 0;
 	
 	bool _touchPressState = false;
 	unsigned long _touchPressedTimer = 0;
