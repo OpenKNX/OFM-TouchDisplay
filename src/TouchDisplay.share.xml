@@ -418,10 +418,10 @@
             
 
                 <!-- Default Page -->
-                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00001_R-%TT%0000101" />
+                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00001_R-%TT%0000101" HelpContext="%DOC%"  />
                 
 
-                <ParameterBlock Id="%AID%_PB-nnn" Name="DefaultPageFallbackTime" Inline="true" Layout="Grid" HelpContext="TCH-Standardseite-Rueckfallzeit" >
+                <ParameterBlock Id="%AID%_PB-nnn" Name="DefaultPageFallbackTime" Inline="true" Layout="Grid" HelpContext="TCH-Rueckfall-auf-Standardseite" >
                   <Rows>
                     <Row Id="%AID%_PB-nnn_R-1" Name="Row1" />
                   </Rows>
@@ -438,7 +438,7 @@
                 </ParameterBlock> 
 
                 <!-- Default Page KO -->
-                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00004_R-%TT%0000401" />
+                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00004_R-%TT%0000401" HelpContext="%DOC%" />
                 <choose ParamRefId="%AID%_UP-%TT%00004_R-%TT%0000401">
                   <when test="1">
                     <!-- Default Page -->
@@ -450,7 +450,7 @@
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Anzeigemodus" UIHint="Headline" />
 
                 <!-- Day/Night Object -->
-                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00009_R-%TT%0000901" />
+                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00009_R-%TT%0000901" HelpContext="%DOC%"/>
                 <choose ParamRefId="%AID%_UP-%TT%00009_R-%TT%0000901">
                   <when test="0">
                     <!-- No day night switch -->
@@ -473,19 +473,19 @@
                     <!-- Day / Night switchable-->
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Tag" />
                     <!-- Theme Day -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00007_R-%TT%0000701" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00007_R-%TT%0000701" HelpContext="%DOC%"/>
                     <!-- Color Palette Day -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00015_R-%TT%0001501" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00015_R-%TT%0001501" HelpContext="%DOC%"/>
                     <!-- Color Palette Day ON  -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00016_R-%TT%0001601" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00016_R-%TT%0001601" HelpContext="%DOC%"/>
                  
                     <ParameterSeparator Id="%AID%_PS-nnn" Text="Nacht" />
                     <!-- Theme Night -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00008_R-%TT%0000801" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00008_R-%TT%0000801" HelpContext="%DOC%"/>
                     <!-- Color Palette Night -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00017_R-%TT%0001701" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00017_R-%TT%0001701" HelpContext="%DOC%"/>
                     <!-- Color Palette Night ON  -->
-                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00018_R-%TT%0001801" />
+                    <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00018_R-%TT%0001801" HelpContext="%DOC%"/>
                   </when>  
                 </choose>
 
@@ -510,7 +510,7 @@
 
      					  <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
                 <!-- Visible Channels -->
-                <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="BASE-Verfuegbare-Kanaele" IndentLevel="1" />
+                <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="%DOC%" IndentLevel="1" />
                 
                 <op:include href="TouchDisplay.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Settings']/*" type="template" prefix="TCH" IsInner="true" />
 
@@ -533,7 +533,7 @@
 
 			                    <!-- Hidden -->
 										      <!-- Add not allowed -->
-                          <ParameterRefRef IndentLevel="1" RefId="%AID%_P-%TT%00010_R-%TT%0001001" />
+                          <ParameterRefRef IndentLevel="1" RefId="%AID%_P-%TT%00010_R-%TT%0001001"/>
                           <choose ParamRefId="%AID%_P-%TT%00010_R-%TT%0001001" >
                             <when test="1">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Hinzufügen von 'Deaktiviert' nicht möglich. Es muss zuerst eine Auswahl getroffen werden." UIHint="Error" />
