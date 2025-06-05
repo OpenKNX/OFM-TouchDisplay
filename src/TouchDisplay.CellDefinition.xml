@@ -77,7 +77,7 @@
                                                 <!-- Device Cell -->
 
                                                 <!-- Device -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%00_R-%TT%%CC%%N%0001" IndentLevel="1" HelpContext="%DOC%" />
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%00_R-%TT%%CC%%N%0001" IndentLevel="1" HelpContext="TCH-DeviceSelection" />
                             
                                                 
                                                 <!-- Short Press -->
@@ -115,7 +115,7 @@
                                             <when test="3" >
                                                 <!-- Time  -->
                                                 <!-- Short Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="%DOC%" />
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="TCH-ShortPressDateTime" />
                                                 <choose ParamRefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801">
                                                     <when test="3" >
                                                         <!-- Jump To Short Press -->
@@ -127,7 +127,7 @@
                                                     </when>
                                                 </choose>
                                                 <!-- Long Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="%DOC%" />
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="TCH-ShortPressDateTime" />
                                                 <choose ParamRefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901">
                                                     <when test="3" >
                                                         <!-- Jump To Long Press -->
@@ -142,7 +142,7 @@
                                             <when test="4" >
                                                 <!-- Date -->
                                                 <!-- Short Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="%DOC%" />
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801" IndentLevel="1" HelpContext="TCH-ShortPressDateTime" />
                                                 <choose ParamRefId="%AID%_UP-%TT%%CC%%N%08_R-%TT%%CC%%N%0801">
                                                     <when test="3" >
                                                         <!-- Jump To Short Press -->
@@ -154,7 +154,7 @@
                                                     </when>
                                                 </choose>
                                                 <!-- Long Press -->
-                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="%DOC%" />
+                                                <ParameterRefRef RefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901" IndentLevel="1" HelpContext="TCH-ShortPressDateTime" />
                                                 <choose ParamRefId="%AID%_UP-%TT%%CC%%N%09_R-%TT%%CC%%N%0901">
                                                     <when test="3" >
                                                         <!-- Jump To Long Press -->
