@@ -1,6 +1,6 @@
 ﻿### Farbe Bedienelemente
 
-Wählt die Farbe für Steuerbedienelemente im aktiven Zustand (Z.B. der aktive Teil eines Sliders).
+Wählt die Farbe für Steuerbedienelemente im aktiven Zustand (z. B. der aktive Teil eines Sliders).
 
 - Rot
 - Pink
@@ -15,7 +15,7 @@ Wählt die Farbe für Steuerbedienelemente im aktiven Zustand (Z.B. der aktive T
 - Hellgrün
 - Limette
 - Gelb
-- Orange Gelb
+- Orangegelb
 - Orange
 - Dunkel Orange
 - Braun

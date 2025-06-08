@@ -1,4 +1,4 @@
-﻿### Geröt
+﻿### Gerät
 
-Die Gerätenummer des Geräts das angezeigt und gesteuert werden soll
+Die Gerätenummer des Geräts, das angezeigt und gesteuert werden soll.
 

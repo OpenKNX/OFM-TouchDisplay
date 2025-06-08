@@ -1,6 +1,6 @@
 ﻿### Farbe Bild EIN
 
-Farbe die für die Bildeinfärbung im Zustand EIN verwendet wird.
+Farbe, die für die Bildeinfärbung im Zustand EIN verwendet wird.
 
 - Rot
 - Pink
@@ -15,7 +15,7 @@ Farbe die für die Bildeinfärbung im Zustand EIN verwendet wird.
 - Hellgrün
 - Limette
 - Gelb
-- Orange Gelb
+- Orangegelb
 - Orange
 - Dunkel Orange
 - Braun

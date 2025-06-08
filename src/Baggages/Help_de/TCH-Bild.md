@@ -1,9 +1,9 @@
 ﻿### Bild
 
-Bild das auf einem Absprung-Feld angezeigt wird, das auf diese Seite verweist.
+Bild, das auf einem Absprung-Feld angezeigt wird, das auf diese Seite verweist.
 
-- Benutzerdefiniert
-  Blenden die Konfiguration für ein benutzerspezifisches Bild ein.
+- Benutzerdefiniert  
+  Blendet die Konfiguration für ein benutzerspezifisches Bild ein.
 - Ein-/Ausschaltbares Gerät
 - Steckdose
 - Lampe
@@ -22,7 +22,7 @@ Bild das auf einem Absprung-Feld angezeigt wird, das auf diese Seite verweist.
 - Text
 - Kontakt
 - Bewegungsmelder
-- Präsensmelder
+- Präsenzmelder
 - Leckmelder
 - Rauchmelder
 - Kohlendioxidmelder (CO2)

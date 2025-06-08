@@ -1,4 +1,4 @@
 ﻿### Seitenreihenfolge anpassen
 
-Über die Tasten kann die Reihenfolge der Seite.
+Über die Tasten kann die Reihenfolge der Seiten angepasst werden.
 

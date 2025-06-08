@@ -1,4 +1,4 @@
 ﻿### Layout
 
-Legt fest, wieviele Bedien- bzw. Anzeigefelder auf der Seite sind.
+Legt fest, wie viele Bedien- bzw. Anzeigefelder auf der Seite sind.
 

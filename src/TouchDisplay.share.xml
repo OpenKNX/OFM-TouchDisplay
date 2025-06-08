@@ -216,16 +216,16 @@
                 <!-- Visible Channels -->
                 <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%00000" Name="VisibleChannels" ParameterType="%AID%_PT-TCHNumChannels"  Text="Verfügbare Seiten" Value="0" SuffixText=" von %N%" />
                 <!-- Default Page -->
-                <Parameter Offset="1" BitOffset="0" Id="%AID%_UP-%TT%00001" Name="DefaultPage" ParameterType="%AID%_PT-TCHNumChannels" Text="Standard Seite" Value="1" />
+                <Parameter Offset="1" BitOffset="0" Id="%AID%_UP-%TT%00001" Name="DefaultPage" ParameterType="%AID%_PT-TCHNumChannels" Text="Standardseite" Value="1" />
                 <!-- Default Page Fallback Time DelayBase -->
                 <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%00002" Name="DefaultPageDelayBase"   ParameterType="%AID%_PT-DelayBase" Text="Standardseite nach Zeitbasis" Value="1" />
                 <!-- Default Page Fallback Timeg DelayTime -->
                 <Parameter Offset="2" BitOffset="2" Id="%AID%_UP-%TT%00003" Name="DefaultPageDelayTime"   ParameterType="%AID%_PT-DelayTime"    Text="Standardseite nach Zeit" Value="2" />
                 <!-- ^^^  Need 2 Bytes ^^^ -->       
                 <!-- Default Page KO -->
-                <Parameter Offset="4" BitOffset="0" Id="%AID%_UP-%TT%00004" Name="DefaultPageKO" ParameterType="%AID%_PT-OnOffYesNo"  Text="Gruppenobjekt für Standard Seitenauswahl" Value="0" />
+                <Parameter Offset="4" BitOffset="0" Id="%AID%_UP-%TT%00004" Name="DefaultPageKO" ParameterType="%AID%_PT-OnOffYesNo"  Text="Gruppenobjekt für Standardseitenauswahl" Value="0" />
                 <!-- Sensor Keys -->
-                <Parameter Offset="4" BitOffset="1" Id="%AID%_UP-%TT%00011" Name="SensorKeys" ParameterType="%AID%_PT-OnOffYesNo" Text="Sensor Tasten Vorhanden" Value="1" />
+                <Parameter Offset="4" BitOffset="1" Id="%AID%_UP-%TT%00011" Name="SensorKeys" ParameterType="%AID%_PT-OnOffYesNo" Text="Sensor Tasten vorhanden" Value="1" />
                 <!-- Sensor Keys Changed -->
                 <Parameter Offset="4" BitOffset="2" Id="%AID%_UP-%TT%00012" Name="LeftRightChanged" ParameterType="%AID%_PT-OnOffYesNo" Text="Links-Rechts tauschen" Value="0" />
                 <!-- Slide -->

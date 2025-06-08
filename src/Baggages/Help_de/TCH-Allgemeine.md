@@ -1,4 +1,4 @@
 ﻿### Allgemeine
 
-In diesem Abshnitt werden globale für das Display notwendige Einstellungen vorgenommen.
+In diesem Abschnitt werden globale, für das Display notwendige Einstellungen vorgenommen.
 

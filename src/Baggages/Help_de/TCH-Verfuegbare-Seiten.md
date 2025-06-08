@@ -1,4 +1,4 @@
 ﻿### Verfügbare Seiten
 
-Anzahl der Seiten die in der Konfiguration zur Verfügung stehen.
+Anzahl der Seiten, die in der Konfiguration zur Verfügung stehen.
 

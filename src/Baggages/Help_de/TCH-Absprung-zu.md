@@ -1,4 +1,4 @@
 ﻿### Absprung zu
 
-Seitennummer die bei Druck auf das Feld angesprungen wird.
+Seitennummer, die bei Druck auf das Feld angesprungen wird.
 
