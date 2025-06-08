@@ -378,7 +378,7 @@
           </Static>
           <Dynamic>
             <Channel Id="%AID%_CH-Basic" Name="BasicChannel" Number="1" Text="Rundes Touch-Display" Icon="animation-outline">
-              <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Allgemein" Icon="cog-outline" HelpContext="Empty" >
+              <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Allgemein" Icon="cog-outline" HelpContext="TCH-Touch-Display" >
 
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Rundes Touch-Display" UIHint="Headline" />
 								<ParameterSeparator Id="%AID%_PS-nnn" Text="Version: %ModuleVersion%" />
@@ -518,7 +518,13 @@
                 <!-- Page Enabled H -->
                 <ComObjectRefRef RefId="%AID%_O-%TT%00014_R-%TT%0001401" />
                </ParameterBlock>
-               <ParameterBlock Id="%AID%_PB-nnn" Name="SHCPageDefintion" Text="Seiten" Icon="vector-arrange-below">	
+               <ParameterBlock Id="%AID%_PB-nnn" Name="SHCPageDefintion" Text="Seiten" Icon="vector-arrange-below" HelpContext="TCH-Seiten" >
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
+                <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
+                
+                <!-- Visible Channels -->
+                <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="%DOC%" IndentLevel="1" />	
 
      					  <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
                 <!-- Visible Channels -->

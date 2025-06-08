@@ -8,8 +8,7 @@ Das Konfigurationskonzept sieht vor, dass im Abschnitt [Geräte](https://github.
 In diesem Abschnitt wird das Layout der Seiten definiert und bei Bedarf die Verknüpfungen zur Gerätedefinition vorgenommen. 
 Durch die Trennung von Geräte- und Seitenkonfiguration kann das Layout und die Seitenreihenfolge leicht angepasst werden, ohne aufwendige Gruppenverknüpfungen erneut vorzunehmen.
 
-<!-- DOC -->
-## Allgemeine
+## Allgemein
 
 In diesem Abschnitt werden globale, für das Display notwendige Einstellungen vorgenommen.
 
@@ -187,29 +186,29 @@ Farbe, die für die Bildeinfärbung im Zustand EIN verwendet wird.
 - Grau
 
 <!-- DOC -->
-### Seiten 
+## Seiten 
 
 In diesem Abschnitt werden die Seitenanzahl und Seitentypen eingestellt.
 
 <!-- DOC -->
-#### Verfügbare Seiten
+### Verfügbare Seiten
 
 Anzahl der Seiten, die in der Konfiguration zur Verfügung stehen.
 
 <!-- DOC HelpContext="MovePageButtons" -->
-#### Seitenreihenfolge anpassen
+### Seitenreihenfolge anpassen
 
 Über die Tasten kann die Reihenfolge der Seiten angepasst werden.
 
 <!-- DOC -->
-### Beschreibung
+## Beschreibung
 
 Beschreibung der Seite, die in der ETS verwendet werden soll. 
 Die Beschreibung wird am Display nicht angezeigt.
 Sie dient zur Erleichterung und Übersichtlichkeit der Konfiguration.
 
 <!-- DOC -->
-### Seitentyp
+## Seitentyp
 
 Hier kann man zwischen verschiedenen Seitenarten wählen.
 
