@@ -1,2 +1,0 @@
-﻿### Einstellung für Feldfunktion Gerät
-

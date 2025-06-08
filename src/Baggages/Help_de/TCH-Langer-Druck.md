@@ -18,3 +18,4 @@ legt fest, was bei einem langen Druck passieren soll.
 Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
 Es muss nicht explizit auf das Bild gedrückt werden.
 
+

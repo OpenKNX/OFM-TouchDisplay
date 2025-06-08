@@ -119,7 +119,13 @@ std::string CellPage::image()
     {
         // custom icon
         auto name = (const char*)ParamTCH_CHIconName;
+
         return std::string(name, 8) + ".png";
+    }
+    if (icon > 99)
+    {
+        // icon out of range
+        return std::string("Type") + std::to_string(icon / 10) + "_" + std::to_string(icon % 100) + ".png";
     }
     return std::string("Type") + std::to_string(icon) + ".png";
 }

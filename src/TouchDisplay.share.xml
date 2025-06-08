@@ -9,7 +9,7 @@
         
           <op:part href="TouchDisplay.CellDefinition.xml" name="CellDefintion" instances="4">
 				    <op:param name="%N%" value="1" />
-            <op:param name="%OFFSET%" value="39" increment="5"/>
+            <op:param name="%OFFSET%" value="40" increment="5"/>
 					</op:part>
           
           <Static>
@@ -32,8 +32,6 @@
                 </TypeRestriction>
               </ParameterType>
 
-
-    
 
               <ParameterType Id="%AID%_PT-TCHCellType" Name="TCHCellType">
                 <TypeRestriction Base="Value" SizeInBit="8">
@@ -114,27 +112,41 @@
               </ParameterType>
          
               <ParameterType Id="%AID%_PT-TCHIcon" Name="TCHIcon">
-                <TypeRestriction Base="Value" SizeInBit="8">
+                <TypeRestriction Base="Value" SizeInBit="16">
                     <Enumeration Value="0"  Id="%ENID%" Text="Benutzerdefiniert"  />
                     <Enumeration Value="10" Id="%ENID%" Text="Ein-/Ausschaltbares Gerät" Icon="power" />
                     <Enumeration Value="11" Id="%ENID%" Text="Steckdose" Icon="power-socket-eu" />
                     <Enumeration Value="20" Id="%ENID%" Text="Lampe" Icon="lamp-outline"   />
                     <Enumeration Value="30" Id="%ENID%" Text="Jalousie" Icon="window-shutter" />
-                    <Enumeration Value="31" Id="%ENID%" Text="Rolladen" Icon="roller-shade-closed" />
+                    <Enumeration Value="31" Id="%ENID%" Text="Rollladen" Icon="roller-shade-closed" />
                     <Enumeration Value="32" Id="%ENID%" Text="Markise" Icon="storefront-outline" />
                     <Enumeration Value="50" Id="%ENID%" Text="Thermostat" Icon="thermometer-lines" />
-                    <Enumeration Value="60" Id="%ENID%" Text="Anzeige" Icon="card-text-outline" />
-                    <Enumeration Value="70" Id="%ENID%" Text="Kontakt" Icon="electric-switch"/>
-                    <Enumeration Value="71" Id="%ENID%" Text="Bewegungsmelder" Icon="walk" />
-                    <Enumeration Value="72" Id="%ENID%" Text="Präsensmelder" Icon="human-male-female"/>
-                    <Enumeration Value="73" Id="%ENID%" Text="Leckmelder" Icon="water-alert-outline" />
-                    <Enumeration Value="74" Id="%ENID%" Text="Rauchmelder" Icon="smoke" />
-                    <Enumeration Value="75" Id="%ENID%" Text="Kohlendioxidmelder (CO2)" Icon="molecule-co2"  />
-                    <Enumeration Value="76" Id="%ENID%" Text="Kohlenmonoxidmelder (CO)" Icon="molecule-co" />
+
+                    <Enumeration Value="600" Id="%ENID%" Text="Temperatur"       Icon="thermometer" />
+                    <Enumeration Value="601" Id="%ENID%" Text="Luftfeuchtigkeit" Icon="water-percent" />
+                    <Enumeration Value="602" Id="%ENID%" Text="Helligkeit"       Icon="brightness-7" />
+                    <Enumeration Value="603" Id="%ENID%" Text="Regenprognose"    Icon="weather-pouring" />
+                    <Enumeration Value="604" Id="%ENID%" Text="Schneeprognose"   Icon="weather-snowy-heavy" />
+                    <Enumeration Value="605" Id="%ENID%" Text="Wind"             Icon="weather-windy" />
+                    <Enumeration Value="606" Id="%ENID%" Text="Prozent"          Icon="percent" />
+
+                    <Enumeration Value="608" Id="%ENID%" Text="Individuell"      Icon="artboard" />
+                    <Enumeration Value="609" Id="%ENID%" Text="Text"             Icon="card-text-outline" />
+
+                    <Enumeration Value="700" Id="%ENID%" Text="Kontakt" Icon="electric-switch"/>
+                    <Enumeration Value="701" Id="%ENID%" Text="Bewegungsmelder" Icon="walk" />
+                    <Enumeration Value="702" Id="%ENID%" Text="Präsensmelder" Icon="human-male-female"/>
+                    <Enumeration Value="703" Id="%ENID%" Text="Leckmelder" Icon="water-alert-outline" />
+                    <Enumeration Value="704" Id="%ENID%" Text="Rauchmelder" Icon="smoke" />
+                    <Enumeration Value="705" Id="%ENID%" Text="Kohlendioxidmelder (CO2)" Icon="molecule-co2"  />
+                    <Enumeration Value="706" Id="%ENID%" Text="Kohlenmonoxidmelder (CO)" Icon="molecule-co" />
+                    
                     <Enumeration Value="80" Id="%ENID%" Text="Lüfter" Icon="fan" />
                     <Enumeration Value="90" Id="%ENID%" Text="Fenster" Icon="window-closed-variant" />
                     <Enumeration Value="91" Id="%ENID%" Text="Tür" Icon="door" />
                     <Enumeration Value="92" Id="%ENID%" Text="Garagentor" Icon="garage-open-variant" />
+                    <Enumeration Value="40" Id="%ENID%" Text="Szene" Icon="ceiling-light-multiple-outline" />
+                    <Enumeration Value="41" Id="%ENID%" Text="Mediensteuerung" Icon="music" />
                   </TypeRestriction>
                 </ParameterType>
 

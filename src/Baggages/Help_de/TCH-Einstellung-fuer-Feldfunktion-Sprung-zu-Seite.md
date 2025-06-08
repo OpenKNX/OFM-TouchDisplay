@@ -1,4 +1,4 @@
-﻿### Einstellung für Feldfunktion Sprung zu Seite
+﻿### Einstellung für Feldfunktion "Sprung zu Seite"
 
 In dieser Einstellung, muss die Seitennummer konfiguriert werden, die angesprungen wird.
 Es können auch Seiten die aktuell durch ein Kommunikationsobjekt oder die beim Blättern ausgenommen sind, angesprungen werden.

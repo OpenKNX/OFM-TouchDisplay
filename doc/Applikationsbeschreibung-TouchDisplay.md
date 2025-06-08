@@ -271,25 +271,20 @@ Beispielsweise kann sinnvoll sein, alle Seiten die für die Heizungsteuerung die
   Die Seite wird nicht durch das Kommunikationsobjekt "Seitenfreigabe H" gesperrt.
 
 <!-- DOC -->
-## Seitentype Gerät
-
-Mit der Seitentype Gerät
-
-<!-- DOC -->
-### Gerät
+## Seitentype "Gerät"
 
 Ein Gerät aus der Geräteliste wird auf der Seite dargestellt.
 Dabei gibt es die Auswahl ob ein Standardvisualierung (Hauptfunktion) verwendet werden soll, die für jedes Gerät gleich aussieht mit Gerätetype abhängigen Symbol oder eine Spezialseite das mehr Gerätefunktionen für die Steuerung bereitstellt.
 
 <!-- DOC -->
-### Anzeige
+### Gerät
 
 Auswahl welches Gerät auf der Seite angezeigt und gesteuert wird.
 
 <!-- DOC -->
-### Layout
+### Anzeige
 
-Zur Auswahl steht:
+Hier wird festgelegt, wie das Geräte dargestellt werden soll:
 
 - Hauptfunktion
   Die Seite besteht jeweils aus einem Gerätspezifischen Bild, einer Wertanzeige, einem Titel der dem Gerätenamen entspricht. 
@@ -299,9 +294,20 @@ Zur Auswahl steht:
   Viele Geräte stellen eigene Seitenlayouts zur Verfügung die mehrer Gerätefunktionen über eine Seite steuern lässt.
   Bei Geräten mit nur einer Funktion, z.B. bei "Ein- Ausschaltbares Gerät" sieht die Seite gleich wie die "Hauptfunktion" Darstellung aus.
 
-## Seitentype Mehrere Felder
+<!-- DOC -->
+## Seitentype "Mehrere Felder"
 
 Die Seite wird auf mehrere Felder aufgeteilt die jeweils unterschiedlich konfiguriert werden können.
+
+<!-- DOC -->
+### Layout
+
+Legt fest, wieviele Bedien- bzw. Anzeigefelder auf der Seite sind.
+
+<!-- DOC HelpContext="Felddefintion" -->
+### Feld 1-n
+
+Pro Feld wird das Verhalten und Aussehen definiert.
 
 <!-- DOC -->
 ### Funktion
@@ -318,15 +324,15 @@ Die Seite wird auf mehrere Felder aufgeteilt die jeweils unterschiedlich konfigu
   Im Feld wird das aktuelle Datum angezeigt
 
 <!-- DOCEND -->
-#### Einstellung für Feldfunktion Gerät
+### Einstellung für Feldfunktion "Gerät"
 
 <!-- DOC HelpContext="DeviceSelection" -->
-##### Geröt
+#### Geröt
 
 Die Gerätenummer des Geräts das angezeigt und gesteuert werden soll
 
 <!-- DOC -->
-##### Kurzer Druck
+#### Kurzer Druck
 
 Legt fest, was bei einem kurzen Druck passieren soll.
 
@@ -347,7 +353,7 @@ Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden.
 Es muss nicht explizit auf das Bild gedrückt werden.
 
 <!-- DOC -->
-### Langer Druck
+#### Langer Druck
 
 legt fest, was bei einem langen Druck passieren soll.
 
@@ -367,8 +373,80 @@ legt fest, was bei einem langen Druck passieren soll.
 Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
 Es muss nicht explizit auf das Bild gedrückt werden.
 
+
 <!-- DOC -->
-#### Einstellung für Feldfunktion Gerät
+#### Einstellung für Feldfunktion "Sprung zu Seite"
+
+In dieser Einstellung, muss die Seitennummer konfiguriert werden, die angesprungen wird.
+Es können auch Seiten die aktuell durch ein Kommunikationsobjekt oder die beim Blättern ausgenommen sind, angesprungen werden.
+
+Das ermöglich die Konfiguriation eines Menüssystems.
+Es werden übersichtsseiten gebaut, z.B. eine Raumübersicht.
+In jedem Felld wird dann auf eine Seite verzweigt die alle Geräte des Raumes in Feldern darstellt.
+Die jeweilige Raumseite ist auch über blättern erreichbar, jedoch sollten die einzelnen Geräte nur durch Absprünge erreichbar sein und aus dem Blättern exkludiert werden.
+
+<!-- DOC -->
+##### Absprung zu
+
+Seitennummer die bei Druck auf das Feld angesprungen wird.
+
+<!-- DOC -->
+##### Verknüpfung auf diese Seite
+
+In diesem Abschnitt kann ein Name und ein Bild für die Seite vergeben werden. Beides wird nicht auf dierser Seite darsgestellt, sonder wird verwendet wenn von einer anderen Feld-Seite auf dies Seite verwiesen wird.
+
+<!-- DOC -->
+###### Name
+
+Name der auf einem Absprung-Feld angezeigt wird, das auf diese Seite verweist.
+
+<!-- DOC -->
+###### Bild
+
+Bild das auf einem Absprung-Feld angezeigt wird, das auf diese Seite verweist.
+
+- Benutzerdefiniert
+  Blenden die Konfiguration für ein benutzerspezifisches Bild ein.
+- Ein-/Ausschaltbares Gerät
+- Steckdose
+- Lampe
+- Jalousie
+- Rollladen
+- Markise
+- Thermostat
+- Temperatur
+- Luftfeuchtigkeit
+- Helligkeit
+- Regenprognose
+- Schneeprognose
+- Wind
+- Prozent
+- Individuell
+- Text
+- Kontakt
+- Bewegungsmelder
+- Präsensmelder
+- Leckmelder
+- Rauchmelder
+- Kohlendioxidmelder (CO2)
+- Kohlenmonoxidmelder (CO)
+- Lüfter
+- Fenster
+- Tür
+- Garagentor
+- Szene
+- Mediensteuerung
+
+<!-- DOC -->
+###### Bilddatei
+
+Diese Einstellung wird nun angezeigt, wenn Bild auf "Benutzerdefiniert" eingestellt ist.
+
+<!-- DOC -->
+#### Einstellung für Feldfunktion "Zeit"
+
+Die Funktion Zeit, benötigt keine Touch-Bedienung. 
+Jedoch kann über einen kurzen bzw. langen Druck eine anderwertige Funktion ausgelöst werden.
 
 <!-- DOC HelpContext="ShortPressDateTime" -->
 ##### Kurzer Druck
@@ -399,52 +477,76 @@ Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden.
 Es muss nicht explizit auf das Bild gedrückt werden.
 
 <!-- DOC -->
-#### Einstellung für Feldfunktion Sprung zu Seite
+#### Einstellung für Feldfunktion "Datum"
 
-In dieser Einstellung, muss die Seitennummer konfiguriert werden, die angesprungen wird.
-Es können auch Seiten die aktuell durch ein Kommunikationsobjekt oder die beim Blättern ausgenommen sind, angesprungen werden.
+Die Funktion Datum, benötigt keine Touch-Bedienung. 
+Jedoch kann über einen kurzen bzw. langen Druck eine anderwertige Funktion ausgelöst werden.
 
-Das ermöglich die Konfiguriation eines Menüssystems.
-Es werden übersichtsseiten gebaut, z.B. eine Raumübersicht.
-In jedem Felld wird dann auf eine Seite verzweigt die alle Geräte des Raumes in Feldern darstellt.
-Die jeweilige Raumseite ist auch über blättern erreichbar, jedoch sollten die einzelnen Geräte nur durch Absprünge erreichbar sein und aus dem Blättern exkludiert werden.
+<!-- DOCEND -->
+##### Kurzer Druck
 
-<!-- DOC -->
-### Bild für Absprung-Link auf diese Seite
+Legt fest, was bei einem kurzen Druck passieren soll.
 
+- Nichts
+- Hauptfunktion von Gerät ausführen
+  Führt die Hauptfunktion eines anderen Gerätes aus.
+- Absprung zu Seite
+  Beim Klick wird auf die Konfigurierte Seite gesprungen.
 
-<!-- DOC -->
-### Bilddatei
+Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
+Es muss nicht explizit auf das Bild gedrückt werden.
 
+##### Langer Druck
 
+Legt fest, was bei einem kurzen Druck passieren soll.
 
+- Nichts
+- Hauptfunktion von Gerät ausführen
+  Führt die Hauptfunktion eines anderen Gerätes aus.
+- Absprung zu Seite
+  Beim Klick wird auf die Konfigurierte Seite gesprungen.
 
-
-
-
-<!-- DOC -->
-### Absprung zu
-
-<!-- DOC -->
-### Feldanzahl
-
-Legt fest, wieviele Bedien- bzw. Anzeigefelder auf der Seite sind.
-
-<!-- DOC -->
-### Felddefintion
-
+Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
+Es muss nicht explizit auf das Bild gedrückt werden.
 
 
 <!-- DOC -->
-### Darstellung
+## Seitentype "Zeit / Datum"
 
-
-
-<!-- DOC -->
-### Name
-
-<!-- DOC -->
-### Bild
+Die Seite zeigt den aktuellen Wochentag, das Datum und die Uhrzeit an.
+Vorraussetzung ist, dass das Geräte über Gruppenadressen mit Zeit und Datum bzw. mit einem kombinierten Gruppenobjekt Zeit/Datum mit der aktuellen Uhrzeit vom Bus versorgt wird.
+Mehr dazu ist Abschnitt "OpenKNX | Allgemein" zu finden.
 
 
 <!-- DOCEND -->
+### Kurzer Druck
+
+Legt fest, was bei einem kurzen Druck passieren soll.
+
+- Nichts
+- Hauptfunktion von Gerät ausführen
+  Führt die Hauptfunktion eines anderen Gerätes aus.
+- Absprung zu Seite
+  Beim Klick wird auf die Konfigurierte Seite gesprungen.
+
+Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
+Es muss nicht explizit auf das Bild gedrückt werden.
+
+<!-- DOCEND -->
+### Langer Druck
+
+Legt fest, was bei einem kurzen Druck passieren soll.
+
+- Nichts
+- Hauptfunktion von Gerät ausführen
+  Führt die Hauptfunktion eines anderen Gerätes aus.
+- Absprung zu Seite
+  Beim Klick wird auf die Konfigurierte Seite gesprungen.
+
+Hinweis: Die gesamte Feldfläche kann für das Drücken verwendet werden. 
+Es muss nicht explizit auf das Bild gedrückt werden.
+
+<!-- DOC -->
+## Seitentype "System"
+
+Die Systemseite zeigt die Softwareversion des Gerätes und erlaubt über einen Touch-Taster den KNX-Adresssen-Programmiermodus zu aktivieren.
