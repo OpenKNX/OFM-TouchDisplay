@@ -102,7 +102,7 @@
                       </Columns>
                       <ParameterSeparator Id="%AID%_PS-nnn" Text="  Seite verschieben" Cell="1,1" />
                          <!-- Always 0 -->
-                        <ParameterRefRef RefId="%AID%_P-%TT%00019_R-%TT%0001901" IndentLevel="1" />
+                        <ParameterRefRef RefId="%AID%_P-%TT%00019_R-%TT%0001901" IndentLevel="1" HelpContext="Empty" />
                         <choose ParamRefId="%AID%_P-%TT%00019_R-%TT%0001901">    
                           <when test="!=%C-1%">
                             <!-- sofern noch ein Vorgänger existiert -->

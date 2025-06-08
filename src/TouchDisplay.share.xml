@@ -545,7 +545,7 @@
 
 			                    <!-- Hidden -->
 										      <!-- Add not allowed -->
-                          <ParameterRefRef IndentLevel="1" RefId="%AID%_P-%TT%00010_R-%TT%0001001"/>
+                          <ParameterRefRef IndentLevel="1" RefId="%AID%_P-%TT%00010_R-%TT%0001001" HelpContext="Empty"/>
                           <choose ParamRefId="%AID%_P-%TT%00010_R-%TT%0001001" >
                             <when test="1">
                               <ParameterSeparator Id="%AID%_PS-nnn" Text="Hinzufügen von 'Deaktiviert' nicht möglich. Es muss zuerst eine Auswahl getroffen werden." UIHint="Error" />
