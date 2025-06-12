@@ -519,15 +519,9 @@
                 <ComObjectRefRef RefId="%AID%_O-%TT%00014_R-%TT%0001401" />
                </ParameterBlock>
                <ParameterBlock Id="%AID%_PB-nnn" Name="SHCPageDefintion" Text="Seiten" Icon="vector-arrange-below" HelpContext="TCH-Seiten" >
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
-                <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
-                
-                <!-- Visible Channels -->
-                <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="%DOC%" IndentLevel="1" />	
-
-     					  <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
-                <!-- Visible Channels -->
+               <ParameterSeparator Id="%AID%_PS-nnn" Text="Seiten" UIHint="Headline" />
+               
+     			     <!-- Visible Channels -->
                 <ParameterRefRef RefId="%AID%_UP-%TT%00000_R-%TT%0000001" HelpContext="%DOC%" IndentLevel="1" />
                 
                 <op:include href="TouchDisplay.templ.xml" xpath="//Dynamic/ChannelIndependentBlock/ParameterBlock[@Name='Settings']/*" type="template" prefix="TCH" IsInner="true" />
