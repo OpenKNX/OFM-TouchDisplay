@@ -112,7 +112,7 @@
                                   Id="%AID%_B-%TT%%CC%901" 
                                   Icon="chevron-up"
                                   Text="" 
-                                  EventHandler="tchBtnSwap"
+                                  EventHandler="uctBtnSwap"
                                   EventHandlerParameters="{ &quot;module&quot;:&quot;TCH&quot;, &quot;channelA&quot;:%C%, &quot;channelB&quot;:%C-1% }"
                             />
                           </when>
@@ -128,7 +128,7 @@
                                   Id="%AID%_B-%TT%%CC%902" 
                                   Icon="chevron-down"
                                   Text="" 
-                                  EventHandler="tchBtnSwap"
+                                  EventHandler="uctBtnSwap"
                                   EventHandlerParameters="{ &quot;module&quot;:&quot;TCH&quot;, &quot;channelA&quot;:%C%, &quot;channelB&quot;:%C+1% }"
                             />
                           </when> 
