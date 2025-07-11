@@ -2,6 +2,7 @@
 #include "ImageLoader.h"
 #include "TouchDisplayModule.h"
 #include "lvgl.h"
+#include <algorithm>
 
 #include "../Images/up.c"
 #include "../Images/down.c"
@@ -170,6 +171,50 @@ void ImageLoader::unloadImage(lv_obj_t* imageObject)
     lv_obj_add_flag(imageObject, LV_OBJ_FLAG_HIDDEN);
 }
 
+std::string ImageLoader::findFilePathCaseInsensitiv(const std::string& fileName)
+{
+    if (LittleFS.exists(("/" + fileName).c_str())) {
+        std::string filePath;
+        filePath += driveLetter;
+        filePath += ":/";
+        filePath += fileName;
+        return filePath;
+    }
+    
+    std::string lowerCase = fileName;
+    std::transform(lowerCase.begin(), lowerCase.end(), lowerCase.begin(), ::toLowerCase);
+    
+    File root = LittleFS.open("/", "r");
+    if (!root || !root.isDirectory()) {
+        return std::string();
+    }
+    
+    File file = root.openNextFile();
+    while (file) 
+    {
+        std::string currentFileName = file.name();
+        
+        std::string lowerCaseFileName = currentFileName;
+        std::transform(lowerCaseFileName.begin(), lowerCaseFileName.end(), 
+                      lowerCaseFileName.begin(), ::toLowerCase);
+        
+        if (lowerCaseFileName == lowerCase) 
+        {
+            file.close();
+            root.close();
+            std::string filePath;
+            filePath += driveLetter;
+            filePath += ":/";
+            filePath += currentFileName;
+            return filePath;
+        }
+        file.close();
+        file = root.openNextFile();
+    }
+    root.close();
+    return std::string(); 
+}
+
 void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool useStateColor, bool state)
 {
     if (fileName == "")
@@ -177,257 +222,256 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
         unloadImage(imageObject);
         return;
     }
-    else if (LittleFS.exists(("/" + fileName).c_str()))
+    auto filePath = findFilePathCaseInsensitiv(fileName); 
+    std::string lowerFileName = fileName;
+    std::transform(lowerFileName.begin(), lowerFileName.end(), lowerFileName.begin(), ::toLowerCase);
+ 
+    if (filePath.length() > 0)
     {
-        std::string filePath;
-        filePath += driveLetter;
-        filePath += ":/";
-        filePath += fileName;
         logInfoP("Load file: %s", filePath.c_str());
-
         lv_img_set_src(imageObject, filePath.c_str());
     }
-    else if (fileName == "missing_file.png")
+    else if (lowerFileName == "missing_file.png")
     {
         lv_img_set_src(imageObject, &missing_file);
     }
-    else if (fileName == "alert.png")
+    else if (lowerFileName == "alert.png")
     {
         lv_img_set_src(imageObject, &alert);
     }
-    else if (fileName == "up.png")
+    else if (lowerFileName == "up.png")
     {
         lv_img_set_src(imageObject, &up);
     }
-    else if (fileName == "down.png")
+    else if (lowerFileName == "down.png")
     {
         lv_img_set_src(imageObject, &down);
     }
-    else if (fileName == "left.png")
+    else if (lowerFileName == "left.png")
     {
         lv_img_set_src(imageObject, &left);
     }
-    else if (fileName == "right.png")
+    else if (lowerFileName == "right.png")
     {
         lv_img_set_src(imageObject, &right);
     }
-    else if (fileName == "stop.png")
+    else if (lowerFileName == "stop.png")
     {
         lv_img_set_src(imageObject, &stop);
     }
-    else if (fileName == "opening_lr.png")
+    else if (lowerFileName == "opening_lr.png")
     {
         lv_img_set_src(imageObject, &opening_lr);
     }
-    else if (fileName == "closing_lr.png")
+    else if (lowerFileName == "closing_lr.png")
     {
         lv_img_set_src(imageObject, &closing_lr);
     }
-    else if (fileName == "opening_l.png")
+    else if (lowerFileName == "opening_l.png")
     {
         lv_img_set_src(imageObject, &opening_l);
     }
-    else if (fileName == "closing_l.png")
+    else if (lowerFileName == "closing_l.png")
     {
         lv_img_set_src(imageObject, &closing_l);
     }
-    else if (fileName == "opening_r.png")
+    else if (lowerFileName == "opening_r.png")
     {
         lv_img_set_src(imageObject, &opening_r);
     }
-    else if (fileName == "closing_r.png")
+    else if (lowerFileName == "closing_r.png")
     {
         lv_img_set_src(imageObject, &closing_r);
     }
-    else if (fileName == "opening_ud.png")
+    else if (lowerFileName == "opening_ud.png")
     {
         lv_img_set_src(imageObject, &opening_ud);
     }
-    else if (fileName == "closing_ud.png")
+    else if (lowerFileName == "closing_ud.png")
     {
         lv_img_set_src(imageObject, &closing_ud);
     }
-    else if (fileName == "opening_u.png")
+    else if (lowerFileName == "opening_u.png")
     {
         lv_img_set_src(imageObject, &opening_u);
     }
-    else if (fileName == "closing_u.png")
+    else if (lowerFileName == "closing_u.png")
     {
         lv_img_set_src(imageObject, &closing_u);
     }
-    else if (fileName == "opening_d.png")
+    else if (lowerFileName == "opening_d.png")
     {
         lv_img_set_src(imageObject, &opening_d);
     }
-    else if (fileName == "closing_d.png")
+    else if (lowerFileName == "closing_d.png")
     {
         lv_img_set_src(imageObject, &closing_d);
     }
-    else if (fileName == "thermostatHeading.png")
+    else if (lowerFileName == "thermostatheading.png")
     {
         lv_img_set_src(imageObject, &thermostatHeading);
     }
-    else if (fileName == "thermostatCooling.png")
+    else if (lowerFileName == "thermostatcooling.png")
     {
         lv_img_set_src(imageObject, &thermostatCooling);
     }
-    else if (fileName == "thermostatAuto.png")
+    else if (lowerFileName == "thermostatauto.png")
     {
         lv_img_set_src(imageObject, &thermostatAuto);
     }
-    else if (fileName == "thermostatOff.png")
+    else if (lowerFileName == "thermostatoff.png")
     {
         lv_img_set_src(imageObject, &thermostatOff);
     }
-    else if (fileName == "Bild1.png")
+    else if (lowerFileName == "bild1.png")
     {
         lv_img_set_src(imageObject, &Bild1);
     }
-    else if (fileName == "Bild2.png")
+    else if (lowerFileName == "bild2.png")
     {
         lv_img_set_src(imageObject, &Bild2);
     }
-    else if (fileName == "Bild3.png")
+    else if (lowerFileName == "bild3.png")
     {
         lv_img_set_src(imageObject, &Bild3);
     }
-    else if (fileName == "Type10.png")
+    else if (lowerFileName == "type10.png")
     {
         lv_img_set_src(imageObject, &Type10);
     }
-    else if (fileName == "Type11.png")
+    else if (lowerFileName == "type11.png")
     {
         lv_img_set_src(imageObject, &Type11);
     }
-    else if (fileName == "Type20.png")
+    else if (lowerFileName == "type20.png")
     {
         lv_img_set_src(imageObject, &Type20);
     }
-    else if (fileName == "Type30.png")
+    else if (lowerFileName == "type30.png")
     {
         lv_img_set_src(imageObject, &Type30);
     }
-    else if (fileName == "Type31.png")
+    else if (lowerFileName == "type31.png")
     {
         lv_img_set_src(imageObject, &Type31);
     }
-    else if (fileName == "Type32.png")
+    else if (lowerFileName == "type32.png")
     {
         lv_img_set_src(imageObject, &Type32);
     }
-    else if (fileName == "Type40.png")
+    else if (lowerFileName == "type40.png")
     {
         lv_img_set_src(imageObject, &Type40);
     }
-    else if (fileName == "Type41.png")
+    else if (fileName == "type41.png")
     {
         lv_img_set_src(imageObject, &Type41);
     }
-    else if (fileName == "Type50.png")
+    else if (fileName == "type50.png")
     {
         lv_img_set_src(imageObject, &Type50);
     }
-    else if (fileName == "Type50.png")
+    else if (fileName == "type50.png")
     {
         lv_img_set_src(imageObject, &Type50);
     }
-    else if (fileName == "Type60_0.png")
+    else if (fileName == "type60_0.png")
     {
         lv_img_set_src(imageObject, &Type60_0);
     }
-    else if (fileName == "Type60_1.png")
+    else if (fileName == "type60_1.png")
     {
         lv_img_set_src(imageObject, &Type60_1);
     }
-    else if (fileName == "Type60_2.png")
+    else if (fileName == "type60_2.png")
     {
         lv_img_set_src(imageObject, &Type60_2);
     }
-    else if (fileName == "Type60_3.png")
+    else if (fileName == "type60_3.png")
     {
         lv_img_set_src(imageObject, &Type60_3);
     }
-    else if (fileName == "Type60_4.png")
+    else if (fileName == "type60_4.png")
     {
         lv_img_set_src(imageObject, &Type60_4);
     }
-    else if (fileName == "Type60_5.png")
+    else if (fileName == "type60_5.png")
     {
         lv_img_set_src(imageObject, &Type60_5);
     }
-    else if (fileName == "Type60_6.png")
+    else if (fileName == "type60_6.png")
     {
         lv_img_set_src(imageObject, &Type60_6);
     }   
-    else if (fileName == "Type60_8.png")
+    else if (fileName == "type60_8.png")
     {
         lv_img_set_src(imageObject, &Type60_8);
     }
-    else if (fileName == "Type60_9.png")
+    else if (fileName == "type60_9.png")
     {
         lv_img_set_src(imageObject, &Type60_9);
     }
-    else if (fileName == "Type70_0.png")
+    else if (fileName == "type70_0.png")
     {
         lv_img_set_src(imageObject, &Type70_0);
     }
-    else if (fileName == "Type70_1.png")
+    else if (fileName == "type70_1.png")
     {
         lv_img_set_src(imageObject, &Type70_1);
     }
-    else if (fileName == "Type70_2.png")
+    else if (fileName == "type70_2.png")
     {
         lv_img_set_src(imageObject, &Type70_2);
     }
-    else if (fileName == "Type70_3.png")
+    else if (fileName == "type70_3.png")
     {
         lv_img_set_src(imageObject, &Type70_3);
     }
-    else if (fileName == "Type70_4.png")
+    else if (fileName == "type70_4.png")
     {
         lv_img_set_src(imageObject, &Type70_4);
     }
-    else if (fileName == "Type70_5.png")
+    else if (fileName == "type70_5.png")
     {
         lv_img_set_src(imageObject, &Type70_5);
     }
-    else if (fileName == "Type70_6.png")
+    else if (fileName == "type70_6.png")
     {
         lv_img_set_src(imageObject, &Type70_6);
     }
-    else if (fileName == "Type80.png")
+    else if (fileName == "type80.png")
     {
         lv_img_set_src(imageObject, &Type80);
     }
-    else if (fileName == "Type90.png")
+    else if (fileName == "type90.png")
     {
         lv_img_set_src(imageObject, &Type90);
     }
-    else if (fileName == "Type91.png")
+    else if (fileName == "type91.png")
     {
         lv_img_set_src(imageObject, &Type91);
     }
-    else if (fileName == "Type92.png")
+    else if (fileName == "type92.png")
     {
         lv_img_set_src(imageObject, &Type92);
     }
-    else if (fileName == "System.png")
+    else if (fileName == "system.png")
     {
         lv_img_set_src(imageObject, &System);
     }
-    else if (fileName == "Error.png")
+    else if (fileName == "error.png")
     {
         lv_img_set_src(imageObject, &ErrorImg);
     }
-    else if (fileName == "Time.png")
+    else if (fileName == "time.png")
     {
         lv_img_set_src(imageObject, &Time);
     }
-    else if (fileName == "Date.png")
+    else if (fileName == "date.png")
     {
         lv_img_set_src(imageObject, &Date);
     }
-    else if (fileName == "DateTime.png")
+    else if (fileName == "datetime.png")
     {
         lv_img_set_src(imageObject, &DateTime);
     }

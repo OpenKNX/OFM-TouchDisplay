@@ -7,6 +7,7 @@ class ImageLoader
 {
     static const char driveLetter;
     static const std::string logPrefix();
+    static std::string findFilePathCaseInsensitiv(const std::string& fileName); 
     static void* fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
     static lv_fs_res_t fs_read(lv_fs_drv_t *drv, void *file_p, void *buf, uint32_t btr, uint32_t *br);
     static lv_fs_res_t fs_close(lv_fs_drv_t *drv, void *file_p);
