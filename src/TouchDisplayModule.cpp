@@ -91,6 +91,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         uint8_t page = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         logDebugP("Requested Page: %d", page);
         _setPageDelayed = page;
+        _setPageDelayedSwitchDisplayOn = ParamTCH_KoPageSwitchOn;
         _waitForSetPageDelayed = max(millis(), 1L);
         break;
     }
@@ -108,9 +109,16 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         if (isDefaultPageActive)
         {
-            _setPageDelayed = _defaultPage;
-            _waitForSetPageDelayed = max(millis(), 1L);;
+            _setPageDelayed = _defaultPage;  
+            logDebugP("Set Default Page: %d", (int) _defaultPage);
         }
+        else
+        {
+            _setPageDelayed = 255;
+            logDebugP("Store Default Page: %d", (int) _defaultPage);
+        }
+        _setPageDelayedSwitchDisplayOn = ParamTCH_KoDefaultPageSwitchOn;
+        _waitForSetPageDelayed = max(millis(), 1L);;
         break;
     }
     case TCH_KoDisplayOnOff:
@@ -177,14 +185,15 @@ void TouchDisplayModule::activatePage(uint8_t page, bool displayOnAndResetTimeou
         return;
     }
     _waitForSetPageDelayed = 0; 
-    if (displayOnAndResetTimeout)
-        display(true);
+   
    
     auto current = _channelIndex;
     _channelIndex = page - 1;
     if (current == _channelIndex && Page::currentPage() != nullptr && !_detailDevicePageActive)
     {
         logDebugP("Page: %d already activ", page);
+        if (displayOnAndResetTimeout)
+            display(true);
         return;
     }
     logDebugP("Active Page: %d", page);
@@ -193,6 +202,8 @@ void TouchDisplayModule::activatePage(uint8_t page, bool displayOnAndResetTimeou
     KoTCH_CurrentPage.value(_channelIndex, DPT_SceneNumber);
     logDebugP("Create Page: %d", page);
     Page::showPage(Page::createPage(_channelIndex));
+    if (displayOnAndResetTimeout)
+       _turnOnDisplayInLoop = true;;
 }
 
 void TouchDisplayModule::showDetailDevicePage(uint8_t channelIndex, uint8_t deviceIndex)
@@ -456,21 +467,29 @@ void TouchDisplayModule::updateTheme()
 void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
 {
     lv_disp_t *display = lv_disp_get_default();
-    // <Enumeration Text="Light" Value="0" Id="%ENID%" />
-    // <Enumeration Text="Dark" Value="1" Id="%ENID%" />
+    // <Enumeration Text="Weiß" Value="3" Id="%ENID%" />
+    // <Enumeration Text="Hell" Value="0" Id="%ENID%" />
+    // <Enumeration Text="Dunkel" Value="1" Id="%ENID%" />
+    // <Enumeration Text="Schwarz" Value="2" Id="%ENID%" />
     _themeSelection = themeSelection;
     bool dark = false;
     switch (themeSelection)
     {
     case 0:
+        dark = false;
+        Screen::removeBackgroundColor();
         break;
     case 1:
         dark = true;
-        Screen::blackBackground(false);
+        Screen::removeBackgroundColor();
         break;
     case 2:
         dark = true;
-        Screen::blackBackground(true);
+        Screen::setBackgroundColor(lv_color_black());
+        break;
+    case 3:
+        dark = false;
+        Screen::setBackgroundColor(lv_color_make(255, 255, 255));
         break;
     }
     lv_palette_t main = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDay) : getPaletteFromConfig(ParamTCH_ColorPaletteNight);
@@ -604,6 +623,7 @@ bool TouchDisplayModule::isDisplayOn()
 
 void TouchDisplayModule::display(bool on)
 {
+    _turnOnDisplayInLoop = false;
     if (on)
         resetDisplayTimeout();
     if (_displayOn == on)
@@ -675,15 +695,23 @@ void TouchDisplayModule::loop(bool configured)
 {
     if (_waitForSetPageDelayed > 0 && millis() - _waitForSetPageDelayed > 100)
     {
-        _waitForSetPageDelayed = 0;
-        if (_channelIndex != _setPageDelayed - 1)
+        _waitForSetPageDelayed = 0;      
+        if (_setPageDelayed == 255)
+        {
+            // only check for display on
+            if (_setPageDelayedSwitchDisplayOn)
+                display(true);
+        }
+        else if (_channelIndex != _setPageDelayed - 1)
         {
             logDebugP("Activate delayed page: %d", _setPageDelayed);
-            activatePage(_setPageDelayed);
+            activatePage(_setPageDelayed, _setPageDelayedSwitchDisplayOn);
         }
         else
         {
             logDebugP("Delayed page %d already active", _setPageDelayed);
+            if (_setPageDelayedSwitchDisplayOn)
+                display(true);
         }
        
     }
@@ -766,6 +794,11 @@ void TouchDisplayModule::loop(bool configured)
     lv_timer_handler(); // let the GUI do its work
 
     Page::handleLoop(configured);
+    if (_turnOnDisplayInLoop)
+    {
+        _turnOnDisplayInLoop = false;
+        display(true);
+    }
   
     if (_lastTimeoutReset != 0)
     {

@@ -6,23 +6,32 @@ Screen::Screen()
     lv_obj_clear_flag(screen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 }
 
-bool Screen::_blackBackground = false;
+bool Screen::_showBackground = false;
+lv_color_t Screen::_backgroundColor = lv_color_black();
 
-void Screen::blackBackground(bool black)
+void Screen::setBackgroundColor(lv_color_t color)
 {
-    _blackBackground = black;
+    _backgroundColor = color;
+    _showBackground = true;
+}
+
+void Screen::removeBackgroundColor()
+{
+    _showBackground = false;
 }
 
 void Screen::show()
 {
-    if (_blackBackground)
-        lv_obj_set_style_bg_color(screen, lv_color_black(), 0);
+    if (_showBackground)
+        lv_obj_set_style_bg_color(screen, _backgroundColor, 0);
     else
         lv_theme_apply(screen);
     lv_scr_load(screen);
 }
 
+
 Screen::~Screen()
 {
     lv_obj_del(screen);
 }
+

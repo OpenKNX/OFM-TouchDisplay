@@ -3,12 +3,14 @@
 
 class Screen
 {
-    static bool _blackBackground;
+    static bool _showBackground;
+    static lv_color_t _backgroundColor;
 public:
     lv_obj_t *screen;
 
 public:
-    static void blackBackground(bool black);
+    static void setBackgroundColor(lv_color_t color);
+    static void removeBackgroundColor();
     Screen();
     void show();
     virtual ~Screen();

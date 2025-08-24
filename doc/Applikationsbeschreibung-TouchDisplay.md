@@ -26,7 +26,7 @@ Die Anzeige kann über folgende Optionen gedreht werden:
 - 180° 
 - 270°
 
-<!-- DOC -->
+<!-- DOC HelpContext="Sensor-Tasten" -->
 #### Sensor-Tasten vorhanden
 
 Über diese Einstellung muss festgelegt werden, ob bei der Hardware zwei Touch-Sensorflächen angeschlossen sind.
@@ -75,12 +75,18 @@ Gibt die Zeit an, die gewartet wird, bis nach der letzten Bedienung das Display 
 - Stunde(n)
 
 <!-- DOC -->
+#### Objekt 'Gehe zu Seite' schaltet Anzeige ein
+
+Wenn über 'Gehe zu Seite' eine Seite gewählt wird, wird die Anzeige eingeschalten
+
+<!-- DOC -->
 #### Standardseite 
 
 Gibt die Seite an, die angezeigt wird, wenn das Display die Busspannung bekommt. 
 Weiters kann ein automatischer Rückfall auf die Standardseite konfiguriert werden.
 
 Achtung: Die hier eingestellte Standardseite kann auch über ein Gruppenobjekt überladen werden. Siehe dazu die Einstellung [Rückfall auf Standardseite](#rückfall-auf-standardseite).
+
 
 <!-- DOC -->
 #### Rückfall auf Standardseite 
@@ -107,6 +113,12 @@ Blendet ein Gruppenobjekt ein, über das die Standardseite vom KNX-Bus vorgegebe
 Als Typ wird der Szenen-Typ (DPT 17.001) verwendet.
 Die Szenennummer entspricht der Seite.
 Die Szene 1 (RAW-Wert 0) wählt somit die Seite 1 als Standardobjekt aus.
+
+<!-- DOC -->
+#### Objekt 'Standardseite' schaltet Anzeige ein
+
+Wenn über 'Standardseite' eine Standard-Seite gesetzt wird, wird die Anzeige eingeschalten
+
 
 <!-- DOCEND -->
 ### Anzeigemodus
