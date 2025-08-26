@@ -1,7 +1,7 @@
 #include "CellPage.h"
 #include "../Cells/Cell.h"
 #include "../Screens/CellScreen.h"
-#include "CP1252ToUTF8.h"
+#include "ISO8859_15ToUTF8.h"
 
 const char* CellPage::pageType()
 {
@@ -105,7 +105,7 @@ CellPage::~CellPage()
 std::string CellPage::name()
 {
     char* pageName1252 = (char *) ParamTCH_CHPageName;
-    const char* utf8 = convert1252ToUTF8(pageName1252);
+    const char* utf8 = convertISO8859_15ToUTF8(pageName1252);
     auto result = std::string(utf8);
     if (pageName1252 != utf8)
         free((void*) utf8);

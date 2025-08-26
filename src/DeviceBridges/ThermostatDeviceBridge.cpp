@@ -96,19 +96,19 @@ void ThermostatDeviceBridge::setMode(ThermostatMode mode)
     {
     case ThermostatMode::ThermostatModeOff:
         lv_label_set_text(_screen.labelMode, "Aus");
-        ImageLoader::loadImage(_screen.image, "thermostatOff.png", true, false);
+        ImageLoader::loadImage(_screen.image, "thermostatOff.png", true, _channel->mainFunctionValue());
         break;
     case ThermostatMode::ThermostatModeHeating:
         lv_label_set_text(_screen.labelMode, "Heizen");
-        ImageLoader::loadImage(_screen.image, "thermostatHeading.png", true, true);
+        ImageLoader::loadImage(_screen.image, "thermostatHeading.png", true, _channel->mainFunctionValue());
         break;
     case ThermostatMode::ThermostatModeCooling:
         lv_label_set_text(_screen.labelMode, "Kühlen");
-        ImageLoader::loadImage(_screen.image, "thermostatCooling.png", true, false);
+        ImageLoader::loadImage(_screen.image, "thermostatCooling.png", true, _channel->mainFunctionValue());
         break;
     case ThermostatMode::ThermostatModeAutoHeatingCooling:
         lv_label_set_text(_screen.labelMode, "Auto");
-        ImageLoader::loadImage(_screen.image, "thermostatAuto.png", true, false);
+        ImageLoader::loadImage(_screen.image, "thermostatAuto.png", true, _channel->mainFunctionValue());
         break;
     default:
         break;
@@ -121,14 +121,17 @@ void ThermostatDeviceBridge::setCurrentState(ThermostatCurrentState currentState
     case ThermostatCurrentState::ThermostatCurrentStateOff:
         ImageLoader::colorImage(_screen.buttonUp, openknxTouchDisplayModule.getInactiveColor());
         ImageLoader::colorImage(_screen.buttonDown, openknxTouchDisplayModule.getInactiveColor());
+        ImageLoader::colorImage(_screen.image, openknxTouchDisplayModule.getInactiveColor());
         break;
     case ThermostatCurrentState::ThermostatCurrentStateHeating:
         ImageLoader::colorImage(_screen.buttonUp, openknxTouchDisplayModule.getActiveColor());
         ImageLoader::colorImage(_screen.buttonDown, openknxTouchDisplayModule.getInactiveColor());
+        ImageLoader::colorImage(_screen.image, openknxTouchDisplayModule.getActiveColor());
         break;
     case ThermostatCurrentState::ThermostatCurrentStateCooling:
         ImageLoader::colorImage(_screen.buttonUp, openknxTouchDisplayModule.getInactiveColor());
         ImageLoader::colorImage(_screen.buttonDown, openknxTouchDisplayModule.getActiveColor());
+        ImageLoader::colorImage(_screen.image, openknxTouchDisplayModule.getActiveColor());
         break;
     }
 }

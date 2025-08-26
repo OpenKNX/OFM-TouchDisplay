@@ -363,115 +363,115 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &Type40);
     }
-    else if (fileName == "type41.png")
+    else if (lowerFileName == "type41.png")
     {
         lv_img_set_src(imageObject, &Type41);
     }
-    else if (fileName == "type50.png")
+    else if (lowerFileName == "type50.png")
     {
         lv_img_set_src(imageObject, &Type50);
     }
-    else if (fileName == "type50.png")
+    else if (lowerFileName == "type50.png")
     {
         lv_img_set_src(imageObject, &Type50);
     }
-    else if (fileName == "type60_0.png")
+    else if (lowerFileName == "type60_0.png")
     {
         lv_img_set_src(imageObject, &Type60_0);
     }
-    else if (fileName == "type60_1.png")
+    else if (lowerFileName == "type60_1.png")
     {
         lv_img_set_src(imageObject, &Type60_1);
     }
-    else if (fileName == "type60_2.png")
+    else if (lowerFileName == "type60_2.png")
     {
         lv_img_set_src(imageObject, &Type60_2);
     }
-    else if (fileName == "type60_3.png")
+    else if (lowerFileName == "type60_3.png")
     {
         lv_img_set_src(imageObject, &Type60_3);
     }
-    else if (fileName == "type60_4.png")
+    else if (lowerFileName == "type60_4.png")
     {
         lv_img_set_src(imageObject, &Type60_4);
     }
-    else if (fileName == "type60_5.png")
+    else if (lowerFileName == "type60_5.png")
     {
         lv_img_set_src(imageObject, &Type60_5);
     }
-    else if (fileName == "type60_6.png")
+    else if (lowerFileName == "type60_6.png")
     {
         lv_img_set_src(imageObject, &Type60_6);
     }   
-    else if (fileName == "type60_8.png")
+    else if (lowerFileName == "type60_8.png")
     {
         lv_img_set_src(imageObject, &Type60_8);
     }
-    else if (fileName == "type60_9.png")
+    else if (lowerFileName == "type60_9.png")
     {
         lv_img_set_src(imageObject, &Type60_9);
     }
-    else if (fileName == "type70_0.png")
+    else if (lowerFileName == "type70_0.png")
     {
         lv_img_set_src(imageObject, &Type70_0);
     }
-    else if (fileName == "type70_1.png")
+    else if (lowerFileName == "type70_1.png")
     {
         lv_img_set_src(imageObject, &Type70_1);
     }
-    else if (fileName == "type70_2.png")
+    else if (lowerFileName == "type70_2.png")
     {
         lv_img_set_src(imageObject, &Type70_2);
     }
-    else if (fileName == "type70_3.png")
+    else if (lowerFileName == "type70_3.png")
     {
         lv_img_set_src(imageObject, &Type70_3);
     }
-    else if (fileName == "type70_4.png")
+    else if (lowerFileName == "type70_4.png")
     {
         lv_img_set_src(imageObject, &Type70_4);
     }
-    else if (fileName == "type70_5.png")
+    else if (lowerFileName == "type70_5.png")
     {
         lv_img_set_src(imageObject, &Type70_5);
     }
-    else if (fileName == "type70_6.png")
+    else if (lowerFileName == "type70_6.png")
     {
         lv_img_set_src(imageObject, &Type70_6);
     }
-    else if (fileName == "type80.png")
+    else if (lowerFileName == "type80.png")
     {
         lv_img_set_src(imageObject, &Type80);
     }
-    else if (fileName == "type90.png")
+    else if (lowerFileName == "type90.png")
     {
         lv_img_set_src(imageObject, &Type90);
     }
-    else if (fileName == "type91.png")
+    else if (lowerFileName == "type91.png")
     {
         lv_img_set_src(imageObject, &Type91);
     }
-    else if (fileName == "type92.png")
+    else if (lowerFileName == "type92.png")
     {
         lv_img_set_src(imageObject, &Type92);
     }
-    else if (fileName == "system.png")
+    else if (lowerFileName == "system.png")
     {
         lv_img_set_src(imageObject, &System);
     }
-    else if (fileName == "error.png")
+    else if (lowerFileName == "error.png")
     {
         lv_img_set_src(imageObject, &ErrorImg);
     }
-    else if (fileName == "time.png")
+    else if (lowerFileName == "time.png")
     {
         lv_img_set_src(imageObject, &Time);
     }
-    else if (fileName == "date.png")
+    else if (lowerFileName == "date.png")
     {
         lv_img_set_src(imageObject, &Date);
     }
-    else if (fileName == "datetime.png")
+    else if (lowerFileName == "datetime.png")
     {
         lv_img_set_src(imageObject, &DateTime);
     }

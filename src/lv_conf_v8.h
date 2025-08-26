@@ -396,11 +396,11 @@
 /*Optionally declare custom fonts here.
  *You can use these fonts as default font too and they will be available globally.
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
-#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Monserat14WithGermanLetters) LV_FONT_DECLARE(Monserat40WithGermanLetters)
+#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Monserat16_ISO_8859_15) LV_FONT_DECLARE(Monserat24_ISO_8859_15) LV_FONT_DECLARE(Monserat40_ISO_8859_15)
 
 
 /*Always set a default font*/
-#define LV_FONT_DEFAULT &Monserat14WithGermanLetters
+#define LV_FONT_DEFAULT &Monserat16_ISO_8859_15
 
 /*Enable handling large font and/or fonts with a lot of characters.
  *The limit depends on the font size, font face and bpp.

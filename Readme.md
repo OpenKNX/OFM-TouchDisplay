@@ -3,6 +3,16 @@
 Diese Modul stellt die Anbindung an ein Touch Display zur Verfügung. 
 Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-SmartHomeBridge) für die Gerätedefinitionen.
 
+## Release Notes
+
+- 0.2 Neues Stil "Weiß"
+- 0.2 Größere Schriften
+- 0.2 Einstellung ob Telegramme zu "Gehe zur Seite" und "Standardseite" die Anzeige einschalten
+- 0.2 Thermostat: Haupticon zeigt den aktuellen Heizung und Kühlstatus an 
+- 0.2 Libary aktualisierung auf LVGL Version 9.3
+- 0.2 Bugfix: Kurze Anzeige der alten Seite beim Seitenumschalten über Telegramme
+- 0.2 Bugfix: Fehlende Icons bei manchen Gerätetypen
+
 ## Features
 - Unterstützung alle Gerätetypen der [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-SmartHomeBridge)
   - Anzeige von Detailseiten je nach Gerätetype
