@@ -10,7 +10,7 @@ RGBScreen::RGBScreen()
     lv_obj_set_height(value, LV_SIZE_CONTENT);
     lv_obj_set_align(value, LV_ALIGN_RIGHT_MID);
     lv_obj_align(value, LV_ALIGN_RIGHT_MID, -115, -20);  
-    lv_obj_set_style_text_font(value, &Monserat40_ISO_8859_15, LV_PART_MAIN | LV_STATE_DEFAULT); 
+    lv_obj_set_style_text_font(value, &FONT_LARGE, LV_PART_MAIN | LV_STATE_DEFAULT); 
   
     image = lv_img_create(screen);  
     lv_obj_align(image, LV_ALIGN_CENTER, 40, -20);  

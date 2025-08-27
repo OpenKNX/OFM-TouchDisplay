@@ -610,10 +610,10 @@
  */
 
 
-#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(Monserat16_ISO_8859_15) LV_FONT_DECLARE(Monserat24_ISO_8859_15) LV_FONT_DECLARE(Monserat40_ISO_8859_15)
+#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(FONT_SMALL) LV_FONT_DECLARE(FONT_MEDIUM) LV_FONT_DECLARE(FONT_LARGE)
 /** Always set a default font */
 //#define LV_FONT_DEFAULT &lv_font_montserrat_14
-#define LV_FONT_DEFAULT &Monserat16_ISO_8859_15
+#define LV_FONT_DEFAULT &FONT_SMALL
 
 
 /** Enable handling large font and/or fonts with a lot of characters.

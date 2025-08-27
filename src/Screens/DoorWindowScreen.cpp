@@ -19,7 +19,7 @@ DoorWindowScreen::DoorWindowScreen()
     lv_obj_set_height(value, LV_SIZE_CONTENT); 
     lv_obj_set_align(value, LV_ALIGN_CENTER);
     lv_obj_align(value, LV_ALIGN_CENTER, 0, 40);  
-    lv_obj_set_style_text_font(value, &Monserat40_ISO_8859_15, LV_PART_MAIN | LV_STATE_DEFAULT); 
+    lv_obj_set_style_text_font(value, &FONT_LARGE, LV_PART_MAIN | LV_STATE_DEFAULT); 
 
     setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_LEFT);
    

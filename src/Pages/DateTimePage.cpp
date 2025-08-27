@@ -64,7 +64,7 @@ void DateTimePage::updateTime(bool forceUpdate)
             lv_label_set_text(_screen.weekday, "");
             lv_label_set_text(_screen.date, "");
             lv_label_set_text(_screen.time, "");
-            lv_label_set_text(_screen.message, "Zeit nicht vorhanden.\nBitte prüfen ob Uhrzeit/Datum\nin der ETS korrekt verbunden ist");
+            lv_label_set_text(_screen.message, "Zeit nicht vorhanden.\nBitte prüfen,\nob Uhrzeit/Datum\nin der ETS\n korrekt verbunden sind");
         }
     }
 }
