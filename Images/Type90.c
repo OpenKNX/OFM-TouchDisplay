@@ -89,7 +89,7 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_TYPE90 ui
 };
 
 const lv_img_dsc_t Type90 = {
-    .header = {
+.header = {
         #if LVGL_VERSION_MAJOR < 9
         .cf = LV_IMG_CF_ALPHA_4BIT,
         .always_zero = 0,

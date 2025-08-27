@@ -6,6 +6,9 @@ Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-Sma
 ## Release Notes
 
 - 0.2 Neues Stil "Weiß"
+- 0.2 Hinweise zum USB-Bild Upload in Applikationsberschreibung
+- 0.2 Neue Bilder für geöffnete Jalousien, Rolladen, Markise, Fenster, Türe, Gargagentor
+- 0.2 Neue Schrift "NotoSans-Regular"
 - 0.2 Größere Schriften
 - 0.2 Einstellung ob Telegramme zu "Gehe zur Seite" und "Standardseite" die Anzeige einschalten
 - 0.2 Thermostat: Haupticon zeigt den aktuellen Heizung und Kühlstatus an 

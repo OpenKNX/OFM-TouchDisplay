@@ -13,8 +13,11 @@
 #include "../Images/Type11.c"
 #include "../Images/Type20.c"
 #include "../Images/Type30.c"
+#include "../Images/Type30_A.c"
 #include "../Images/Type31.c"
+#include "../Images/Type31_A.c"
 #include "../Images/Type32.c"
+#include "../Images/Type32_A.c"
 #include "../Images/Type40.c"
 #include "../Images/Type41.c"
 #include "../Images/Type50.c"
@@ -36,8 +39,11 @@
 #include "../Images/Type70_6.c"
 #include "../Images/Type80.c"
 #include "../Images/Type90.c"
+#include "../Images/Type90_A.c"
 #include "../Images/Type91.c"
+#include "../Images/Type91_A.c"
 #include "../Images/Type92.c"
+#include "../Images/Type92_A.c"
 #include "../Images/missing_file.c"
 #include "../Images/System.c"
 #include "../Images/Error.c"
@@ -351,13 +357,25 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &Type30);
     }
+    else if (lowerFileName == "type30_a.png")
+    {
+        lv_img_set_src(imageObject, &Type30_A);
+    }
     else if (lowerFileName == "type31.png")
     {
         lv_img_set_src(imageObject, &Type31);
     }
+    else if (lowerFileName == "type31_a.png")
+    {
+        lv_img_set_src(imageObject, &Type31_A);
+    }
     else if (lowerFileName == "type32.png")
     {
         lv_img_set_src(imageObject, &Type32);
+    }
+    else if (lowerFileName == "type32_a.png")
+    {
+        lv_img_set_src(imageObject, &Type32_A);
     }
     else if (lowerFileName == "type40.png")
     {
@@ -447,13 +465,25 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &Type90);
     }
+    else if (lowerFileName == "type90_a.png")
+    {
+        lv_img_set_src(imageObject, &Type90_A);
+    }
     else if (lowerFileName == "type91.png")
     {
         lv_img_set_src(imageObject, &Type91);
     }
+    else if (lowerFileName == "type91_a.png")
+    {
+        lv_img_set_src(imageObject, &Type91_A);
+    }
     else if (lowerFileName == "type92.png")
     {
         lv_img_set_src(imageObject, &Type92);
+    }
+    else if (lowerFileName == "type92_a.png")
+    {
+        lv_img_set_src(imageObject, &Type92_A);
     }
     else if (lowerFileName == "system.png")
     {
