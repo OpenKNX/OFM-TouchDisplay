@@ -44,18 +44,18 @@ void ProgButtonPage::setup()
 {
     auto label = openknx.info.humanIndividualAddress();
     if (label == "15.15.255")
-        label = "Keine Adresse";
+        label = u8"Keine Adresse";
     lv_label_set_text(_screen.label, label.c_str());
     
     std::string message;
     if (openknx.info.applicationNumber() > 0)
         message += "v" + openknx.info.humanApplicationVersion() + "   " + openknx.info.humanApplicationNumber();
-    message += "\nOpenKNX Touch Round";
+    message += u8"\nOpenKNX Touch Round";
     if (!knx.configured())
-        message += "\n\nBitte übertragen Sie die\nETS Applikation";
+        message += u8"\n\nBitte übertragen Sie die\nETS Applikation";
     lv_label_set_text(_screen.message, message.c_str());
-    lv_label_set_text(_screen.buttonText, "Programmier Modus");
-  
+    lv_label_set_text(_screen.buttonText, u8"Programmier Modus");
+
     _eventButtonPressed = [](lv_event_t *e) { ((ProgButtonPage*) lv_event_get_user_data(e))->buttonClicked(); };
     lv_obj_add_event_cb(_screen.button, _eventButtonPressed, LV_EVENT_CLICKED, this);
  
@@ -66,7 +66,7 @@ void ProgButtonPage::setup()
 
 std::string ProgButtonPage::name()
 {
-    return "System";
+    return u8"System";
 }
 
 std::string ProgButtonPage::image()
