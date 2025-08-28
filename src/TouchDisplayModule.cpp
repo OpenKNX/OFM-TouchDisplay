@@ -92,7 +92,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         logDebugP("Requested Page: %d", page);
         _setPageDelayed = page;
         _setPageDelayedSwitchDisplayOn = ParamTCH_KoPageSwitchOn;
-        _waitForSetPageDelayed = max(millis(), 1L);
+        _waitForSetPageDelayed = max(1UL, millis());
         break;
     }
     case TCH_KoPrevNext:
@@ -118,7 +118,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
             logDebugP("Store Default Page: %d", (int) _defaultPage);
         }
         _setPageDelayedSwitchDisplayOn = ParamTCH_KoDefaultPageSwitchOn;
-        _waitForSetPageDelayed = max(millis(), 1L);;
+        _waitForSetPageDelayed = max(1UL, millis());;
         break;
     }
     case TCH_KoDisplayOnOff:
@@ -612,7 +612,7 @@ void TouchDisplayModule::resetDisplayTimeout()
 {
     if (_pageTimeout > 0 || _displayTimeoutMs > 0)
     {
-        _lastTimeoutReset = max(1L, millis());
+        _lastTimeoutReset = max(1UL, millis());
     }
 }
 
@@ -743,7 +743,7 @@ void TouchDisplayModule::loop(bool configured)
             {
                 _pageAtPressStart = Page::currentPage();
                 touchPressStateForLgvl = true;
-                _touchPressedTimer = max(1L, millis());
+                _touchPressedTimer = max(1UL, millis());
             }
         }
         else
