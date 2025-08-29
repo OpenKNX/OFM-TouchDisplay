@@ -394,10 +394,14 @@ void TouchDisplayModule::setup(bool configured)
 
     if (!configured || ParamTCH_SensorKeys)
     {
+#ifdef TOUCH_LEFT_PIN
         pinMode(TOUCH_LEFT_PIN, INPUT);
-        pinMode(TOUCH_RIGHT_PIN, INPUT);
         attachInterrupt(digitalPinToInterrupt(TOUCH_LEFT_PIN), TouchDisplayModule::interruptTouchLeft, CHANGE);
+#endif
+#ifdef TOUCH_RIGHT_PIN
+        pinMode(TOUCH_RIGHT_PIN, INPUT);
         attachInterrupt(digitalPinToInterrupt(TOUCH_RIGHT_PIN), TouchDisplayModule::interruptTouchRight, CHANGE);
+#endif
     }
 
     if (configured)
@@ -682,12 +686,16 @@ void TouchDisplayModule::handleGesture(lv_event_t *event)
 
 void TouchDisplayModule::interruptTouchLeft()
 {
+#if defined(TOUCH_LEFT_PIN)
     _touchLeftPressed = digitalRead(TOUCH_LEFT_PIN) == HIGH;
+#endif
 }
 
 void TouchDisplayModule::interruptTouchRight()
 {
+#if defined(TOUCH_RIGHT_PIN)
     _touchRightPressed = digitalRead(TOUCH_RIGHT_PIN) == HIGH;
+#endif
 }
 
 
