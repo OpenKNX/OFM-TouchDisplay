@@ -107,7 +107,7 @@ void setup()
 Zur Integration der Display Hardware müssen folgende Funktionen implementiert werden:
 
 - bool touchIsPressed()
-- void displayInit()
+- void displayInit(uint8_t screenRotation)
 - void touchInit()
 - void backgroundLight(bool on)
 
@@ -120,9 +120,9 @@ bool touchIsPressed()
     return chsc6x_is_pressed();
 }
 
-void displayInit()
+void displayInit(uint8_t screenRotation)
 {
-    lv_xiao_disp_init();
+    lv_xiao_disp_init(screenRotation);
 }
 
 void touchInit()

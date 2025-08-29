@@ -23,7 +23,7 @@
 #include "./ImageLoader.h"
 
 extern bool touchIsPressed();
-extern void displayInit();
+extern void displayInit(uint8_t screenRotation);
 extern void touchInit();
 extern void backgroundLight(bool on);
 
@@ -349,10 +349,6 @@ void TouchDisplayModule::setup(bool configured)
     if (configured)
         resetDisplayTimeout();
 
-    if (configured)
-    {
-        screen_rotation = ParamTCH_DisplayRotation;
-    }
     lv_init();
 #if LV_USE_LOG
     lv_log_register_print_cb(lv_log);
@@ -366,10 +362,10 @@ void TouchDisplayModule::setup(bool configured)
 #endif
     lv_tick_set_cb(millis);
 #endif
-    //lv_lodepng_init();
+ 
     ImageLoader::connectLittleFSwithLVGL();
   
-    displayInit();
+    displayInit(configured ? ParamTCH_DisplayRotation : 0);
     touchInit();
    
     updateTheme();
