@@ -22,11 +22,11 @@
             "args": [
                 "baggages",
                 "--DocFileName",
-                "doc/Applikationsbeschreibung-Fingerprint.md",
+                "doc/Applikationsbeschreibung-TouchDisplay.md",
                 "--BaggagesDir",
                 "src/Baggages/Help_de",
                 "--Prefix",
-                "FIN"
+                "TCH"
             ],
             "problemMatcher": [],
             "group": "test"

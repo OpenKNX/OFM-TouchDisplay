@@ -389,7 +389,7 @@
 
           </Static>
           <Dynamic>
-            <Channel Id="%AID%_CH-Basic" Name="BasicChannel" Number="1" Text="%TCH_TabName%" Icon="animation-outline">
+            <Channel Id="%AID%_CH-%PREFIX%" Name="BasicChannel" Number="%PREFIX%" Text="%TCH_TabName%" Icon="animation-outline">
               <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Allgemein" Icon="cog-outline" HelpContext="TCH-Touch-Display" >
 
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="%TCH_TabName%" UIHint="Headline" />
