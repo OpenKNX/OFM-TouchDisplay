@@ -251,6 +251,34 @@ void TouchDisplayModule::nextPage()
     }
 }
 
+
+void TouchDisplayModule::previousPage()
+{
+    if (knx.configured() && ParamTCH_VisibleChannels > 0)
+    {
+        if (_detailDevicePageActive)
+        {
+            activatePage(_channelIndex + 1);
+            return;
+        }
+        uint8_t currentChannel = _channelIndex;
+        uint8_t newPage = _channelIndex + 1;
+        while (currentChannel != --_channelIndex)
+        {
+            if (_channelIndex >= ParamTCH_VisibleChannels)
+                _channelIndex = ParamTCH_VisibleChannels - 1;
+            uint8_t page = _channelIndex + 1;
+            if (ParamTCH_CHNavigation && pageEnabled(page))
+            {
+                newPage = page;
+                break;
+            }
+        }
+        _channelIndex = currentChannel;
+        activatePage(newPage);
+    }
+}
+
 bool TouchDisplayModule::pageEnabled(uint8_t page)
 {
     uint8_t _channelIndex = page - 1;
@@ -314,33 +342,6 @@ bool TouchDisplayModule::pageEnabled(uint8_t page)
     }
     
     return true;
-}
-
-void TouchDisplayModule::previousPage()
-{
-    if (knx.configured() && ParamTCH_VisibleChannels > 0)
-    {
-        if (_detailDevicePageActive)
-        {
-            activatePage(_channelIndex + 1);
-            return;
-        }
-        uint8_t currentChannel = _channelIndex;
-        uint8_t newPage = _channelIndex + 1;
-        while (currentChannel != --_channelIndex)
-        {
-            if (_channelIndex >= ParamTCH_VisibleChannels)
-                _channelIndex = ParamTCH_VisibleChannels - 1;
-            uint8_t page = _channelIndex + 1;
-            if (ParamTCH_CHNavigation && pageEnabled(page))
-            {
-                newPage = page;
-                break;
-            }
-        }
-        _channelIndex = currentChannel;
-        activatePage(newPage);
-    }
 }
 
 
