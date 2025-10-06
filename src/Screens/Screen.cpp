@@ -20,15 +20,33 @@ void Screen::removeBackgroundColor()
     _showBackground = false;
 }
 
+bool Screen::useCustomBackgroundColor()
+{
+    return false;
+}
+
+lv_color_t Screen::customBackgroundColor()
+{
+    return lv_color_black();
+}
+
 void Screen::show()
 {
-    if (_showBackground)
-        lv_obj_set_style_bg_color(screen, _backgroundColor, 0);
-    else
-        lv_theme_apply(screen);
+    updateBackgroundColor();
     lv_scr_load(screen);
 }
 
+void Screen::updateBackgroundColor()
+{
+    if (useCustomBackgroundColor())
+    {
+        lv_obj_set_style_bg_color(screen, customBackgroundColor(), 0);
+    }
+    else if (_showBackground)
+        lv_obj_set_style_bg_color(screen, _backgroundColor, 0);
+    else
+        lv_theme_apply(screen);
+}
 
 Screen::~Screen()
 {

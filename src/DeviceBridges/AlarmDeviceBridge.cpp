@@ -19,7 +19,7 @@ AlarmDeviceBridge::~AlarmDeviceBridge()
 
 void AlarmDeviceBridge::setDetected(bool detected)
 {
-    
+    _screen.setAlarm(detected);    
 }
 
 void AlarmDeviceBridge::mainFunctionValueChanged()

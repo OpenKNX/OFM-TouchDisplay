@@ -8,6 +8,11 @@ class Screen
 public:
     lv_obj_t *screen;
 
+protected:
+    virtual bool useCustomBackgroundColor();
+    virtual lv_color_t customBackgroundColor();
+    void updateBackgroundColor();
+ 
 public:
     static void setBackgroundColor(lv_color_t color);
     static void removeBackgroundColor();
