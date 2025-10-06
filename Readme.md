@@ -5,6 +5,7 @@ Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-Sma
 
 ## Release Notes
 
+- 0.3 Alarm Bildschirme haben bei aktiven Alarm einen roten Hintergrund
 - 0.2 Neues Stil "Weiß"
 - 0.2 Hinweise zum USB-Bild Upload in Applikationsberschreibung
 - 0.2 Neue Bilder für geöffnete Jalousien, Rolladen, Markise, Fenster, Türe, Gargagentor
@@ -174,7 +175,10 @@ void chsc6x_read( lv_indev_t * indev_driver, lv_indev_data_t * data )
 
 ## Architektur
 
-To Do
+- KnxChannel* (z.b. KnxChannelDimmer): KO Behandlung, KNX Businesslogik, ETS Konfiguration
+- *DeviceBridge (z.b. DimmerDeviceBridge): Verbindung zwischen dem KnxChannel und dem Screen (Z.b. KnxChannelDimmer und DimmerScreen)
+- *Pages: Das sind die eigentlichen Seiten die im Display dargestellt werden und entsprechen der Seitenkonfiguration in der ETS. Diese verwenden Screens, das sind die unterschiedlichen Layouts für die Darstellung. Für eine seitenfüllende gerätespezifische Darstellung ist die DetailDevicePage zuständig. Diese verwendet eine Factory um die Verbindung KnxChannel <--> Screen herzustellen.
+- *Screen: Grafisches Layout einer Seite.
 
 ## Lizenz
 
