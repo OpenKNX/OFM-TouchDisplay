@@ -285,17 +285,7 @@ bool TouchDisplayModule::pageEnabled(uint8_t page)
     if (ParamTCH_CHPageType == 0)
         return false;
   
-    switch (ParamTCH_CHPageEnabled)
-    {
-    case 1:
-        if (!KoTCH_PageEnabledA.value(DPT_Switch))
-            return false;
-        break;
-    case 2:
-        if (KoTCH_PageEnabledB.value(DPT_Switch))
-            return false;
-        break;
-    }
+    
     // <Enumeration Text="Deaktiviert" Value="0" Id="%ENID%" />
     // <Enumeration Text="Seitenfreigabe A" Value="1" Id="%ENID%" />
     // <Enumeration Text="Seitenfreigabe B" Value="2" Id="%ENID%" />
@@ -308,35 +298,35 @@ bool TouchDisplayModule::pageEnabled(uint8_t page)
     switch (ParamTCH_CHPageEnabled)
     {
     case 1:
-        if (!KoTCH_PageEnabledA.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledA.value(DPT_Switch))
             return false;
         break;
     case 2:
-        if (!KoTCH_PageEnabledB.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledB.value(DPT_Switch))
             return false;
         break;
     case 3:
-        if (!KoTCH_PageEnabledC.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledC.value(DPT_Switch))
             return false;
         break;
     case 4:
-        if (!KoTCH_PageEnabledD.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledD.value(DPT_Switch))
             return false;
         break;
     case 5:
-        if (!KoTCH_PageEnabledE.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledE.value(DPT_Switch))
             return false;
         break;
     case 6:
-        if (!KoTCH_PageEnabledF.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledF.value(DPT_Switch))
             return false;
         break;
     case 7:
-        if (!KoTCH_PageEnabledG.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledG.value(DPT_Switch))
             return false;
         break;
     case 8: 
-        if (!KoTCH_PageEnabledH.value(DPT_Switch))
+        if (ParamTCH_CHPageEnabledValue == (bool) KoTCH_PageEnabledH.value(DPT_Switch))
             return false;
         break;
     }

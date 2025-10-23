@@ -172,6 +172,13 @@
                   </TypeRestriction>
                 </ParameterType>
 
+                <ParameterType Id="%AID%_PT-TCHPageEnabledValue" Name="TCHPageEnabledValue">
+                  <TypeRestriction Base="Value" SizeInBit="1" UIHint="DropDown">
+                    <Enumeration Text="EIN - 1" Value="1" Id="%ENID%" />
+                    <Enumeration Text="AUS - 0" Value="0" Id="%ENID%" />
+                  </TypeRestriction>
+                </ParameterType>
+
                 <ParameterType Id="%AID%_PT-TCHRotateDisplay" Name="TCHRotateDisplay">
                   <TypeRestriction Base="Value" SizeInBit="4">
                     <Enumeration Text="Nein" Value="0" Id="%ENID%" />

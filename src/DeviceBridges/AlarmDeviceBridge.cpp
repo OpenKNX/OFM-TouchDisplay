@@ -10,6 +10,7 @@ void AlarmDeviceBridge::setup(uint8_t _channelIndex)
 {   
     lv_label_set_text(_screen.label, _channel->getNameInUTF8());
     mainFunctionValueChanged();
+    _screen.setUseRedBackgroundForAlarm(_channel->isUseRedBackgroundForAlarm());
     _screen.show();
 }
 

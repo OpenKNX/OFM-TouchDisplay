@@ -16,7 +16,9 @@
                 <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%%CC%001" Name="CH%C%PageType" ParameterType="%AID%_PT-TCHPageType" Text="Seitentyp" Value="0" />          
                 <!-- Page Reachable -->  
                 <Parameter Offset="1" BitOffset="0" Id="%AID%_UP-%TT%%CC%002" Name="CH%C%Navigation" ParameterType="%AID%_PT-OnOffYesNo" Text="Seite über Blättern erreichbar" Value="1" />
-                <!--3 bits free --> 
+                <!-- Page Enabled Inverted -->
+                <Parameter Offset="1" BitOffset="1" Id="%AID%_UP-%TT%%CC%008" Name="CH%C%PageEnabledValue" ParameterType="%AID%_PT-TCHPageEnabledValue" Text="Freigabe bei" Value="1" />
+                <!-- 2 bits free-->
                 <!-- Page Enabled -->
                 <Parameter Offset="1" BitOffset="3" Id="%AID%_UP-%TT%%CC%003" Name="CH%C%PageEnabled" ParameterType="%AID%_PT-TCHPageEnabled" Text="Seitenfreigabe über Objekt" Value="0" />
                 <!-- Number of fields -->
@@ -30,7 +32,7 @@
                 <Parameter Offset="31" BitOffset="0" Id="%AID%_UP-%TT%%CC%007" Name="CH%C%IconName" ParameterType="%AID%_PT-TCHIconName" Text="Bilddatei" Value="Seite" SuffixText=".png (%BRI_IconSize%)" />
                 <!-- ^^^ 8 bytes ^^^ --> 
            
-                <!-- Next Id AID%_UP-%TT%%CC%008 -->
+                <!-- Next Id AID%_UP-%TT%%CC%009 -->
           
 
                 <!-- Device Page Type --> 
@@ -66,6 +68,8 @@
               <ParameterRef Id="%AID%_UP-%TT%%CC%006_R-%TT%%CC%00601" RefId="%AID%_UP-%TT%%CC%006" />
               <!-- Custom Icon -->
               <ParameterRef Id="%AID%_UP-%TT%%CC%007_R-%TT%%CC%00701" RefId="%AID%_UP-%TT%%CC%007" />
+              <!-- Page Enabled Inverted -->
+              <ParameterRef Id="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" RefId="%AID%_UP-%TT%%CC%008" />
 
               <!-- Device Page -->
               <!-- Device Page Type -->
@@ -186,7 +190,13 @@
                           <!-- Page Reachable -->
                           <ParameterRefRef RefId="%AID%_UP-%TT%%CC%002_R-%TT%%CC%00201" IndentLevel="1" HelpContext="%DOC%" />                                        
                           <!-- Page Enabled -->
-                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301" IndentLevel="1" HelpContext="%DOC%" />                       
+                          <ParameterRefRef RefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301" IndentLevel="1" HelpContext="%DOC%" />  
+                          <choose ParamRefId="%AID%_UP-%TT%%CC%003_R-%TT%%CC%00301">
+                            <when test="1">
+                              <!-- Page Enabled Inverted -->
+                              <ParameterRefRef RefId="%AID%_UP-%TT%%CC%008_R-%TT%%CC%00801" IndentLevel="2" HelpContext="%DOC%" />  
+                            </when>   
+                          </choose>                  
                         </when>
                         <when test="1">
                           <!-- Device Page -->
