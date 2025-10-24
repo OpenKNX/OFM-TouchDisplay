@@ -9,7 +9,9 @@ AlarmScreen::AlarmScreen()
 
 bool AlarmScreen::useCustomBackgroundColor()
 {
-    return _alarm;
+    if (_alarm)
+        return true;
+    return MainFunctionScreen::useCustomBackgroundColor();
 }   
 
 lv_color_t AlarmScreen::customBackgroundColor()
