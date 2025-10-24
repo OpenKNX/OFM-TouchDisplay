@@ -140,7 +140,7 @@
 
                     <Enumeration Value="700" Id="%ENID%" Text="Kontakt" Icon="electric-switch"/>
                     <Enumeration Value="701" Id="%ENID%" Text="Bewegungsmelder" Icon="walk" />
-                    <Enumeration Value="702" Id="%ENID%" Text="Präsensmelder" Icon="human-male-female"/>
+                    <Enumeration Value="702" Id="%ENID%" Text="Präsenzmelder" Icon="human-male-female"/>
                     <Enumeration Value="703" Id="%ENID%" Text="Leckmelder" Icon="water-alert-outline" />
                     <Enumeration Value="704" Id="%ENID%" Text="Rauchmelder" Icon="smoke" />
                     <Enumeration Value="705" Id="%ENID%" Text="Kohlendioxidmelder (CO2)" Icon="molecule-co2"  />
