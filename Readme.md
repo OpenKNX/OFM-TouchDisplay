@@ -6,6 +6,7 @@ Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-Sma
 ## Release Notes
 
 - 0.3 Seitenfreigabe Auswertung bei der jeweiligen invertierbar
+- 0.3 Bei Alarm Bildschirmen kann man eine Benutzerspezifischen Statustext hinterlegen
 - 0.3 Alarm Bildschirme haben bei aktiven Alarm einen roten Hintergrund
 - 0.2 Neues Stil "Weiß"
 - 0.2 Hinweise zum USB-Bild Upload in Applikationsberschreibung
