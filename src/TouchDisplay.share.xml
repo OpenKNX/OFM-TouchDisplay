@@ -48,12 +48,10 @@
 
               <ParameterType Id="%AID%_PT-BTNInputs" Name="BTNInputs">
                 <TypeRestriction Base="Value" SizeInBit="16">
-                  <Enumeration Text="Touch-Button links" Value="1910" Id="%ENID%" DisplayOrder="1" />
-                  <Enumeration Text="Touch-Button rechts" Value="1911" Id="%ENID%" DisplayOrder="1" />
-                  <Enumeration Text="Binäreingang A" Value="1912" Id="%ENID%" DisplayOrder="1" />
-                  <Enumeration Text="Binäreingang B" Value="1913" Id="%ENID%" DisplayOrder="1" />
-                  <Enumeration Text="Binäreingang C" Value="1914" Id="%ENID%" DisplayOrder="1" />
-                  <Enumeration Text="Binäreingang D" Value="1915" Id="%ENID%" DisplayOrder="1" />
+                  <Enumeration Text="Binäreingang A" Value="1910" Id="%ENID%" DisplayOrder="1" />
+                  <Enumeration Text="Binäreingang B" Value="1911" Id="%ENID%" DisplayOrder="1" />
+                  <Enumeration Text="Binäreingang C" Value="1912" Id="%ENID%" DisplayOrder="1" />
+                  <Enumeration Text="Binäreingang D" Value="1913" Id="%ENID%" DisplayOrder="1" />
                 </TypeRestriction>
               </ParameterType>
               <ParameterType Id="%AID%_PT-TCHNumChannels" Name="TCHNumChannels">
