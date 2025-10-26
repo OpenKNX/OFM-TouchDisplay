@@ -49,7 +49,7 @@ void ProgButtonPage::setup()
     
     std::string message;
     if (openknx.info.applicationNumber() > 0)
-        message += "v" + openknx.info.humanApplicationVersion() + "   " + openknx.info.humanApplicationNumber();
+        message += "v" + openknx.info.humanFirmwareVersion() + "   " + openknx.info.humanFirmwareNumber().c_str();
     message += (const char*)u8"\nOpenKNX Touch Round";
     if (!knx.configured())
         message += (const char*)u8"\n\nBitte übertragen Sie die\nETS Applikation";
