@@ -1,6 +1,6 @@
 {
   "name": "OFM-TouchDisplay",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "This module provides a touch display interface for the OpenKNX framework. It allows users to interact with the system through a graphical interface, enhancing user experience and control.",
   "dependencies": {
   },
