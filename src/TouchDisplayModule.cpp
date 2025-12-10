@@ -91,6 +91,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         uint8_t page = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         logDebugP("Requested Page: %d", page);
         _setPageDelayed = page;
+        _setPageDelayedActiveFromSetPageKo = true;
         _setPageDelayedSwitchDisplayOn = ParamTCH_KoPageSwitchOn;
         _waitForSetPageDelayed = max(1UL, millis());
         break;
@@ -107,6 +108,11 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
     {
         bool isDefaultPageActive = _defaultPage == activePage();
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
+        if (_setPageDelayedActiveFromSetPageKo)
+        {
+            // set page has higher priority than default page
+            break;
+        }
         if (isDefaultPageActive)
         {
             _setPageDelayed = _defaultPage;  
@@ -691,6 +697,7 @@ void TouchDisplayModule::loop(bool configured)
     if (_waitForSetPageDelayed > 0 && millis() - _waitForSetPageDelayed > 100)
     {
         _waitForSetPageDelayed = 0;      
+        _setPageDelayedActiveFromSetPageKo = false;
         if (_setPageDelayed == 255)
         {
             // only check for display on

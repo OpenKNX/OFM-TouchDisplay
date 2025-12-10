@@ -4,6 +4,7 @@ Diese Modul stellt die Anbindung an ein Touch Display zur Verfügung.
 Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-SmartHomeBridge) für die Gerätedefinitionen.
 
 ## Release Notes
+- 0.3.2 Set page has more priority for setting pages then set default page
 - 0.3.1 Firmware Versionsanzeige auf Prog-Seite korrigiert
 - 0.3 Seitenfreigabe Auswertung bei der jeweiligen Seite invertierbar
 - 0.3 Bei Alarm Bildschirmen kann man eine Benutzerspezifischen Statustext hinterlegen

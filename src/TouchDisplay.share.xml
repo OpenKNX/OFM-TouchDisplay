@@ -321,35 +321,35 @@
             </ParameterRefs>
             <ComObjectTable>
             	<!-- Display On/Off -->
-							<ComObject Number="0" Id="%AID%_O-%TT%00000" ObjectSize="1 Bit" DatapointType="DPST-1-1" Name="DisplayOnOff" Text="Display Einschalten" FunctionText="Display Einschalten" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+							<ComObject Number="0" Id="%AID%_O-%TT%00000" ObjectSize="1 Bit"  DatapointType="DPST-1-1"  Name="DisplayOnOff"      Text="Anzeige Einschalten"   FunctionText="Anzeige: Eingang, Schalten, Aus=0 / Ein=1" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
 				    	<!-- Display On/Off  Status-->
-							<ComObject Number="1" Id="%AID%_O-%TT%00001" ObjectSize="1 Bit" DatapointType="DPST-1-1" Name="DisplayOnOffState" Text="Display Eingeschalten" FunctionText="Display Einschalten" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+							<ComObject Number="1" Id="%AID%_O-%TT%00001" ObjectSize="1 Bit"  DatapointType="DPST-1-1"  Name="DisplayOnOffState" Text="Anzeige Eingeschalten" FunctionText="Anzeige: Ausgang, Status, Aus=0 / Ein=1" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
      	        <!-- Page -->
-							<ComObject Number="2" Id="%AID%_O-%TT%00002" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="Page" Text="Gehe zu Seite" FunctionText="Gehe zu Seite" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-				    	<!-- Current Page  Status-->
-							<ComObject Number="3" Id="%AID%_O-%TT%00003" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="CurrentPage" Text="Aktuelle Seite" FunctionText="Aktuelle Seite" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-			        <!-- Next/Previous Page -->
-							<ComObject Number="4" Id="%AID%_O-%TT%00004" ObjectSize="1 Bit" DatapointType="DPST-1-8" Name="PrevNext" Text="Blättern" FunctionText="Zurück / Vor" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-					    <!-- Default Page -->
-							<ComObject Number="5" Id="%AID%_O-%TT%00005" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="DefaultPage" Text="Standardseite" FunctionText="Standardseite" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-	           	<!-- Display Tag Nacht -->
-							<ComObject Number="6" Id="%AID%_O-%TT%00006" ObjectSize="1 Bit" DatapointType="DPST-1-24" Name="DayNight" Text="Tag/Nacht" FunctionText="Nacht EIN" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled A -->
-              <ComObject Number="7" Id="%AID%_O-%TT%00007" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledA" Text="Seitenfreigabe A" FunctionText="Seitenfreigabe A" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled B -->
-              <ComObject Number="8" Id="%AID%_O-%TT%00008" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledB" Text="Seitenfreigabe B" FunctionText="Seitenfreigabe B" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled C -->
-              <ComObject Number="9" Id="%AID%_O-%TT%00009" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledC" Text="Seitenfreigabe C" FunctionText="Seitenfreigabe C" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />  	     
-              <!-- Page Enabled D -->
-              <ComObject Number="10" Id="%AID%_O-%TT%00010" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledD" Text="Seitenfreigabe D" FunctionText="Seitenfreigabe D" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled E -->
-              <ComObject Number="11" Id="%AID%_O-%TT%00011" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledE" Text="Seitenfreigabe E" FunctionText="Seitenfreigabe E" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled F -->
-              <ComObject Number="12" Id="%AID%_O-%TT%00012" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledF" Text="Seitenfreigabe F" FunctionText="Seitenfreigabe F" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
-              <!-- Page Enabled G -->
-              <ComObject Number="13" Id="%AID%_O-%TT%00013" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledG" Text="Seitenfreigabe G" FunctionText="Seitenfreigabe G" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" /> 
-              <!-- Page Enabled H -->
-              <ComObject Number="14" Id="%AID%_O-%TT%00014" ObjectSize="1 Bit" DatapointType="DPST-1-3" Name="PageEnabledH" Text="Seitenfreigabe H" FunctionText="Seitenfreigabe H" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+							<ComObject Number="2" Id="%AID%_O-%TT%00002" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="Page"              Text="Gehe zu Seite"         FunctionText="Anzeige: Eingang, Seitennummer" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+				    	<!-- Current Page  Status-->     
+							<ComObject Number="3" Id="%AID%_O-%TT%00003" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="CurrentPage"       Text="Aktuelle Seite"        FunctionText="Anzeige: Ausgang, Seitennummer" ReadFlag="Enabled" WriteFlag="Disabled" CommunicationFlag="Enabled" TransmitFlag="Enabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+			        <!-- Next/Previous Page -->          
+							<ComObject Number="4" Id="%AID%_O-%TT%00004" ObjectSize="1 Bit"  DatapointType="DPST-1-8"  Name="PrevNext"          Text="Blättern"              FunctionText="Anzeige: Eingang, Zurück=0 / Vor=1" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+					    <!-- Default Page -->          
+							<ComObject Number="5" Id="%AID%_O-%TT%00005" ObjectSize="1 Byte" DatapointType="DPST-17-1" Name="DefaultPage"       Text="Standardseite"         FunctionText="Azeigen: Eingang, Seitennummer" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+	           	<!-- Display Tag Nacht -->          
+							<ComObject Number="6" Id="%AID%_O-%TT%00006" ObjectSize="1 Bit"  DatapointType="DPST-1-24" Name="DayNight"          Text="Tag/Nacht"             FunctionText="Anzeige: Eingang, Tag=0 / Nacht=1" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Enabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled A -->          
+              <ComObject Number="7" Id="%AID%_O-%TT%00007" ObjectSize="1 Bit"  DatapointType="DPST-1-3"  Name="PageEnabledA"      Text="Seitenfreigabe A"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled B -->          
+              <ComObject Number="8" Id="%AID%_O-%TT%00008" ObjectSize="1 Bit"  DatapointType="DPST-1-3"  Name="PageEnabledB"      Text="Seitenfreigabe B"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled C -->          
+              <ComObject Number="9" Id="%AID%_O-%TT%00009" ObjectSize="1 Bit"  DatapointType="DPST-1-3"  Name="PageEnabledC"      Text="Seitenfreigabe C"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />  	     
+              <!-- Page Enabled D -->          
+              <ComObject Number="10" Id="%AID%_O-%TT%00010" ObjectSize="1 Bit" DatapointType="DPST-1-3"  Name="PageEnabledD"      Text="Seitenfreigabe D"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled E -->          
+              <ComObject Number="11" Id="%AID%_O-%TT%00011" ObjectSize="1 Bit" DatapointType="DPST-1-3"  Name="PageEnabledE"      Text="Seitenfreigabe E"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled F -->          
+              <ComObject Number="12" Id="%AID%_O-%TT%00012" ObjectSize="1 Bit" DatapointType="DPST-1-3"  Name="PageEnabledF"      Text="Seitenfreigabe F"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
+              <!-- Page Enabled G -->          
+              <ComObject Number="13" Id="%AID%_O-%TT%00013" ObjectSize="1 Bit" DatapointType="DPST-1-3"  Name="PageEnabledG"      Text="Seitenfreigabe G"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" /> 
+              <!-- Page Enabled H -->          
+              <ComObject Number="14" Id="%AID%_O-%TT%00014" ObjectSize="1 Bit" DatapointType="DPST-1-3"  Name="PageEnabledH"      Text="Seitenfreigabe H"      FunctionText="Anzeige: Eingang, Steuern" ReadFlag="Disabled" WriteFlag="Enabled" CommunicationFlag="Enabled" TransmitFlag="Disabled" UpdateFlag="Disabled" ReadOnInitFlag="Disabled" Priority="Low" />
             </ComObjectTable>
             <ComObjectRefs>
               <!-- Display On/Off -->
