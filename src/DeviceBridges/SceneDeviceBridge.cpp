@@ -12,6 +12,7 @@ void SceneDeviceBridge::setup(uint8_t _channelIndex)
  
     _eventButtonPressed = [](lv_event_t *e) { ((SceneDeviceBridge*) lv_event_get_user_data(e))->buttonClicked(); };
     lv_obj_add_event_cb(_screen.image, _eventButtonPressed , LV_EVENT_CLICKED, this);
+    
 
     mainFunctionValueChanged();
     _screen.show();
@@ -40,5 +41,47 @@ void SceneDeviceBridge::mainFunctionValueChanged()
 
 void SceneDeviceBridge::buttonClicked()
 {    
-    _channel->commandMainFunctionClick();   
+    auto& device = *_channel;
+    auto _channelIndex = device.channelIndex();
+    if (ParamBRI_CHSceneLearn)
+        _lastButtonPressTime = millis();
+    else
+        device.commandMainFunctionClick();
+}
+
+void SceneDeviceBridge::released()
+{
+    if (_lastButtonPressTime != 0)
+    {
+        _channel->commandMainFunctionClick();   
+        _lastButtonPressTime = 0;
+    }
+}
+
+void SceneDeviceBridge::loop()
+{
+    unsigned long pressDuration = millis() - _lastButtonPressTime;
+    if (pressDuration >= 1000)
+    {
+        int countDown = max(0, 3 - (int) ((pressDuration - 1000) / 1000));
+        if (countDown != _storeCountDown)
+        {
+            _storeCountDown = countDown;
+            if (countDown == 0)
+            {
+                // Store scene
+                _channel->learnScene();
+                _lastButtonPressTime = 0;
+                _storeCountDown = 0;
+                _channel->setMessage("Gespeichert");
+            }
+            else
+            {
+                char buffer[20];
+                snprintf(buffer, sizeof(buffer), "Speichern in %ds", countDown);
+                lv_label_set_text(_screen.value, buffer);
+            }
+        }
+    }
+ 
 }

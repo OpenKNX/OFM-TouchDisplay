@@ -9,6 +9,5 @@ class SwitchScreen: public ScreenWithLabel
     lv_obj_t* value;
     lv_obj_t* image;
 
-
     SwitchScreen();
 };
