@@ -6,6 +6,8 @@
 
 class ProgButtonPage : public Page
 {
+public:
+
 
     lv_event_cb_t _eventButtonPressed = nullptr;
     ButtonMessageScreen& _screen = *ButtonMessageScreen::instance;

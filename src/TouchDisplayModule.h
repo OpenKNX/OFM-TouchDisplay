@@ -31,6 +31,7 @@ class TouchDisplayModule : public OpenKNX::Module
 	lv_color_t _colorInactive;
 	bool _setupDone = false;
 public:
+	static const unsigned long longPressTimeMs = 800;
 	bool touchPressStateForLgvl = false;
 
 	void loop(bool configured) override;

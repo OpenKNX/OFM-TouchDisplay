@@ -21,6 +21,7 @@
 #include "./Pages/Page.h"
 #include "./Pages/ProgButtonPage.h"
 #include "./ImageLoader.h"
+#include "DisplayLed.h"
 
 extern bool touchIsPressed();
 extern void displayInit(uint8_t screenRotation);
@@ -694,6 +695,7 @@ void TouchDisplayModule::interruptTouchRight()
 
 void TouchDisplayModule::loop(bool configured)
 {
+    DisplayLed::handleLeds();
     if (_waitForSetPageDelayed > 0 && millis() - _waitForSetPageDelayed > 100)
     {
         _waitForSetPageDelayed = 0;      
@@ -773,7 +775,7 @@ void TouchDisplayModule::loop(bool configured)
     if (_touchPressedTimer != 0)
     {
         unsigned long pressedTime = millis() - _touchPressedTimer;
-        if (pressedTime > 800)
+        if (pressedTime > longPressTimeMs)
         {
             _touchPressedTimer = 0;
             auto page = Page::currentPage();  
