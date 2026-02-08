@@ -11,7 +11,9 @@ void SceneDeviceBridge::setup(uint8_t _channelIndex)
     lv_label_set_text(_screen.label, _channel->getNameInUTF8());
  
     _eventButtonPressed = [](lv_event_t *e) { ((SceneDeviceBridge*) lv_event_get_user_data(e))->buttonClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventButtonPressed , LV_EVENT_CLICKED, this);
+    lv_obj_add_event_cb(_screen.image, _eventButtonPressed , LV_EVENT_PRESSED, this);
+    _eventButtonReleased = [](lv_event_t *e) { ((SceneDeviceBridge*) lv_event_get_user_data(e))->released(); };
+    lv_obj_add_event_cb(_screen.image, _eventButtonReleased , LV_EVENT_RELEASED, this);
     
 
     mainFunctionValueChanged();
@@ -22,6 +24,8 @@ SceneDeviceBridge::~SceneDeviceBridge()
 {
     if (_eventButtonPressed != nullptr)
         lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonPressed, this);
+    if (_eventButtonReleased != nullptr)
+        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonReleased, this);
 }
 
 void SceneDeviceBridge::setActivating(bool activating)
@@ -53,33 +57,45 @@ void SceneDeviceBridge::released()
 {
     if (_lastButtonPressTime != 0)
     {
-        _channel->commandMainFunctionClick();   
+        if (millis() - _lastButtonPressTime < 1000)
+        {
+            _channel->commandMainFunctionClick();   
+            logErrorP("SceneDeviceBridge", "DEBUG: MAINFUNCTIOIN");
+        }
+        else
+        {
+            _channel->setMessage("Abgebrochen");
+        }
         _lastButtonPressTime = 0;
     }
 }
 
 void SceneDeviceBridge::loop()
 {
-    unsigned long pressDuration = millis() - _lastButtonPressTime;
-    if (pressDuration >= 1000)
-    {
-        int countDown = max(0, 3 - (int) ((pressDuration - 1000) / 1000));
-        if (countDown != _storeCountDown)
+    if (_lastButtonPressTime != 0)
+    { 
+        unsigned long pressDuration = millis() - _lastButtonPressTime;
+        if (pressDuration >= 1000)
         {
-            _storeCountDown = countDown;
-            if (countDown == 0)
+            int countDown = max(0, 3 - (int) ((pressDuration - 1000) / 1000));
+            if (countDown != _storeCountDown)
             {
-                // Store scene
-                _channel->learnScene();
-                _lastButtonPressTime = 0;
-                _storeCountDown = 0;
-                _channel->setMessage("Gespeichert");
-            }
-            else
-            {
-                char buffer[20];
-                snprintf(buffer, sizeof(buffer), "Speichern in %ds", countDown);
-                lv_label_set_text(_screen.value, buffer);
+                _storeCountDown = countDown;
+                if (countDown == 0)
+                {
+                    // Store scene
+                    _channel->learnScene();
+                    logErrorP("SceneDeviceBridge", "DEBUG: LEARN");
+                    _lastButtonPressTime = 0;
+                    _storeCountDown = 0;
+                    _channel->setMessage("Gespeichert");
+                }
+                else
+                {
+                    char buffer[20];
+                    snprintf(buffer, sizeof(buffer), "Speichern in %ds", countDown);
+                    lv_label_set_text(_screen.value, buffer);
+                }
             }
         }
     }
