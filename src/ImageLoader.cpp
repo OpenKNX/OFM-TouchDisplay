@@ -11,6 +11,8 @@
 #include "../Images/stop.c"
 #include "../Images/Type10.c"
 #include "../Images/Type11.c"
+#include "../Images/Type12.c"
+#include "../Images/Type12_A.c"
 #include "../Images/Type20.c"
 #include "../Images/Type30.c"
 #include "../Images/Type30_A.c"
@@ -348,6 +350,14 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (lowerFileName == "type11.png")
     {
         lv_img_set_src(imageObject, &Type11);
+    }
+    else if (lowerFileName == "type12.png")
+    {
+        lv_img_set_src(imageObject, &Type12);
+    }
+    else if (lowerFileName == "type12_a.png")
+    {
+        lv_img_set_src(imageObject, &Type12_A);
     }
     else if (lowerFileName == "type20.png")
     {

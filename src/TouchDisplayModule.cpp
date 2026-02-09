@@ -14,6 +14,7 @@
 #include "./Screens/JalousieScreen.h"
 #include "./Screens/FanScreen.h"
 #include "./Screens/DoorWindowScreen.h"
+#include "./Screens/LockScreen.h"
 #include "./Screens/SceneScreen.h"
 #include "./Screens/ThermostatScreen.h"
 #include "./Screens/RGBScreen.h"
@@ -382,6 +383,7 @@ void TouchDisplayModule::setup(bool configured)
     FanScreen::instance = new FanScreen();
     RGBScreen::instance = new RGBScreen();
     DoorWindowScreen::instance = new DoorWindowScreen();
+    LockScreen::instance = new LockScreen();
     SceneScreen::instance = new SceneScreen();
     ThermostatScreen::instance = new ThermostatScreen();
     MediaScreen::instance = new MediaScreen();
