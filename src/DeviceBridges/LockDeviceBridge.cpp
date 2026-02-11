@@ -39,6 +39,7 @@ void LockDeviceBridge::setLocked(bool lock)
 
 void LockDeviceBridge::setBlocked(bool blocked)
 {
+    logDebugP("Set blocked: %d", blocked);
     if (blocked)
     {
         lv_obj_clear_flag(_screen.blocked, LV_OBJ_FLAG_HIDDEN);
@@ -51,14 +52,16 @@ void LockDeviceBridge::setBlocked(bool blocked)
 
 void LockDeviceBridge::setUnlocking(bool unlocking)
 {
+    logDebugP("Set unlocking: %d", unlocking);
     if (unlocking)
     {
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "opening_l.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "unlocking_l.png", true, true);
         else
-            ImageLoader::loadImage(_screen.movement, "opening_r.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "unlocking_r.png", true, true);
+       
     }
     else
     {
@@ -68,14 +71,15 @@ void LockDeviceBridge::setUnlocking(bool unlocking)
 
 void LockDeviceBridge::setLocking(bool locking)
 {
+    logDebugP("Set locking: %d", locking);
     if (locking)
     {
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "closing_l.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "locking_r.png", true, true);
         else
-            ImageLoader::loadImage(_screen.movement, "closing_r.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "locking_l.png", true, true);  
     }
     else
     {

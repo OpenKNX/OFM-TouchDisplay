@@ -60,7 +60,6 @@ void SceneDeviceBridge::released()
         if (millis() - _lastButtonPressTime < 1000)
         {
             _channel->commandMainFunctionClick();   
-            logErrorP("SceneDeviceBridge", "DEBUG: MAINFUNCTIOIN");
         }
         else
         {
@@ -85,7 +84,6 @@ void SceneDeviceBridge::loop()
                 {
                     // Store scene
                     _channel->learnScene();
-                    logErrorP("SceneDeviceBridge", "DEBUG: LEARN");
                     _lastButtonPressTime = 0;
                     _storeCountDown = 0;
                     _channel->setMessage("Gespeichert");

@@ -10,8 +10,9 @@ LockScreen::LockScreen()
     lv_obj_add_flag(image, LV_OBJ_FLAG_CLICKABLE); 
 
     blocked = lv_img_create(screen);  
-  
+    lv_obj_align(blocked, LV_ALIGN_CENTER, 73, -15);  
     movement = lv_img_create(screen);  
+    lv_obj_align(movement, LV_ALIGN_CENTER, -73, -15);  
    
     value = lv_label_create(screen);
     lv_obj_set_width(value, LV_SIZE_CONTENT);  
