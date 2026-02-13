@@ -4,6 +4,7 @@ Diese Modul stellt die Anbindung an ein Touch Display zur Verfügung.
 Das Modul benötigt die [OFM-SmartHomeBridge](https://github.com/OpenKNX/OFM-SmartHomeBridge) für die Gerätedefinitionen.
 
 ## Release Notes
+- 0.4.0 Gerät "Schloss" hinzugefügt 
 - 0.4.0 Szenen Speicherfunktion
 - 0.3.2 Das Setzen von Seiten hat eine höhere Priorität als das Setzen der Standardseite.
 - 0.3.1 Firmware Versionsanzeige auf Prog-Seite korrigiert

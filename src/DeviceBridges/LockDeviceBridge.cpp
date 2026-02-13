@@ -58,9 +58,9 @@ void LockDeviceBridge::setUnlocking(bool unlocking)
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "unlocking_l.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "rotate_l.png", true, true);
         else
-            ImageLoader::loadImage(_screen.movement, "unlocking_r.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "rotate_r.png", true, true);
        
     }
     else
@@ -77,9 +77,9 @@ void LockDeviceBridge::setLocking(bool locking)
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "locking_r.png", true, true);
+            ImageLoader::loadImage(_screen.movement, "rotate_r.png", true, true);
         else
-            ImageLoader::loadImage(_screen.movement, "locking_l.png", true, true);  
+            ImageLoader::loadImage(_screen.movement, "rotate_l.png", true, true);  
     }
     else
     {

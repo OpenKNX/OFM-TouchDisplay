@@ -72,10 +72,8 @@
 #include "../Images/closing_u.c"
 #include "../Images/opening_d.c"
 #include "../Images/closing_d.c"
-#include "../Images/locking_l.c"
-#include "../Images/locking_r.c"
-#include "../Images/unlocking_l.c"
-#include "../Images/unlocking_r.c"
+#include "../Images/rotate_l.c"
+#include "../Images/rotate_r.c"
 
 
 
@@ -319,21 +317,13 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &closing_d);
     }
-    else if (lowerFileName == "locking_l.png")
+    else if (lowerFileName == "rotate_l.png")
     {
-        lv_img_set_src(imageObject, &locking_l);
+        lv_img_set_src(imageObject, &rotate_l);
     }
-    else if (lowerFileName == "locking_r.png")
+    else if (lowerFileName == "rotate_r.png")
     {
-        lv_img_set_src(imageObject, &locking_r);
-    }
-    else if (lowerFileName == "unlocking_l.png")
-    {
-        lv_img_set_src(imageObject, &unlocking_l);
-    }
-    else if (lowerFileName == "unlocking_r.png")
-    {
-        lv_img_set_src(imageObject, &unlocking_r);
+        lv_img_set_src(imageObject, &rotate_r);
     }
     else if (lowerFileName == "thermostatheading.png")
     {
