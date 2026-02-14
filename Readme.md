@@ -52,7 +52,7 @@ Die Anwenderdokumentation ist [hier](./doc/Applikationsbeschreibung.md) zu finde
 |ESP32     | Untested             |                            |
 
 Getestete Hardware:
-- [OpenKNX Ready Touch Round](https://www.ab-smarthouse.com/produkt/openknx-touch-display/?v=7d0db380a5b9 )
+- [AB-SmartHouse Touch-Display](https://openknx.atlassian.net/wiki/spaces/OpenKNX/pages/8225237/AB-SmartHouse+Touch-Display)
 
 ## Einbindung in die Anwendung
 
