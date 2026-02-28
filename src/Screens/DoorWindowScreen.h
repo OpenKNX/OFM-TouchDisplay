@@ -2,7 +2,7 @@
 
 #include "ScreenWithLabel.h"
 
-enum DoorWindowSliderDirection
+enum class DoorWindowSliderDirection
 {
     DOOR_WINDOW_SLIDER_LEFT = 0,
     DOOR_WINDOW_SLIDER_RIGHT,

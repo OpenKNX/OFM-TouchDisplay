@@ -14,5 +14,6 @@ SwitchScreen::SwitchScreen()
     lv_obj_set_align(value, LV_ALIGN_CENTER);
     lv_obj_align(value, LV_ALIGN_CENTER, 0, 34);  
     lv_obj_set_style_text_font(value, &FONT_LARGE, LV_PART_MAIN | LV_STATE_DEFAULT); 
+
 }
   

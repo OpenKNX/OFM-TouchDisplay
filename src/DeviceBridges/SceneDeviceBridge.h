@@ -8,8 +8,11 @@
 class SceneDeviceBridge : public SceneBridge
 {
     lv_event_cb_t _eventButtonPressed = nullptr;
+    lv_event_cb_t _eventButtonReleased = nullptr;
+    unsigned long _lastButtonPressTime = 0;
     DetailDevicePage& _detailDevicePage;
     SceneScreen& _screen = *SceneScreen::instance;
+    int _storeCountDown = 0;
 public:
     SceneDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~SceneDeviceBridge() override;
@@ -20,4 +23,5 @@ public:
     void released();
     void buttonClicked();
     void updateText();
+    void loop() override;
 };  

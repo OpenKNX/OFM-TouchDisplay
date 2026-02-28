@@ -4,6 +4,19 @@ ButtonMessageScreen* ButtonMessageScreen::instance = nullptr;
 
 ButtonMessageScreen::ButtonMessageScreen()
 {
+
+    led1= lv_led_create(screen);
+    lv_obj_align(led1, LV_ALIGN_TOP_MID, -28, 15);
+    lv_obj_set_size(led1, 15, 15);
+   
+    led2= lv_led_create(screen);
+    lv_obj_align(led2, LV_ALIGN_TOP_MID, 0, 15);
+    lv_obj_set_size(led2, 15, 15);
+   
+    led3= lv_led_create(screen);
+    lv_obj_align(led3, LV_ALIGN_TOP_MID, 28, 15);
+    lv_obj_set_size(led3, 15, 15);
+   
     message = lv_label_create(screen);
     lv_obj_set_width(message, LV_SIZE_CONTENT);
     lv_obj_set_height(message, LV_SIZE_CONTENT); 

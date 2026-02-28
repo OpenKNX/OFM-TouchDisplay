@@ -1,5 +1,7 @@
 #include "ProgButtonPage.h"
+#include "DisplayLed.h"
 #include "OpenKNX.h"
+
 
 const char* ProgButtonPage::pageType()
 {
@@ -14,6 +16,9 @@ void ProgButtonPage::buttonClicked()
 
 ProgButtonPage::~ProgButtonPage()
 {
+    DisplayLed::led1->setLedObject(nullptr);
+    DisplayLed::led2->setLedObject(nullptr);
+    DisplayLed::led3->setLedObject(nullptr);
     if (_eventButtonPressed != nullptr)
         lv_obj_remove_event_cb_with_user_data(_screen.button, _eventButtonPressed, this);
 }
@@ -42,17 +47,21 @@ void ProgButtonPage::updateButtonState()
 
 void ProgButtonPage::setup()
 {
+    DisplayLed::led1->setLedObject(_screen.led1);
+    DisplayLed::led2->setLedObject(_screen.led2);
+    DisplayLed::led3->setLedObject(_screen.led3);
+   
+   
     auto label = openknx.info.humanIndividualAddress();
     if (label == "15.15.255")
         label = (const char*) u8"Keine Adresse";
     lv_label_set_text(_screen.label, label.c_str());
     
     std::string message;
-    if (openknx.info.applicationNumber() > 0)
-        message += "v" + openknx.info.humanFirmwareVersion() + "   " + openknx.info.humanFirmwareNumber().c_str();
+    message += "v" + openknx.info.humanFirmwareVersion() + "   " + openknx.info.humanFirmwareNumber().c_str();
     message += (const char*)u8"\nOpenKNX Touch Round";
     if (!knx.configured())
-        message += (const char*)u8"\n\nBitte übertragen Sie die\nETS Applikation";
+        message += (const char*)u8"\nBitte übertragen Sie die\nETS Applikation";
     lv_label_set_text(_screen.message, message.c_str());
     lv_label_set_text(_screen.buttonText, (const char*)u8"Programmier Modus");
 

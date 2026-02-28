@@ -14,6 +14,7 @@
 #include "./Screens/JalousieScreen.h"
 #include "./Screens/FanScreen.h"
 #include "./Screens/DoorWindowScreen.h"
+#include "./Screens/LockScreen.h"
 #include "./Screens/SceneScreen.h"
 #include "./Screens/ThermostatScreen.h"
 #include "./Screens/RGBScreen.h"
@@ -21,6 +22,7 @@
 #include "./Pages/Page.h"
 #include "./Pages/ProgButtonPage.h"
 #include "./ImageLoader.h"
+#include "DisplayLed.h"
 
 extern bool touchIsPressed();
 extern void displayInit(uint8_t screenRotation);
@@ -91,6 +93,7 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
         uint8_t page = 1 + (uint8_t) ko.value(DPT_SceneNumber);
         logDebugP("Requested Page: %d", page);
         _setPageDelayed = page;
+        _setPageDelayedActiveFromSetPageKo = true;
         _setPageDelayedSwitchDisplayOn = ParamTCH_KoPageSwitchOn;
         _waitForSetPageDelayed = max(1UL, millis());
         break;
@@ -107,6 +110,11 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
     {
         bool isDefaultPageActive = _defaultPage == activePage();
         _defaultPage = 1 + (uint8_t) ko.value(DPT_SceneNumber);
+        if (_setPageDelayedActiveFromSetPageKo)
+        {
+            // set page has higher priority than default page
+            break;
+        }
         if (isDefaultPageActive)
         {
             _setPageDelayed = _defaultPage;  
@@ -375,6 +383,7 @@ void TouchDisplayModule::setup(bool configured)
     FanScreen::instance = new FanScreen();
     RGBScreen::instance = new RGBScreen();
     DoorWindowScreen::instance = new DoorWindowScreen();
+    LockScreen::instance = new LockScreen();
     SceneScreen::instance = new SceneScreen();
     ThermostatScreen::instance = new ThermostatScreen();
     MediaScreen::instance = new MediaScreen();
@@ -688,9 +697,11 @@ void TouchDisplayModule::interruptTouchRight()
 
 void TouchDisplayModule::loop(bool configured)
 {
+    DisplayLed::handleLeds();
     if (_waitForSetPageDelayed > 0 && millis() - _waitForSetPageDelayed > 100)
     {
         _waitForSetPageDelayed = 0;      
+        _setPageDelayedActiveFromSetPageKo = false;
         if (_setPageDelayed == 255)
         {
             // only check for display on
@@ -766,7 +777,7 @@ void TouchDisplayModule::loop(bool configured)
     if (_touchPressedTimer != 0)
     {
         unsigned long pressedTime = millis() - _touchPressedTimer;
-        if (pressedTime > 800)
+        if (pressedTime > longPressTimeMs)
         {
             _touchPressedTimer = 0;
             auto page = Page::currentPage();  

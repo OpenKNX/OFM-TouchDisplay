@@ -11,6 +11,8 @@
 #include "../Images/stop.c"
 #include "../Images/Type10.c"
 #include "../Images/Type11.c"
+#include "../Images/Type12.c"
+#include "../Images/Type12_A.c"
 #include "../Images/Type20.c"
 #include "../Images/Type30.c"
 #include "../Images/Type30_A.c"
@@ -70,6 +72,8 @@
 #include "../Images/closing_u.c"
 #include "../Images/opening_d.c"
 #include "../Images/closing_d.c"
+#include "../Images/rotate_l.c"
+#include "../Images/rotate_r.c"
 
 
 
@@ -313,6 +317,14 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     {
         lv_img_set_src(imageObject, &closing_d);
     }
+    else if (lowerFileName == "rotate_l.png")
+    {
+        lv_img_set_src(imageObject, &rotate_l);
+    }
+    else if (lowerFileName == "rotate_r.png")
+    {
+        lv_img_set_src(imageObject, &rotate_r);
+    }
     else if (lowerFileName == "thermostatheading.png")
     {
         lv_img_set_src(imageObject, &thermostatHeading);
@@ -348,6 +360,14 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (lowerFileName == "type11.png")
     {
         lv_img_set_src(imageObject, &Type11);
+    }
+    else if (lowerFileName == "type12.png")
+    {
+        lv_img_set_src(imageObject, &Type12);
+    }
+    else if (lowerFileName == "type12_a.png")
+    {
+        lv_img_set_src(imageObject, &Type12_A);
     }
     else if (lowerFileName == "type20.png")
     {
