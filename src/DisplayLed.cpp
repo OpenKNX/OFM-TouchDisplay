@@ -67,13 +67,11 @@ void DisplayLed::handlDipslayLed()
         return;
     if (_rgbChanged)
     {
-        logDebug("LED", "Update color to %d %d %d", _r, _g, _b);
         lv_led_set_color(_led, lv_color_make(_r, _g, _b));
         _rgbChanged = false;
     }
     if (_brightnessChanged)
     {
-        logDebug("LED", "Update brightness to %d", _brightness);
         lv_led_set_brightness(_led, _brightness);
         if (_brightness == 0)
             lv_led_off(_led);
