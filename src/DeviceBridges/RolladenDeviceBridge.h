@@ -5,14 +5,10 @@
 
 class RolladenDeviceBridge : public RolladenBridge
 {
-    lv_event_cb_t _eventButtonUpPressed = nullptr;
-    lv_event_cb_t _eventButtonDownPressed = nullptr;
-    lv_event_cb_t _eventButtonMainFunctionPressed = nullptr;
-    lv_event_cb_t _eventSliderReleased = nullptr;
-    RolladenScreen& _screen;
+    IRolladenScreen& _screen;
 protected:
     DetailDevicePage& _detailDevicePage;
-    RolladenDeviceBridge(RolladenScreen& screen, DetailDevicePage& detailDevicePage);
+    RolladenDeviceBridge(IRolladenScreen& screen, DetailDevicePage& detailDevicePage);
  public:
     RolladenDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~RolladenDeviceBridge() override;
@@ -24,5 +20,5 @@ protected:
     void buttonUpPressed();
     void buttonDownPressed();
     void buttonMainFunctionPressed();
-    void sliderReleased();
+    void percentageChangeCompleted();
 };  

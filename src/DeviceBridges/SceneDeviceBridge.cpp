@@ -1,5 +1,4 @@
 #include "SceneDeviceBridge.h"
-#include "../ImageLoader.h"
 
 SceneDeviceBridge::SceneDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -8,24 +7,19 @@ SceneDeviceBridge::SceneDeviceBridge(DetailDevicePage& detailDevicePage)
 
 void SceneDeviceBridge::setup(uint8_t _channelIndex)
 {
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
- 
-    _eventButtonPressed = [](lv_event_t *e) { ((SceneDeviceBridge*) lv_event_get_user_data(e))->buttonClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventButtonPressed , LV_EVENT_PRESSED, this);
-    _eventButtonReleased = [](lv_event_t *e) { ((SceneDeviceBridge*) lv_event_get_user_data(e))->released(); };
-    lv_obj_add_event_cb(_screen.image, _eventButtonReleased , LV_EVENT_RELEASED, this);
+    _screen.SetLabelText(_channel->getNameInUTF8());
+    _screen.RegisterPrimaryActionPressed([this]() { buttonClicked(); });
+    _screen.RegisterPrimaryActionReleased([this]() { released(); });
     
 
     mainFunctionValueChanged();
-    _screen.show();
+    _screen.Show();
 }
 
 SceneDeviceBridge::~SceneDeviceBridge()
 {
-    if (_eventButtonPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonPressed, this);
-    if (_eventButtonReleased != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonReleased, this);
+    _screen.RegisterPrimaryActionPressed(nullptr);
+    _screen.RegisterPrimaryActionReleased(nullptr);
 }
 
 void SceneDeviceBridge::setActivating(bool activating)
@@ -38,8 +32,8 @@ void SceneDeviceBridge::mainFunctionValueChanged()
     auto& device = *_channel;
     auto image = device.mainFunctionImage();
     bool power = device.mainFunctionValue();
-    ImageLoader::loadImage(_screen.image, image.imageFile, image.allowRecolor, power);
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(image.imageFile.c_str(), image.allowRecolor, power);
+    _screen.SetValueText(device.currentValueAsString().c_str());
 }
 
 
@@ -92,7 +86,7 @@ void SceneDeviceBridge::loop()
                 {
                     char buffer[20];
                     snprintf(buffer, sizeof(buffer), "Speichern in %ds", countDown);
-                    lv_label_set_text(_screen.value, buffer);
+                    _screen.SetValueText(buffer);
                 }
             }
         }

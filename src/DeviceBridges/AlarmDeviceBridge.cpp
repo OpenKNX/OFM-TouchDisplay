@@ -1,5 +1,4 @@
 #include "AlarmDeviceBridge.h"
-#include "../ImageLoader.h"
 
 AlarmDeviceBridge::AlarmDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -8,10 +7,10 @@ AlarmDeviceBridge::AlarmDeviceBridge(DetailDevicePage& detailDevicePage)
 
 void AlarmDeviceBridge::setup(uint8_t _channelIndex)
 {   
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
+    _screen.SetLabelText(_channel->getNameInUTF8());
     mainFunctionValueChanged();
     _screen.setUseRedBackgroundForAlarm(_channel->isUseRedBackgroundForAlarm());
-    _screen.show();
+    _screen.Show();
 }
 
 AlarmDeviceBridge::~AlarmDeviceBridge()
@@ -26,6 +25,6 @@ void AlarmDeviceBridge::setDetected(bool detected)
 void AlarmDeviceBridge::mainFunctionValueChanged()
 {
     auto& device = *_channel;
-    ImageLoader::loadImage(_screen.image, device.mainFunctionImage().imageFile, device.mainFunctionImage().allowRecolor, device.mainFunctionValue());
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(device.mainFunctionImage().imageFile.c_str(), device.mainFunctionImage().allowRecolor, device.mainFunctionValue());
+    _screen.SetValueText(device.currentValueAsString().c_str());
 }

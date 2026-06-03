@@ -7,9 +7,8 @@
 
 class SwitchDeviceBridge : public SwitchBridge
 {
-    lv_event_cb_t _eventButtonPressed = nullptr;
     DetailDevicePage& _detailDevicePage;
-    SwitchScreen& _screen = *SwitchScreen::instance;
+    ISwitchScreen& _screen = *SwitchScreen::instance;
 public:
     SwitchDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~SwitchDeviceBridge() override;
@@ -17,7 +16,6 @@ public:
     virtual void setPower(bool on) override;
     virtual void mainFunctionValueChanged() override;
   
-    void released();
     void buttonClicked();
     void updateText();
 };  

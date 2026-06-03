@@ -1,5 +1,4 @@
 #include "MediaDeviceBridge.h"
-#include "../ImageLoader.h"
 
 MediaDeviceBridge::MediaDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -8,68 +7,58 @@ MediaDeviceBridge::MediaDeviceBridge(DetailDevicePage& detailDevicePage)
 
 void MediaDeviceBridge::setup(uint8_t _channelIndex)
 {
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
-    _eventSliderReleased =[](lv_event_t *e) { ((MediaDeviceBridge*) lv_event_get_user_data(e))->sliderReleased(); };
-    lv_obj_add_event_cb(_screen.slider, _eventSliderReleased, LV_EVENT_RELEASED, this);
-    _eventSliderPressing = [](lv_event_t *e) { ((MediaDeviceBridge*) lv_event_get_user_data(e))->sliderPressing(); };
-    lv_obj_add_event_cb(_screen.slider, _eventSliderPressing, LV_EVENT_PRESSING, this);
-    _eventButtonPressed = [](lv_event_t *e) { ((MediaDeviceBridge*) lv_event_get_user_data(e))->buttonClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventButtonPressed , LV_EVENT_CLICKED, this);
-    _eventButtonPreviousPressed = [](lv_event_t *e) { ((MediaDeviceBridge*) lv_event_get_user_data(e))->buttonPrevious(); };
-    lv_obj_add_event_cb(_screen.buttonPrevious, _eventButtonPreviousPressed , LV_EVENT_CLICKED, this);
-    _eventButtonNextPressed = [](lv_event_t *e) { ((MediaDeviceBridge*) lv_event_get_user_data(e))->buttonNext(); };
-    lv_obj_add_event_cb(_screen.buttonNext, _eventButtonNextPressed , LV_EVENT_CLICKED, this);
+    _screen.SetLabelText(_channel->getNameInUTF8());
+    _screen.RegisterPercentageChangeCompleted([this](uint8_t) { percentageChangeCompleted(); });
+    _screen.RegisterPercentageChanged([this](uint8_t) { percentageChanged(); });
+    _screen.RegisterMainAction([this]() { buttonClicked(); });
+    _screen.RegisterPreviousAction([this]() { buttonPrevious(); });
+    _screen.RegisterNextAction([this]() { buttonNext(); });
 
     mainFunctionValueChanged();
-    _screen.show();
+    _screen.Show();
 }
 
 MediaDeviceBridge::~MediaDeviceBridge()
 {
-    if (_eventSliderReleased != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.slider, _eventSliderReleased, this);
-    if (_eventSliderPressing != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.slider, _eventSliderPressing, this);
-    if (_eventButtonPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventButtonPressed, this);
-    if (_eventButtonPreviousPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.buttonPrevious, _eventButtonPreviousPressed, this);
-    if (_eventButtonNextPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.buttonNext, _eventButtonNextPressed, this);
+    _screen.RegisterPercentageChangeCompleted(nullptr);
+    _screen.RegisterPercentageChanged(nullptr);
+    _screen.RegisterMainAction(nullptr);
+    _screen.RegisterPreviousAction(nullptr);
+    _screen.RegisterNextAction(nullptr);
 }
 
 void MediaDeviceBridge::setVolume(uint8_t volume)
 {
     if (_lastSliderPressing != 0)
         return;
-    lv_arc_set_value(_screen.slider, volume);  
+    _screen.SetPercentageValue(volume);
 }
 
 void MediaDeviceBridge::setPlay(bool play)
 {
-    ImageLoader::loadImage(_screen.image, _channel->mainFunctionImage().imageFile, _channel->mainFunctionImage().allowRecolor, play); 
+    _screen.SetMainIndicatorImage(_channel->mainFunctionImage().imageFile.c_str(), _channel->mainFunctionImage().allowRecolor, play);
 }
 void MediaDeviceBridge::setTitle(const char* text)
 {
   
 }
 
-void MediaDeviceBridge::sliderReleased()
+void MediaDeviceBridge::percentageChangeCompleted()
 {    
     _lastSliderPressing = 0;
-    auto value = lv_arc_get_value(_screen.slider);
+    auto value = _screen.GetPercentageValue();
     if (_lastSendValue == value)
         return;
     _lastSendValue = 255;
     _channel->commandVolume(nullptr,  value);
 }
 
-void MediaDeviceBridge::sliderPressing()
+void MediaDeviceBridge::percentageChanged()
 {    
     if (_lastSliderPressing != 0 && millis() - _lastSliderPressing < 200)
         return;
     _lastSliderPressing = max(1UL, millis());
-    auto value = lv_arc_get_value(_screen.slider);
+    auto value = _screen.GetPercentageValue();
     if (_lastSendValue == value)
         return;
     _lastSendValue = value;
@@ -93,5 +82,5 @@ void MediaDeviceBridge::buttonNext()
 
 void MediaDeviceBridge::mainFunctionValueChanged()
 {
-    lv_label_set_text(_screen.title, _channel->currentValueAsString().c_str());
+    _screen.SetTitleText(_channel->currentValueAsString().c_str());
 }

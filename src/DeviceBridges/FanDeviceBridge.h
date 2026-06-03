@@ -5,10 +5,8 @@
 
 class FanDeviceBridge : public FanBridge
 {
-    lv_event_cb_t _eventButtonPressed = nullptr;
-    lv_event_cb_t _eventIconPressed = nullptr;
     DetailDevicePage& _detailDevicePage;
-    FanScreen& _screen = *FanScreen::instance;
+    IFanScreen& _screen = *FanScreen::instance;
     bool _automatic = false;
  public:
     FanDeviceBridge(DetailDevicePage& detailDevicePage);

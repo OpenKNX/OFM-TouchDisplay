@@ -1,5 +1,4 @@
 #include "DisplayDeviceBridge.h"
-#include "../ImageLoader.h"
 
 DisplayDeviceBridge::DisplayDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -8,9 +7,9 @@ DisplayDeviceBridge::DisplayDeviceBridge(DetailDevicePage& detailDevicePage)
 
 void DisplayDeviceBridge::setup(uint8_t _channelIndex)
 {   
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
+    _screen.SetLabelText(_channel->getNameInUTF8());
     mainFunctionValueChanged();
-    _screen.show();
+    _screen.Show();
 }
 
 DisplayDeviceBridge::~DisplayDeviceBridge()
@@ -28,8 +27,8 @@ void DisplayDeviceBridge::setValue(const char* value)
 void DisplayDeviceBridge::mainFunctionValueChanged() 
 {
     auto& device = *_channel;
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
-    ImageLoader::loadImage(_screen.image, device.mainFunctionImage().imageFile, device.mainFunctionImage().allowRecolor, device.mainFunctionValue());
+    _screen.SetValueText(device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(device.mainFunctionImage().imageFile.c_str(), device.mainFunctionImage().allowRecolor, device.mainFunctionValue());
 }
  
 

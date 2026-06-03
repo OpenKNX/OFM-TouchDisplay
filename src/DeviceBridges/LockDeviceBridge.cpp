@@ -1,5 +1,4 @@
 #include "LockDeviceBridge.h"
-#include "../ImageLoader.h"
 
 LockDeviceBridge::LockDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -13,23 +12,17 @@ void LockDeviceBridge::setup(uint8_t _channelIndex)
     _lockOpenDirection = ParamBRI_CHLockDirection;
 
 
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
-    
-    _eventIconPressed = [](lv_event_t *e) { ((LockDeviceBridge*) lv_event_get_user_data(e))->imageClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventIconPressed, LV_EVENT_CLICKED, this);
-    
-    ImageLoader::loadImage(_screen.blocked, "alert.png");
-    ImageLoader::colorImage(_screen.blocked, 255, 0, 0);
-    lv_obj_add_flag(_screen.blocked, LV_OBJ_FLAG_HIDDEN);
-    ImageLoader::unloadImage(_screen.movement);
+    _screen.SetLabelText(_channel->getNameInUTF8());
+    _screen.RegisterMainAction([this]() { imageClicked(); });
+    _screen.SetBlockedVisible(false);
+    _screen.ClearMovementImage();
     mainFunctionValueChanged();
-    _screen.show();
+    _screen.Show();
 }
 
 LockDeviceBridge::~LockDeviceBridge()
 {
-    if (_eventIconPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventIconPressed, this);
+    _screen.RegisterMainAction(nullptr);
 }
 
 void LockDeviceBridge::setLocked(bool lock)
@@ -40,14 +33,7 @@ void LockDeviceBridge::setLocked(bool lock)
 void LockDeviceBridge::setBlocked(bool blocked)
 {
     logDebugP("Set blocked: %d", blocked);
-    if (blocked)
-    {
-        lv_obj_clear_flag(_screen.blocked, LV_OBJ_FLAG_HIDDEN);
-    }
-    else
-    {
-        lv_obj_add_flag(_screen.blocked, LV_OBJ_FLAG_HIDDEN);
-    }
+    _screen.SetBlockedVisible(blocked);
 }
 
 void LockDeviceBridge::setUnlocking(bool unlocking)
@@ -58,14 +44,14 @@ void LockDeviceBridge::setUnlocking(bool unlocking)
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "rotate_l.png", true, true);
+            _screen.SetMovementImage("rotate_l.png");
         else
-            ImageLoader::loadImage(_screen.movement, "rotate_r.png", true, true);
+            _screen.SetMovementImage("rotate_r.png");
        
     }
     else
     {
-        ImageLoader::unloadImage(_screen.movement);
+        _screen.ClearMovementImage();
     }
 }
 
@@ -77,13 +63,13 @@ void LockDeviceBridge::setLocking(bool locking)
         // <Enumeration Value="0" Id="%ENID%" Text="links"                       />
         // <Enumeration Value="1" Id="%ENID%" Text="rechts"                      />
         if (_lockOpenDirection)
-            ImageLoader::loadImage(_screen.movement, "rotate_r.png", true, true);
+            _screen.SetMovementImage("rotate_r.png");
         else
-            ImageLoader::loadImage(_screen.movement, "rotate_l.png", true, true);  
+            _screen.SetMovementImage("rotate_l.png");
     }
     else
     {
-        ImageLoader::unloadImage(_screen.movement);
+        _screen.ClearMovementImage();
     }
 }
 
@@ -93,8 +79,8 @@ void LockDeviceBridge::mainFunctionValueChanged()
     auto& device = *_channel;
     auto image = device.mainFunctionImage();
     bool power = device.mainFunctionValue();
-    ImageLoader::loadImage(_screen.image, image.imageFile, image.allowRecolor, power);
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(image.imageFile.c_str(), image.allowRecolor, power);
+    _screen.SetValueText(device.currentValueAsString().c_str());
 }
 
 void LockDeviceBridge::imageClicked()

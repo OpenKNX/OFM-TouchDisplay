@@ -1,7 +1,6 @@
 #include "MainFunctionPage.h"
 #include "SmartHomeBridgeModule.h"
 #include "../TouchDisplayModule.h"
-#include "../ImageLoader.h"
 
 
 MainFunctionPage::~MainFunctionPage()
@@ -9,8 +8,7 @@ MainFunctionPage::~MainFunctionPage()
     if (_device != nullptr)
         _device->removeChangedHandler(_handler);
    
-    if (_eventPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.screen, _eventPressed, this);  
+    _screen.RegisterScreenPressed(nullptr);
 }
 
 const char* MainFunctionPage::pageType()
@@ -38,9 +36,8 @@ void MainFunctionPage::setup()
         return;
     }
     auto& device = *_device;
-    _eventPressed = [](lv_event_t *e) { ((MainFunctionPage*) lv_event_get_user_data(e))->_clickStarted = true; };
-    lv_obj_add_event_cb(_screen.screen, _eventPressed, LV_EVENT_PRESSED, this);
-    lv_label_set_text(_screen.label, device.getNameInUTF8());
+    _screen.RegisterScreenPressed([this]() { _clickStarted = true; });
+    _screen.SetLabelText(device.getNameInUTF8());
 
     _handler = [this](KnxChannelBase& channel)
     {
@@ -48,14 +45,14 @@ void MainFunctionPage::setup()
     };
     device.addChangedHandler(_handler);
 
-    _screen.show();
+    _screen.Show();
 }
 
 void MainFunctionPage::channelValueChanged(KnxChannelBase& channel)
 {
-    lv_label_set_text(_screen.value, channel.currentValueAsString().c_str());
     MainFunctionStateImage image = channel.mainFunctionImage();
-    ImageLoader::loadImage(_screen.image, image.imageFile, image.allowRecolor, channel.mainFunctionValue());
+    _screen.SetValueText(channel.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(image.imageFile.c_str(), image.allowRecolor, channel.mainFunctionValue());
 }
 
 void MainFunctionPage::shortPressed()

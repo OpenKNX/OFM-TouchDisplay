@@ -2,7 +2,16 @@
 
 #include "MainFunctionScreen.h"
 
+class IAlarmScreen
+{
+public:
+    virtual ~IAlarmScreen() = default;
+    virtual void setAlarm(bool alarm) = 0;
+    virtual void setUseRedBackgroundForAlarm(bool useRedBackground) = 0;
+};
+
 class AlarmScreen : public MainFunctionScreen
+                 , public IAlarmScreen
 {
     bool _alarm;
     bool _useRedBackground = false;
@@ -12,6 +21,6 @@ protected:
 public:
     static AlarmScreen* instance;
     AlarmScreen();
-    void setAlarm(bool alarm);
-    void setUseRedBackgroundForAlarm(bool useRedBackground);
+    virtual void setAlarm(bool alarm) override;
+    virtual void setUseRedBackgroundForAlarm(bool useRedBackground) override;
 };

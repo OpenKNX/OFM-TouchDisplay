@@ -7,11 +7,8 @@
 
 class DimmerDeviceBridge : public DimmerBridge
 {
-    lv_event_cb_t _eventSliderReleased = nullptr;
-    lv_event_cb_t _eventSliderPressing = nullptr;
-    lv_event_cb_t _eventButtonPressed = nullptr;
     DetailDevicePage& _detailDevicePage;
-    DimmerScreen& _screen = *DimmerScreen::instance;
+    IDimmerScreen& _screen = *DimmerScreen::instance;
     unsigned long _lastSliderPressing = 0;
     uint8_t _lastSendValue = 255;
 public:

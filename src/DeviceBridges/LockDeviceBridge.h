@@ -5,9 +5,8 @@
 
 class LockDeviceBridge : public LockBridge
 {
-    lv_event_cb_t _eventIconPressed = nullptr;
     DetailDevicePage& _detailDevicePage;
-    LockScreen& _screen = *LockScreen::instance;
+    ILockScreen& _screen = *LockScreen::instance;
     bool _automatic = false;
     uint8_t _lockOpenDirection = 0;
  public:

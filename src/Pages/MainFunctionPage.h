@@ -6,7 +6,7 @@
 class MainFunctionPage : public Page
 {
 private:
-    MainFunctionScreen& _screen = *MainFunctionScreen::instance;
+    IMainFunctionScreen& _screen = *MainFunctionScreen::instance;
     virtual const char* pageType() override;
     MainFunctionChangedHandler _handler;
     lv_event_cb_t _eventPressed = nullptr;

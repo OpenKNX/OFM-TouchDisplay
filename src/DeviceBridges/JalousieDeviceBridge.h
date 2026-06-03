@@ -6,9 +6,8 @@
 
 class JalousieDeviceBridge : public RolladenDeviceBridge
 {
-    lv_event_cb_t _eventSliderSlatReleased = nullptr;
-    JalousieScreen& _screen = *JalousieScreen::instance;
-    void sliderSlatReleased();
+    IJalousieAuxScreen& _jalousieScreen = *JalousieScreen::instance;
+    void auxPercentageChangeCompleted();
     
  public:
     JalousieDeviceBridge(DetailDevicePage& detailDevicePage);

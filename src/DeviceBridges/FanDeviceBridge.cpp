@@ -1,5 +1,4 @@
 #include "FanDeviceBridge.h"
-#include "../ImageLoader.h"
 
 FanDeviceBridge::FanDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -8,38 +7,26 @@ FanDeviceBridge::FanDeviceBridge(DetailDevicePage& detailDevicePage)
 
 void FanDeviceBridge::setup(uint8_t _channelIndex)
 {   
-    if (ParamBRI_CHFanAutomatic)
-        lv_obj_clear_flag(_screen.buttonAuto, LV_OBJ_FLAG_HIDDEN);
-    else
-        lv_obj_add_flag(_screen.buttonAuto, LV_OBJ_FLAG_HIDDEN);
+    _screen.SetAutomaticVisible(ParamBRI_CHFanAutomatic);
  
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
-   
-    _eventButtonPressed = [](lv_event_t *e) { ((FanDeviceBridge*) lv_event_get_user_data(e))->buttonClicked(); };
-    lv_obj_add_event_cb(_screen.buttonAuto, _eventButtonPressed, LV_EVENT_CLICKED, this);
-   
-    _eventIconPressed = [](lv_event_t *e) { ((FanDeviceBridge*) lv_event_get_user_data(e))->imageClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventIconPressed, LV_EVENT_CLICKED, this);
+    _screen.SetLabelText(_channel->getNameInUTF8());
+    _screen.RegisterAutomaticAction([this]() { buttonClicked(); });
+    _screen.RegisterMainAction([this]() { imageClicked(); });
 
     mainFunctionValueChanged();
-    _screen.show(); 
+    _screen.Show(); 
 }
 
 FanDeviceBridge::~FanDeviceBridge()
 {
-    if (_eventButtonPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.buttonAuto, _eventButtonPressed, this);
-    if (_eventIconPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventIconPressed, this);
+    _screen.RegisterAutomaticAction(nullptr);
+    _screen.RegisterMainAction(nullptr);
 }
 
 void FanDeviceBridge::setAutomatic(bool automatic)
 {
     _automatic = automatic;
-    if (automatic)
-        lv_obj_add_state(_screen.buttonAuto, LV_STATE_CHECKED);
-    else
-        lv_obj_clear_state(_screen.buttonAuto, LV_STATE_CHECKED);   
+    _screen.SetAutomaticState(automatic);
 }
 
 void FanDeviceBridge::setPower(bool power)
@@ -58,8 +45,8 @@ void FanDeviceBridge::mainFunctionValueChanged()
     auto& device = *_channel;
     auto image = device.mainFunctionImage();
     bool power = device.mainFunctionValue();
-    ImageLoader::loadImage(_screen.image, image.imageFile, image.allowRecolor, power);
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(image.imageFile.c_str(), image.allowRecolor, power);
+    _screen.SetValueText(device.currentValueAsString().c_str());
 }
 
 void FanDeviceBridge::imageClicked()
