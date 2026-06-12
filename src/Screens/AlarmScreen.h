@@ -1,14 +1,7 @@
 #pragma once
 
+#include "IAlarmScreen.h"
 #include "MainFunctionScreen.h"
-
-class IAlarmScreen
-{
-public:
-    virtual ~IAlarmScreen() = default;
-    virtual void setAlarm(bool alarm) = 0;
-    virtual void setUseRedBackgroundForAlarm(bool useRedBackground) = 0;
-};
 
 class AlarmScreen : public MainFunctionScreen
                  , public IAlarmScreen

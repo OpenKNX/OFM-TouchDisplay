@@ -1,22 +1,8 @@
 #pragma once
 
 #include <functional>
+#include "IDimmerScreen.h"
 #include "ScreenWithLabel.h"
-
-class IDimmerScreen
-{
-public:
-    virtual ~IDimmerScreen() = default;
-    virtual void SetLabelText(const char* text) = 0;
-    virtual void SetValueText(const char* text) = 0;
-    virtual void SetPercentageValue(uint8_t value) = 0;
-    virtual uint8_t GetPercentageValue() const = 0;
-    virtual void SetMainIndicatorImage(const char* imageFile, bool allowRecolor, bool active) = 0;
-    virtual void RegisterPercentageChanged(std::function<void(uint8_t)> callback) = 0;
-    virtual void RegisterPercentageChangeCompleted(std::function<void(uint8_t)> callback) = 0;
-    virtual void RegisterPrimaryAction(std::function<void()> callback) = 0;
-    virtual void Show() = 0;
-};
 
 class DimmerScreen: public ScreenWithLabel
                   , public IDimmerScreen

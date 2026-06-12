@@ -2,7 +2,7 @@
 #include "OpenKNX.h"
 #include "lvgl.h"
 
-class ICellObject;
+#include "../Screens/ICellObject.h"
 
 class Cell
 {
