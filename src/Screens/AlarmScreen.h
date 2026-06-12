@@ -14,6 +14,11 @@ protected:
 public:
     static AlarmScreen* instance;
     AlarmScreen();
+    virtual void SetLabelText(const char* text) override { MainFunctionScreen::SetLabelText(text); }
+    virtual void SetValueText(const char* text) override { MainFunctionScreen::SetValueText(text); }
+    virtual void SetMainIndicatorImage(const char* imageFile, bool allowRecolor, bool active) override { MainFunctionScreen::SetMainIndicatorImage(imageFile, allowRecolor, active); }
+    virtual void RegisterScreenPressed(std::function<void()> callback) override { MainFunctionScreen::RegisterScreenPressed(callback); }
+    virtual void Show() override { MainFunctionScreen::Show(); }
     virtual void setAlarm(bool alarm) override;
     virtual void setUseRedBackgroundForAlarm(bool useRedBackground) override;
 };

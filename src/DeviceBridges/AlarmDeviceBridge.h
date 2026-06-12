@@ -6,7 +6,7 @@
 class AlarmDeviceBridge : public AlarmBridge
 {
     DetailDevicePage& _detailDevicePage;
-    AlarmScreen& _screen = *AlarmScreen::instance;
+    IAlarmScreen& _screen = *AlarmScreen::instance;
 public:
     AlarmDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~AlarmDeviceBridge() override;
