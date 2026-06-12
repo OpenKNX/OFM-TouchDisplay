@@ -12,8 +12,8 @@ const char* DateTimeCell::cellType()
 
 DateTimeCell::~DateTimeCell()
 {
-    if (_eventPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_cellObject->cell, _eventPressed, this);
+    if (_cellObject != nullptr)
+        _cellObject->RegisterPressed(nullptr);
 }
 
 DateTimeCell::DateTimeCell(bool showDate, bool showTime)
@@ -24,23 +24,22 @@ DateTimeCell::DateTimeCell(bool showDate, bool showTime)
 
 void DateTimeCell::setup()
 {
-    CellObject& cellObject = *_cellObject;
-    _eventPressed = [](lv_event_t *e) {((DateTimeCell*)lv_event_get_user_data(e))->_clickStarted = true; };
-    lv_obj_add_event_cb(cellObject.cell, _eventPressed, LV_EVENT_PRESSED, this);
+    ICellObject& cellObject = *_cellObject;
+    cellObject.RegisterPressed([this]() { _clickStarted = true; });
  
     if (_showDate && _showTime)
     {
-        lv_label_set_text(cellObject.label, "Datum/Zeit");
+        cellObject.SetLabelText("Datum/Zeit");
     }
     else if (_showDate)
     {
-        lv_label_set_text(cellObject.label, "Datum");
+        cellObject.SetLabelText("Datum");
     }
     else if (_showTime)
     {
-        lv_label_set_text(cellObject.label, "Zeit");
+        cellObject.SetLabelText("Zeit");
     }
-    ImageLoader::loadImage(cellObject.image, "");
+    cellObject.ClearImage();
     updateTime(true);
 }
 
@@ -52,14 +51,14 @@ void DateTimeCell::loop(bool configured)
 
 void DateTimeCell::updateTime(bool forceUpdate)
 {
-    CellObject& cellObject = *_cellObject;
+    ICellObject& cellObject = *_cellObject;
 
     bool timeValid = openknx.time.isValid();
     if (timeValid != _lastValid || forceUpdate)
     {
         _lastValid = timeValid;
         forceUpdate = true;
-        ImageLoader::colorState(cellObject.image, true, timeValid);
+        cellObject.SetImageState(timeValid);
     }
     if (timeValid)
     {
@@ -88,7 +87,7 @@ void DateTimeCell::updateTime(bool forceUpdate)
             {
                 sprintf(buffer, "%02d:%02d", (int) localTime.hour, (int)localTime.minute/*, (int)localTime.second*/);
             }
-            lv_label_set_text(cellObject.value, buffer);
+            cellObject.SetValueText(buffer);
         }
     }
     else
@@ -97,15 +96,15 @@ void DateTimeCell::updateTime(bool forceUpdate)
         {
             if (_showTime && _showDate)
             {
-                lv_label_set_text(cellObject.value, "??.??.???? ??:??:??");
+                cellObject.SetValueText("??.??.???? ??:??:??");
             }
             else if (_showDate)
             {
-                lv_label_set_text(cellObject.value, "??.??.????");
+                cellObject.SetValueText("??.??.????");
             }
             else if (_showTime)
             {
-                lv_label_set_text(cellObject.value, "??:??:??");
+                cellObject.SetValueText("??:??:??");
             }
         }
     }

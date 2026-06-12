@@ -12,23 +12,22 @@ const char* JumpCell::cellType()
 
 JumpCell::~JumpCell()
 {
-    if (_eventPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_cellObject->cell, _eventPressed, this);
+    if (_cellObject != nullptr)
+        _cellObject->RegisterClicked(nullptr);
 }
 
 void JumpCell::setup()
 {
-    CellObject& cellObject = *_cellObject;
-    _eventPressed = [](lv_event_t *e) { ((JumpCell*) lv_event_get_user_data(e))->_clicked = true; };
-    lv_obj_add_event_cb(cellObject.cell, _eventPressed, LV_EVENT_CLICKED, this);
+    ICellObject& cellObject = *_cellObject;
+    cellObject.RegisterClicked([this]() { _clicked = true; });
   
     logDebug("JumpCell", "Setup JumpCell %d", (int) ParamTCH_CHJumpToShort1 - 1); 
     Page* page = Page::createPage(ParamTCH_CHJumpToShort1 - 1);
     logDebug("JumpCell", "Setup JumpCell %s", page->name().c_str()); 
-    lv_label_set_text(cellObject.label, page->name().c_str());
-    ImageLoader::loadImage(cellObject.image, page->image().c_str(), true, false);
+    cellObject.SetLabelText(page->name().c_str());
+    cellObject.SetImage(page->image().c_str(), true, false);
     delete page;
-    lv_label_set_text(cellObject.value, "");
+    cellObject.SetValueText("");
 }
 
 void JumpCell::loop(bool configured)

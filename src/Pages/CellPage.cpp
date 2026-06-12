@@ -37,7 +37,7 @@ void CellPage::setup()
     for (size_t cellIndex = 0; cellIndex < _numberOfCells; cellIndex++)
     {
         logDebugP("Get cell object %d", cellIndex);
-        CellObject& cellObject =  _screen->getCell(cellIndex);
+        ICellObject& cellObject =  _screen->getCell(cellIndex);
         _cells[cellIndex] = Cell::createCell(_channelIndex, cellIndex, cellObject);
     }
     for (size_t cellIndex = 0; cellIndex < _numberOfCells; cellIndex++)

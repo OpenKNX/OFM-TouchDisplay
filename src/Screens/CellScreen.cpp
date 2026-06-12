@@ -1,5 +1,7 @@
 #include "CellScreen.h"
 
+#include "../ImageLoader.h"
+
 CellScreen2* CellScreen2::instance = nullptr;
 
 
@@ -7,16 +9,11 @@ CellScreen2::CellScreen2() :
 cellObject1(*this, LV_HOR_RES, LV_VER_RES / 2, CellLocation::Top),
 cellObject2(*this, LV_HOR_RES, LV_VER_RES / 2, CellLocation::Bottom)
 {
-    lv_obj_set_align(cellObject1.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject1.cell, 0);
-    lv_obj_set_y(cellObject1.cell, 0);
-  
-    lv_obj_set_align(cellObject2.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject2.cell, 0);
-    lv_obj_set_y(cellObject2.cell, LV_VER_RES / 2);
+    cellObject1.SetPlacement(LV_ALIGN_TOP_LEFT, 0, 0);
+    cellObject2.SetPlacement(LV_ALIGN_TOP_LEFT, 0, LV_VER_RES / 2);
 }
 
-CellObject& CellScreen2::getCell(uint8_t index)
+ICellObject& CellScreen2::getCell(uint8_t index)
 {
     switch (index)
     {
@@ -36,20 +33,12 @@ cellObject1(*this, LV_HOR_RES, LV_VER_RES / 2, CellLocation::Top),
 cellObject2(*this, LV_HOR_RES / 2, LV_VER_RES / 2, CellLocation::BottomLeft),
 cellObject3(*this, LV_HOR_RES / 2, LV_VER_RES / 2, CellLocation::BottomRight)
 {
-    lv_obj_set_align(cellObject1.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject1.cell, 0);
-    lv_obj_set_y(cellObject1.cell, 0);
-  
-    lv_obj_set_align(cellObject2.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject2.cell, 0);
-    lv_obj_set_y(cellObject2.cell, LV_VER_RES / 2);
-  
-    lv_obj_set_align(cellObject3.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject3.cell, LV_HOR_RES / 2);
-    lv_obj_set_y(cellObject3.cell, LV_VER_RES / 2);
+    cellObject1.SetPlacement(LV_ALIGN_TOP_LEFT, 0, 0);
+    cellObject2.SetPlacement(LV_ALIGN_TOP_LEFT, 0, LV_VER_RES / 2);
+    cellObject3.SetPlacement(LV_ALIGN_TOP_LEFT, LV_HOR_RES / 2, LV_VER_RES / 2);
 }
 
-CellObject& CellScreen3::getCell(uint8_t index)
+ICellObject& CellScreen3::getCell(uint8_t index)
 {
     switch (index)
     {
@@ -73,24 +62,13 @@ cellObject2(*this, LV_HOR_RES / 2, LV_VER_RES / 2, CellLocation::TopRight),
 cellObject3(*this, LV_HOR_RES / 2, LV_VER_RES / 2, CellLocation::BottomLeft), 
 cellObject4(*this, LV_HOR_RES / 2, LV_VER_RES / 2, CellLocation::BottomRight)
 {
-    lv_obj_set_align(cellObject1.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject1.cell, 0);
-    lv_obj_set_y(cellObject1.cell, 0);
-  
-    lv_obj_set_align(cellObject2.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject2.cell, LV_HOR_RES / 2);
-    lv_obj_set_y(cellObject2.cell, 0);
-  
-    lv_obj_set_align(cellObject3.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject3.cell, 0);
-    lv_obj_set_y(cellObject3.cell, LV_VER_RES / 2);
-  
-    lv_obj_set_align(cellObject4.cell, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_x(cellObject4.cell, LV_HOR_RES / 2);
-    lv_obj_set_y(cellObject4.cell, LV_VER_RES / 2);
+    cellObject1.SetPlacement(LV_ALIGN_TOP_LEFT, 0, 0);
+    cellObject2.SetPlacement(LV_ALIGN_TOP_LEFT, LV_HOR_RES / 2, 0);
+    cellObject3.SetPlacement(LV_ALIGN_TOP_LEFT, 0, LV_VER_RES / 2);
+    cellObject4.SetPlacement(LV_ALIGN_TOP_LEFT, LV_HOR_RES / 2, LV_VER_RES / 2);
 }
 
-CellObject& CellScreen4::getCell(uint8_t index)
+ICellObject& CellScreen4::getCell(uint8_t index)
 {
     switch (index)
     {
@@ -117,62 +95,122 @@ _height(height)
     bool isTop = cellLocation == CellLocation::Top || cellLocation == CellLocation::TopLeft || cellLocation == CellLocation::TopRight;
     bool isLeft = cellLocation == CellLocation::TopLeft || cellLocation == CellLocation::BottomLeft;
     
-    cell = lv_obj_create(cellPage.screen);
-    lv_obj_set_size(cell, width, height);
-    lv_obj_set_style_bg_opa(cell, LV_OPA_TRANSP, 0);
-    lv_obj_clear_flag(cell, LV_OBJ_FLAG_SCROLLABLE); 
+    _cell = lv_obj_create(cellPage.screen);
+    lv_obj_set_size(_cell, width, height);
+    lv_obj_set_style_bg_opa(_cell, LV_OPA_TRANSP, 0);
+    lv_obj_clear_flag(_cell, LV_OBJ_FLAG_SCROLLABLE);
 
-    label = lv_label_create(cell);
-    value = lv_label_create(cell);
-    image = lv_img_create(cell);  
+    _label = lv_label_create(_cell);
+    _value = lv_label_create(_cell);
+    _image = lv_img_create(_cell);
+    lv_obj_add_event_cb(_cell, OnPressed, LV_EVENT_PRESSED, this);
+    lv_obj_add_event_cb(_cell, OnClicked, LV_EVENT_CLICKED, this);
    
     if (wideCell)
     {
-        lv_obj_align(value, LV_ALIGN_CENTER, 0, 0);
-        lv_obj_set_style_text_align(value, LV_TEXT_ALIGN_CENTER, 0);
+        lv_obj_align(_value, LV_ALIGN_CENTER, 0, 0);
+        lv_obj_set_style_text_align(_value, LV_TEXT_ALIGN_CENTER, 0);
         if (isTop)
-            lv_obj_align(label, LV_ALIGN_BOTTOM_MID, 0, 0);
+            lv_obj_align(_label, LV_ALIGN_BOTTOM_MID, 0, 0);
         else
-            lv_obj_align(label, LV_ALIGN_TOP_MID, 0, 0);
+            lv_obj_align(_label, LV_ALIGN_TOP_MID, 0, 0);
         
-        lv_obj_set_style_border_side(cell, isTop ? LV_BORDER_SIDE_BOTTOM : LV_BORDER_SIDE_TOP , LV_PART_MAIN);
+        lv_obj_set_style_border_side(_cell, isTop ? LV_BORDER_SIDE_BOTTOM : LV_BORDER_SIDE_TOP , LV_PART_MAIN);
     }
     else
     {
         if (isLeft)
         {
             // left side
-            lv_obj_align(value, LV_ALIGN_CENTER, 10, 0);
-            lv_obj_set_style_text_align(value, LV_TEXT_ALIGN_RIGHT, 0);
+            lv_obj_align(_value, LV_ALIGN_CENTER, 10, 0);
+            lv_obj_set_style_text_align(_value, LV_TEXT_ALIGN_RIGHT, 0);
             if (isTop)
             {
-                lv_obj_align(label, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
-                lv_obj_set_style_border_side(cell, (lv_border_side_t) (LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_RIGHT) , LV_PART_MAIN);
+                lv_obj_align(_label, LV_ALIGN_BOTTOM_RIGHT, 0, 0);
+                lv_obj_set_style_border_side(_cell, (lv_border_side_t) (LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_RIGHT) , LV_PART_MAIN);
             }
             else
             {
-                lv_obj_align(label, LV_ALIGN_TOP_RIGHT, 0, 0);
-                lv_obj_set_style_border_side(cell, (lv_border_side_t) (LV_BORDER_SIDE_TOP | LV_BORDER_SIDE_RIGHT) , LV_PART_MAIN);
+                lv_obj_align(_label, LV_ALIGN_TOP_RIGHT, 0, 0);
+                lv_obj_set_style_border_side(_cell, (lv_border_side_t) (LV_BORDER_SIDE_TOP | LV_BORDER_SIDE_RIGHT) , LV_PART_MAIN);
             }
         }
         else
         {
             // right side
-            lv_obj_align(value, LV_ALIGN_CENTER, -10, 0);
-            lv_obj_set_style_text_align(value, LV_TEXT_ALIGN_LEFT, 0);
+            lv_obj_align(_value, LV_ALIGN_CENTER, -10, 0);
+            lv_obj_set_style_text_align(_value, LV_TEXT_ALIGN_LEFT, 0);
             if (isTop)
             {
-                lv_obj_align(label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
-                lv_obj_set_style_border_side(cell, (lv_border_side_t) (LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_LEFT) , LV_PART_MAIN);
+                lv_obj_align(_label, LV_ALIGN_BOTTOM_LEFT, 0, 0);
+                lv_obj_set_style_border_side(_cell, (lv_border_side_t) (LV_BORDER_SIDE_BOTTOM | LV_BORDER_SIDE_LEFT) , LV_PART_MAIN);
             }
             else
             {
-                lv_obj_align(label, LV_ALIGN_TOP_LEFT, 0, 0);
-                lv_obj_set_style_border_side(cell, (lv_border_side_t) (LV_BORDER_SIDE_TOP | LV_BORDER_SIDE_LEFT) , LV_PART_MAIN);
+                lv_obj_align(_label, LV_ALIGN_TOP_LEFT, 0, 0);
+                lv_obj_set_style_border_side(_cell, (lv_border_side_t) (LV_BORDER_SIDE_TOP | LV_BORDER_SIDE_LEFT) , LV_PART_MAIN);
             }
         }
     }
  
-    lv_obj_align(image, LV_ALIGN_CENTER,  wideCell ? 0 : isLeft ? 20 : -20, isTop ? -10 : 10);  
+    lv_obj_align(_image, LV_ALIGN_CENTER,  wideCell ? 0 : isLeft ? 20 : -20, isTop ? -10 : 10);
+}
+
+void CellObject::OnPressed(lv_event_t* e)
+{
+    auto* self = static_cast<CellObject*>(lv_event_get_user_data(e));
+    if (self == nullptr || !self->_onPressed)
+        return;
+    self->_onPressed();
+}
+
+void CellObject::OnClicked(lv_event_t* e)
+{
+    auto* self = static_cast<CellObject*>(lv_event_get_user_data(e));
+    if (self == nullptr || !self->_onClicked)
+        return;
+    self->_onClicked();
+}
+
+void CellObject::SetPlacement(lv_align_t align, lv_coord_t x, lv_coord_t y)
+{
+    lv_obj_set_align(_cell, align);
+    lv_obj_set_x(_cell, x);
+    lv_obj_set_y(_cell, y);
+}
+
+void CellObject::SetLabelText(const char* text)
+{
+    lv_label_set_text(_label, text);
+}
+
+void CellObject::SetValueText(const char* text)
+{
+    lv_label_set_text(_value, text);
+}
+
+void CellObject::SetImage(const char* imageFile, bool allowRecolor, bool active)
+{
+    ImageLoader::loadImage(_image, imageFile, allowRecolor, active);
+}
+
+void CellObject::ClearImage()
+{
+    ImageLoader::unloadImage(_image);
+}
+
+void CellObject::SetImageState(bool active)
+{
+    ImageLoader::colorState(_image, true, active);
+}
+
+void CellObject::RegisterPressed(std::function<void()> callback)
+{
+    _onPressed = callback;
+}
+
+void CellObject::RegisterClicked(std::function<void()> callback)
+{
+    _onClicked = callback;
 }
 

@@ -10,8 +10,8 @@ const char* EmptyCell::cellType()
 
 void EmptyCell::setup()
 {
-    CellObject& cellObject = *_cellObject;
-    lv_label_set_text(cellObject.label, "");
-    ImageLoader::unloadImage(cellObject.image);
-    lv_label_set_text(cellObject.value, "");
+    ICellObject& cellObject = *_cellObject;
+    cellObject.SetLabelText("");
+    cellObject.ClearImage();
+    cellObject.SetValueText("");
 }

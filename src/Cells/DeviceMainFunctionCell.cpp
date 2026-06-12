@@ -14,8 +14,8 @@ DeviceMainFunctionCell::~DeviceMainFunctionCell()
 {
     if (_device != nullptr)
         _device->removeChangedHandler(_handler);
-    if (_eventPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_cellObject->cell, _eventPressed, this);
+    if (_cellObject != nullptr)
+        _cellObject->RegisterPressed(nullptr);
 }
 
 void DeviceMainFunctionCell::init(KnxChannelBase* device, uint8_t deviceIndex)
@@ -27,15 +27,14 @@ void DeviceMainFunctionCell::init(KnxChannelBase* device, uint8_t deviceIndex)
 void DeviceMainFunctionCell::setup()
 {
     KnxChannelBase& device = *_device;
-    CellObject& cellObject = *_cellObject;
-    lv_label_set_text(cellObject.label, device.getNameInUTF8());
+    ICellObject& cellObject = *_cellObject;
+    cellObject.SetLabelText(device.getNameInUTF8());
     
-    _eventPressed = [](lv_event_t *e) {((DeviceMainFunctionCell*)lv_event_get_user_data(e))->_clickStarted = true; };
-    lv_obj_add_event_cb(cellObject.cell, _eventPressed, LV_EVENT_PRESSED, this);
+    cellObject.RegisterPressed([this]() { _clickStarted = true; });
  
-    lv_label_set_text(cellObject.label, device.getNameInUTF8());
-    lv_label_set_text(cellObject.value, "");
-    ImageLoader::unloadImage(cellObject.image);
+    cellObject.SetLabelText(device.getNameInUTF8());
+    cellObject.SetValueText("");
+    cellObject.ClearImage();
 
     _handler = [this](KnxChannelBase& channel)
     {
@@ -48,15 +47,15 @@ void DeviceMainFunctionCell::setup()
 
 void DeviceMainFunctionCell::channelValueChanged(KnxChannelBase& channel)
 {
-    CellObject& cellObject = *_cellObject;
+    ICellObject& cellObject = *_cellObject;
     if (channel.mainFunctionPreferValueDisplay())
     {
-        lv_label_set_text(cellObject.value, channel.currentValueAsString().c_str());
+        cellObject.SetValueText(channel.currentValueAsString().c_str());
     }
     else
     {
         auto image = channel.mainFunctionImage();
-        ImageLoader::loadImage(cellObject.image, image.imageFile, image.allowRecolor, channel.mainFunctionValue());            
+        cellObject.SetImage(image.imageFile.c_str(), image.allowRecolor, channel.mainFunctionValue());
     }
 }
 

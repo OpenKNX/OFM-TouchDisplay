@@ -2,7 +2,7 @@
 #include "OpenKNX.h"
 #include "lvgl.h"
 
-class CellObject;
+class ICellObject;
 
 class Cell
 {
@@ -10,18 +10,18 @@ class Cell
 protected:
     uint8_t _cellIndex = 0;
     uint8_t _channelIndex = 0;
-    CellObject* _cellObject = nullptr;
+    ICellObject* _cellObject = nullptr;
  
     virtual const std::string logPrefix();
     virtual const char* cellType() = 0;
  
 public:
-    void init(uint8_t channelIndex, uint8_t cellIndex, CellObject& cellObject);
+    void init(uint8_t channelIndex, uint8_t cellIndex, ICellObject& cellObject);
     virtual ~Cell() {};
     virtual void setup() {};
     virtual void loop(bool configured) {};
 
-    static Cell* createCell(uint8_t channelIndex, uint8_t cellIndex, CellObject& cellObject);
+    static Cell* createCell(uint8_t channelIndex, uint8_t cellIndex, ICellObject& cellObject);
     virtual void resetPressed() {};
     virtual void shortPressed() {};
     virtual void longPressed() {};

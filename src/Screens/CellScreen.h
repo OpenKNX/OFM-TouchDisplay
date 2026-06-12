@@ -1,11 +1,28 @@
 #pragma once
+
+#include <functional>
+
 #include "Screen.h"
+
+class ICellObject
+{
+public:
+    virtual ~ICellObject() = default;
+    virtual void SetLabelText(const char* text) = 0;
+    virtual void SetValueText(const char* text) = 0;
+    virtual void SetImage(const char* imageFile, bool allowRecolor = false, bool active = false) = 0;
+    virtual void ClearImage() = 0;
+    virtual void SetImageState(bool active) = 0;
+    virtual void RegisterPressed(std::function<void()> callback) = 0;
+    virtual void RegisterClicked(std::function<void()> callback) = 0;
+};
+
 class CellObject;
 
 class CellScreen: public Screen
 {
 public:
-    virtual CellObject& getCell(uint8_t index) = 0;
+    virtual ICellObject& getCell(uint8_t index) = 0;
 };
 
 enum CellLocation
@@ -18,17 +35,32 @@ enum CellLocation
     Bottom
 };
 
-class CellObject
+class CellObject : public ICellObject
 {
     CellScreen& _cellPage;
     lv_coord_t _width;
     lv_coord_t _height;
+    lv_obj_t* _cell;
+    lv_obj_t* _label;
+    lv_obj_t* _value;
+    lv_obj_t* _image;
+    std::function<void()> _onPressed;
+    std::function<void()> _onClicked;
+
+    static void OnPressed(lv_event_t* e);
+    static void OnClicked(lv_event_t* e);
 public:
-    lv_obj_t* cell;
-    lv_obj_t* label;
-    lv_obj_t* value;
-    lv_obj_t* image;
     CellObject(CellScreen& cellPage, lv_coord_t width, lv_coord_t height, CellLocation cellLocation);
+
+    void SetPlacement(lv_align_t align, lv_coord_t x, lv_coord_t y);
+
+    virtual void SetLabelText(const char* text) override;
+    virtual void SetValueText(const char* text) override;
+    virtual void SetImage(const char* imageFile, bool allowRecolor = false, bool active = false) override;
+    virtual void ClearImage() override;
+    virtual void SetImageState(bool active) override;
+    virtual void RegisterPressed(std::function<void()> callback) override;
+    virtual void RegisterClicked(std::function<void()> callback) override;
 };
 
 
@@ -39,7 +71,7 @@ public:
     CellObject cellObject1;
     CellObject cellObject2;
     CellScreen2();
-    virtual CellObject& getCell(uint8_t index) override;
+    virtual ICellObject& getCell(uint8_t index) override;
 };
 
 class CellScreen3 : public CellScreen
@@ -50,7 +82,7 @@ public:
     CellObject cellObject2;
     CellObject cellObject3;
     CellScreen3();
-    virtual CellObject& getCell(uint8_t index) override;
+    virtual ICellObject& getCell(uint8_t index) override;
 };
 
 class CellScreen4: public CellScreen
@@ -62,7 +94,7 @@ public:
     CellObject cellObject3;
     CellObject cellObject4;
     CellScreen4();
-    virtual CellObject& getCell(uint8_t index) override;
+    virtual ICellObject& getCell(uint8_t index) override;
 };
 
 

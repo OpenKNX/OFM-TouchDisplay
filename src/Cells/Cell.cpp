@@ -13,7 +13,7 @@ const std::string Cell::logPrefix()
     return _name;
 }
 
-void Cell::init(uint8_t channelIndex, uint8_t cellIndex, CellObject &cellObject)
+void Cell::init(uint8_t channelIndex, uint8_t cellIndex, ICellObject &cellObject)
 {
     _name = cellType();
     _name += "Cell";
@@ -26,7 +26,7 @@ void Cell::init(uint8_t channelIndex, uint8_t cellIndex, CellObject &cellObject)
     setup();
 }
 
-Cell *Cell::createCell(uint8_t channelIndex, uint8_t cellIndex, CellObject &cellObject)
+Cell *Cell::createCell(uint8_t channelIndex, uint8_t cellIndex, ICellObject &cellObject)
 {
     uint8_t _channelIndex = channelIndex; // Used in parameter macros
     uint8_t _cellIndex = cellIndex;       // Used in parameter macros

@@ -10,8 +10,8 @@ const char* DeactivatedCell::cellType()
 
 void DeactivatedCell::setup()
 {
-    CellObject& cellObject = *_cellObject;
-    lv_label_set_text(cellObject.label, "Deaktiviert");
-    ImageLoader::unloadImage(cellObject.image);
-    lv_label_set_text(cellObject.value, "");
+    ICellObject& cellObject = *_cellObject;
+    cellObject.SetLabelText("Deaktiviert");
+    cellObject.ClearImage();
+    cellObject.SetValueText("");
 }
