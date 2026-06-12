@@ -5,13 +5,11 @@
 
 class RGBDeviceBridge : public RGBBridge
 {
-    RGBScreen& _screen = *RGBScreen::instance;
+    IRGBScreen& _screen = *RGBScreen::instance;
     DetailDevicePage& _detailDevicePage;
-    lv_event_cb_t _eventColorChanged = nullptr;
-    lv_event_cb_t _eventButtonClicked = nullptr;
 
     void buttonClicked();
-    void colorChanged();
+    void colorChanged(uint32_t rgb);
   
 public:
     RGBDeviceBridge(DetailDevicePage& detailDevicePage);
