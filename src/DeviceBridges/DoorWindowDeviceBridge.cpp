@@ -1,5 +1,4 @@
 #include "DoorWindowDeviceBridge.h"
-#include "../ImageLoader.h"
 
 DoorWindowDeviceBridge::DoorWindowDeviceBridge(DetailDevicePage& detailDevicePage)
     : _detailDevicePage(detailDevicePage)
@@ -18,22 +17,22 @@ void DoorWindowDeviceBridge::setup(uint8_t _channelIndex)
     switch (_doorWindowOpenDirection)
     {
         case 0:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_LEFT);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_LEFT);
             break;
         case 1:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_RIGHT);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_RIGHT);
             break;
         case 2:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_LEFT_RIGHT);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_LEFT_RIGHT);
             break;
         case 3:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_UP);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_UP);
             break;
         case 4:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_DOWN);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_DOWN);
             break;
         case 5:
-            _screen.setSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_UP_DOWN);
+            _screen.SetSliderDirection(DoorWindowSliderDirection::DOOR_WINDOW_SLIDER_UP_DOWN);
             break;
     }
 
@@ -41,42 +40,34 @@ void DoorWindowDeviceBridge::setup(uint8_t _channelIndex)
     {
         if (ParamBRI_CHDoorWindowUsePercent)
         {
-            lv_obj_clear_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
+            _screen.SetPercentageVisible(true);
         }
         else
         {
-            lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
+            _screen.SetPercentageVisible(false);
         }
     }
     else
-        lv_obj_add_flag(_screen.slider, LV_OBJ_FLAG_HIDDEN);
+        _screen.SetPercentageVisible(false);
     
-    lv_label_set_text(_screen.label, _channel->getNameInUTF8());
-    
-    _eventIconPressed = [](lv_event_t *e) { ((DoorWindowDeviceBridge*) lv_event_get_user_data(e))->imageClicked(); };
-    lv_obj_add_event_cb(_screen.image, _eventIconPressed, LV_EVENT_CLICKED, this);
-    _eventSliderReleased = [](lv_event_t *e) { ((DoorWindowDeviceBridge*) lv_event_get_user_data(e))->sliderReleased(); };
-    lv_obj_add_event_cb(_screen.slider, _eventSliderReleased, LV_EVENT_RELEASED, this);
-    
-    ImageLoader::loadImage(_screen.obstruction, "alert.png");
-    ImageLoader::colorImage(_screen.obstruction, 255, 0, 0);
-    lv_obj_add_flag(_screen.obstruction, LV_OBJ_FLAG_HIDDEN);
-    ImageLoader::unloadImage(_screen.movement);
+    _screen.SetLabelText(_channel->getNameInUTF8());
+    _screen.RegisterMainAction([this]() { imageClicked(); });
+    _screen.RegisterPercentageChangeCompleted([this](uint8_t) { percentageChangeCompleted(); });
+    _screen.SetObstructionVisible(false);
+    _screen.ClearMovementImage();
     mainFunctionValueChanged();
-    _screen.show();
+    _screen.Show();
 }
 
 DoorWindowDeviceBridge::~DoorWindowDeviceBridge()
 {
-    if (_eventIconPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.image, _eventIconPressed, this);
-    if (_eventSliderReleased != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.slider, _eventSliderReleased, this);
+    _screen.RegisterMainAction(nullptr);
+    _screen.RegisterPercentageChangeCompleted(nullptr);
 }
 
 void DoorWindowDeviceBridge::setPosition(uint8_t position)
 {
-    lv_slider_set_value(_screen.slider, position, LV_ANIM_ON);
+    _screen.SetPercentageValue(position);
 }
 
 void DoorWindowDeviceBridge::setMovement(DoorWindowMoveState movement)
@@ -93,22 +84,22 @@ void DoorWindowDeviceBridge::setMovement(DoorWindowMoveState movement)
             switch (_doorWindowOpenDirection)
             {
                 case 0:
-                    ImageLoader::loadImage(_screen.movement, "opening_l.png", true, true);
+                    _screen.SetMovementImage("opening_l.png");
                     break;
                 case 1:
-                    ImageLoader::loadImage(_screen.movement, "opening_r.png", true, true);
+                    _screen.SetMovementImage("opening_r.png");
                     break;
                 case 2:
-                    ImageLoader::loadImage(_screen.movement, "opening_lr.png", true, true);
+                    _screen.SetMovementImage("opening_lr.png");
                     break;
                 case 3:
-                    ImageLoader::loadImage(_screen.movement, "opening_u.png", true, true);
+                    _screen.SetMovementImage("opening_u.png");
                     break;
                 case 4:
-                    ImageLoader::loadImage(_screen.movement, "opening_d.png", true, true);
+                    _screen.SetMovementImage("opening_d.png");
                     break;
                 case 5:
-                    ImageLoader::loadImage(_screen.movement, "opening_ud.png", true, true);
+                    _screen.SetMovementImage("opening_ud.png");
                     break;
             }
             break;
@@ -116,48 +107,41 @@ void DoorWindowDeviceBridge::setMovement(DoorWindowMoveState movement)
             switch (_doorWindowOpenDirection)
             {
                 case 0:
-                    ImageLoader::loadImage(_screen.movement, "closing_r.png", true, true);
+                    _screen.SetMovementImage("closing_r.png");
                     break;
                 case 1:
-                    ImageLoader::loadImage(_screen.movement, "closing_l.png", true, true);
+                    _screen.SetMovementImage("closing_l.png");
                     break;
                 case 2:
-                    ImageLoader::loadImage(_screen.movement, "closing_lr.png", true, true);
+                    _screen.SetMovementImage("closing_lr.png");
                     break;
                 case 3:
-                    ImageLoader::loadImage(_screen.movement, "closing_d.png", true, true);
+                    _screen.SetMovementImage("closing_d.png");
                     break;
                 case 4:
-                    ImageLoader::loadImage(_screen.movement, "closing_u.png", true, true);
+                    _screen.SetMovementImage("closing_u.png");
                     break;
                 case 5:
-                    ImageLoader::loadImage(_screen.movement, "closing_ud.png", true, true);
+                    _screen.SetMovementImage("closing_ud.png");
                     break;
             }
             break;
         case DoorWindowMoveState::DoorWindowMoveStateHold:
-            ImageLoader::unloadImage(_screen.movement);
+            _screen.ClearMovementImage();
             break;
     }
 }
 
-void DoorWindowDeviceBridge::sliderReleased()
+void DoorWindowDeviceBridge::percentageChangeCompleted()
 {
     auto& device = *_channel;
-    int32_t value = lv_slider_get_value(_screen.slider);
+    int32_t value = _screen.GetPercentageValue();
     device.commandPosition(nullptr, value);
 }
 
 void DoorWindowDeviceBridge::setObstructionDetected(bool obstructionDetected)
 {
-    if (obstructionDetected)
-    {
-        lv_obj_clear_flag(_screen.obstruction, LV_OBJ_FLAG_HIDDEN);
-    }
-    else
-    {
-        lv_obj_add_flag(_screen.obstruction, LV_OBJ_FLAG_HIDDEN);
-    }
+    _screen.SetObstructionVisible(obstructionDetected);
 }
 
 void DoorWindowDeviceBridge::mainFunctionValueChanged()
@@ -165,8 +149,8 @@ void DoorWindowDeviceBridge::mainFunctionValueChanged()
     auto& device = *_channel;
     auto image = device.mainFunctionImage();
     bool power = device.mainFunctionValue();
-    ImageLoader::loadImage(_screen.image, image.imageFile, image.allowRecolor, power);
-    lv_label_set_text(_screen.value, device.currentValueAsString().c_str());
+    _screen.SetMainIndicatorImage(image.imageFile.c_str(), image.allowRecolor, power);
+    _screen.SetValueText(device.currentValueAsString().c_str());
 }
 
 void DoorWindowDeviceBridge::imageClicked()
