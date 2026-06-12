@@ -19,8 +19,7 @@ ProgButtonPage::~ProgButtonPage()
     DisplayLed::led1->setLedObject(nullptr);
     DisplayLed::led2->setLedObject(nullptr);
     DisplayLed::led3->setLedObject(nullptr);
-    if (_eventButtonPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.button, _eventButtonPressed, this);
+    _screen.RegisterPrimaryAction(nullptr);
 }
 
 
@@ -35,42 +34,34 @@ void ProgButtonPage::loop(bool configured)
 
 void ProgButtonPage::updateButtonState()
 {
-    if (_progMode)
-    {
-        lv_obj_add_state(_screen.button, LV_STATE_CHECKED);
-    }
-    else
-    {
-        lv_obj_clear_state(_screen.button, LV_STATE_CHECKED);
-    }
+    _screen.SetPrimaryActionChecked(_progMode);
 }
 
 void ProgButtonPage::setup()
 {
-    DisplayLed::led1->setLedObject(_screen.led1);
-    DisplayLed::led2->setLedObject(_screen.led2);
-    DisplayLed::led3->setLedObject(_screen.led3);
+    _screen.ConnectLed(0, DisplayLed::led1);
+    _screen.ConnectLed(1, DisplayLed::led2);
+    _screen.ConnectLed(2, DisplayLed::led3);
    
    
     auto label = openknx.info.humanIndividualAddress();
     if (label == "15.15.255")
         label = (const char*) u8"Keine Adresse";
-    lv_label_set_text(_screen.label, label.c_str());
+    _screen.SetLabelText(label.c_str());
     
     std::string message;
     message += "v" + openknx.info.humanFirmwareVersion() + "   " + openknx.info.humanFirmwareNumber().c_str();
     message += (const char*)u8"\nOpenKNX Touch Round";
     if (!knx.configured())
         message += (const char*)u8"\nBitte übertragen Sie die\nETS Applikation";
-    lv_label_set_text(_screen.message, message.c_str());
-    lv_label_set_text(_screen.buttonText, (const char*)u8"Programmier Modus");
+    _screen.SetMessageText(message.c_str());
+    _screen.SetButtonText((const char*)u8"Programmier Modus");
 
-    _eventButtonPressed = [](lv_event_t *e) { ((ProgButtonPage*) lv_event_get_user_data(e))->buttonClicked(); };
-    lv_obj_add_event_cb(_screen.button, _eventButtonPressed, LV_EVENT_CLICKED, this);
+    _screen.RegisterPrimaryAction([this]() { buttonClicked(); });
  
     _progMode = knx.progMode();
     updateButtonState();
-    _screen.show();
+    _screen.Show();
 }
 
 std::string ProgButtonPage::name()
