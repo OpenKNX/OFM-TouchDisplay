@@ -10,17 +10,15 @@ const char* DateTimePage::pageType()
 
 DateTimePage::~DateTimePage()
 {
-    if (_eventPressed != nullptr)
-        lv_obj_remove_event_cb_with_user_data(_screen.screen, _eventPressed, this);  
+    _screen.RegisterScreenPressed(nullptr);
 }
 
 void DateTimePage::setup()
 {
-    _eventPressed = [](lv_event_t *e) { ((DateTimePage*) lv_event_get_user_data(e))->_clickStarted = true; };
-        lv_obj_add_event_cb(_screen.screen, _eventPressed, LV_EVENT_PRESSED, this);
+    _screen.RegisterScreenPressed([this]() { _clickStarted = true; });
   
     updateTime(true);
-    _screen.show();
+    _screen.Show();
 }
 
 void DateTimePage::updateTime(bool forceUpdate)
@@ -46,25 +44,25 @@ void DateTimePage::updateTime(bool forceUpdate)
             _lastHour = localTime.hour;
             _lastMinute = localTime.minute;
 
-            lv_label_set_text(_screen.weekday, dayOfWeekString(localTime.dayOfWeek));
+            _screen.SetWeekdayText(dayOfWeekString(localTime.dayOfWeek));
 
             char buffer[50];
             sprintf(buffer, "%02d.%02d.%04d", (int)localTime.day, (int)localTime.month, (int)localTime.year);
-            lv_label_set_text(_screen.date, buffer);
+            _screen.SetDateText(buffer);
        
             sprintf(buffer, "%02d:%02d", (int) localTime.hour, (int)localTime.minute /* , (int)localTime.second*/);
-            lv_label_set_text(_screen.time, buffer);
-            lv_label_set_text(_screen.message, "");
+            _screen.SetTimeText(buffer);
+            _screen.SetMessageText("");
         }
     }
     else
     {
         if (forceUpdate)
         {
-            lv_label_set_text(_screen.weekday, "");
-            lv_label_set_text(_screen.date, "");
-            lv_label_set_text(_screen.time, "");
-            lv_label_set_text(_screen.message, (const char*) u8"Zeit nicht vorhanden.\nBitte prüfen,\nob Uhrzeit/Datum\nin der ETS\n korrekt verbunden sind");
+            _screen.SetWeekdayText("");
+            _screen.SetDateText("");
+            _screen.SetTimeText("");
+            _screen.SetMessageText((const char*) u8"Zeit nicht vorhanden.\nBitte prüfen,\nob Uhrzeit/Datum\nin der ETS\n korrekt verbunden sind");
         }
     }
 }

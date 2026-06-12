@@ -4,14 +4,12 @@
 
 class DateTimePage : public Page
 {
-    DateTimeScreen& _screen = *DateTimeScreen::instance;
+    IDateTimeScreen& _screen = *DateTimeScreen::instance;
     bool _lastValid = false;   
     uint16_t _lastYear = 0;
     uint8_t _lastMonth = 0;
     uint8_t _lastHour = 0;
     uint8_t _lastMinute = 0;
-
-    lv_event_cb_t _eventPressed = nullptr;
     bool _clickStarted = false;
     void shortPressed() override;
     void longPressed() override;
