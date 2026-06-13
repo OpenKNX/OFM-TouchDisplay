@@ -1,10 +1,10 @@
 #pragma once
 
-#include "IJalousieAuxScreen.h"
+#include "IJalousieScreen.h"
 #include "RolladenScreen.h"
 
 class JalousieScreen: public RolladenScreen
-                   , public IJalousieAuxScreen
+                   , public IJalousieScreen
 {
 private:
     lv_obj_t* _sliderAux;
