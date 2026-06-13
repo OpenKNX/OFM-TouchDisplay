@@ -18,8 +18,6 @@ private:
     static void OnMainAction(lv_event_t* e);
 
 public:
-    static LockScreen* instance;
-
     LockScreen();
 
     virtual void SetLabelText(const char* text) override;

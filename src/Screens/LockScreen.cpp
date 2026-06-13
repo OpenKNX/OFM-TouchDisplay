@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-LockScreen* LockScreen::instance = nullptr;
+ILockScreen* ILockScreen::instance = nullptr;
 
 LockScreen::LockScreen() 
 {

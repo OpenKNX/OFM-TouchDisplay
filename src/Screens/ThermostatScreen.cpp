@@ -3,7 +3,7 @@
 #include "../ImageLoader.h"
 #include "../TouchDisplayModule.h"
 
-ThermostatScreen* ThermostatScreen::instance = nullptr;
+IThermostatScreen* IThermostatScreen::instance = nullptr;
 
 ThermostatScreen::ThermostatScreen()
 {

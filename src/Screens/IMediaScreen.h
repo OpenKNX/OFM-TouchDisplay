@@ -6,6 +6,7 @@
 class IMediaScreen
 {
 public:
+    static IMediaScreen* instance;
     virtual ~IMediaScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetTitleText(const char* text) = 0;

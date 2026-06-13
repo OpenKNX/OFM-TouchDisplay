@@ -2,7 +2,7 @@
 #include "../ImageLoader.h"
 
 
-RolladenScreen* RolladenScreen::instance = nullptr;
+IRolladenScreen* IRolladenScreen::instance = nullptr;
 
 RolladenScreen::RolladenScreen()
 {

@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-DimmerScreen* DimmerScreen::instance = nullptr;
+IDimmerScreen* IDimmerScreen::instance = nullptr;
 
 DimmerScreen::DimmerScreen()
 {

@@ -9,7 +9,7 @@ class SceneDeviceBridge : public SceneBridge
 {
     unsigned long _lastButtonPressTime = 0;
     DetailDevicePage& _detailDevicePage;
-    ISceneScreen& _screen = *SceneScreen::instance;
+    ISceneScreen& _screen = *ISceneScreen::instance;
     int _storeCountDown = 0;
 public:
     SceneDeviceBridge(DetailDevicePage& detailDevicePage);

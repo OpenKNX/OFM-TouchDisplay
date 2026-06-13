@@ -6,6 +6,7 @@
 class IJalousieScreen
 {
 public:
+    static IJalousieScreen* instance;
     virtual ~IJalousieScreen() = default;
     virtual void SetAuxPercentageValue(uint8_t value) = 0;
     virtual uint8_t GetAuxPercentageValue() const = 0;

@@ -5,6 +5,7 @@
 class IFanScreen
 {
 public:
+    static IFanScreen* instance;
     virtual ~IFanScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

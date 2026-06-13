@@ -5,6 +5,7 @@
 class ILockScreen
 {
 public:
+    static ILockScreen* instance;
     virtual ~ILockScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

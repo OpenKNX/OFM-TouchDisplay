@@ -6,7 +6,7 @@
 class FanDeviceBridge : public FanBridge
 {
     DetailDevicePage& _detailDevicePage;
-    IFanScreen& _screen = *FanScreen::instance;
+    IFanScreen& _screen = *IFanScreen::instance;
     bool _automatic = false;
  public:
     FanDeviceBridge(DetailDevicePage& detailDevicePage);

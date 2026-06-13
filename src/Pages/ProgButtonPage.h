@@ -9,7 +9,7 @@ class ProgButtonPage : public Page
 public:
 
 
-    IButtonMessageScreen& _screen = *ButtonMessageScreen::instance;
+    IButtonMessageScreen& _screen = *IButtonMessageScreen::instance;
     bool _progMode = false;
     void buttonClicked();
     void updateButtonState();

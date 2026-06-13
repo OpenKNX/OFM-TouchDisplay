@@ -13,8 +13,6 @@ private:
     static void OnAuxPercentageChangeCompleted(lv_event_t* e);
 
 public:
-    static JalousieScreen* instance;
-
     JalousieScreen();
 
     virtual void SetAuxPercentageValue(uint8_t value) override;

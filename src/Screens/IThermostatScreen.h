@@ -7,6 +7,7 @@
 class IThermostatScreen
 {
 public:
+    static IThermostatScreen* instance;
     virtual ~IThermostatScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetModeText(const char* text) = 0;

@@ -4,7 +4,7 @@
 
 class DateTimePage : public Page
 {
-    IDateTimeScreen& _screen = *DateTimeScreen::instance;
+    IDateTimeScreen& _screen = *IDateTimeScreen::instance;
     bool _lastValid = false;   
     uint16_t _lastYear = 0;
     uint8_t _lastMonth = 0;

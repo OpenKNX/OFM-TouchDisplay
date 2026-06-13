@@ -12,7 +12,7 @@ class ThermostatDeviceBridge : public ThermostatBridge
     double _currentTemperature = NAN;
 protected:
     DetailDevicePage& _detailDevicePage;
-    ThermostatDeviceBridge(ThermostatScreen& screen, DetailDevicePage& detailDevicePage);
+    ThermostatDeviceBridge(IThermostatScreen& screen, DetailDevicePage& detailDevicePage);
  public:
     ThermostatDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~ThermostatDeviceBridge() override;

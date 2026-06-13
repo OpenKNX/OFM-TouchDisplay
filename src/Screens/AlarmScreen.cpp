@@ -1,6 +1,6 @@
 #include "AlarmScreen.h"
 
-AlarmScreen* AlarmScreen::instance = nullptr;
+IAlarmScreen* IAlarmScreen::instance = nullptr;
 
 AlarmScreen::AlarmScreen()
  : MainFunctionScreen()

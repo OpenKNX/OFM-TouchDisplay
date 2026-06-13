@@ -6,7 +6,7 @@
 class DoorWindowDeviceBridge : public DoorWindowBridge
 {
     DetailDevicePage& _detailDevicePage;
-    IDoorWindowScreen& _screen = *DoorWindowScreen::instance;
+    IDoorWindowScreen& _screen = *IDoorWindowScreen::instance;
     bool _automatic = false;
     uint8_t _doorWindowOpenDirection = 0;
  public:

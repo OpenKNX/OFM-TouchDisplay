@@ -6,7 +6,7 @@
 class DisplayDeviceBridge : public DeviceBridge
 {
     DetailDevicePage& _detailDevicePage;
-    IMainFunctionScreen& _screen = *MainFunctionScreen::instance;
+    IMainFunctionScreen& _screen = *IMainFunctionScreen::instance;
 public:
     DisplayDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~DisplayDeviceBridge() override;

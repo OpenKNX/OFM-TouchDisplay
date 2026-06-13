@@ -12,7 +12,6 @@ protected:
     virtual bool useCustomBackgroundColor() override;
     virtual lv_color_t customBackgroundColor() override;
 public:
-    static AlarmScreen* instance;
     AlarmScreen();
     virtual void SetLabelText(const char* text) override { MainFunctionScreen::SetLabelText(text); }
     virtual void SetValueText(const char* text) override { MainFunctionScreen::SetValueText(text); }

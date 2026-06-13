@@ -36,8 +36,6 @@ private:
     std::function<void()> _onMainAction;
 
 public:
-    static RGBScreen* instance;
-  
     RGBScreen();
 
     virtual void SetLabelText(const char* text) override;

@@ -16,6 +16,7 @@ enum class DoorWindowSliderDirection
 class IDoorWindowScreen
 {
 public:
+    static IDoorWindowScreen* instance;
     virtual ~IDoorWindowScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

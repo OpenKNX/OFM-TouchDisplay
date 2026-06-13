@@ -20,8 +20,6 @@ private:
     static void OnPrimaryAction(lv_event_t* e);
 
 public:
-    static DimmerScreen* instance;
-
     DimmerScreen();
 
     virtual void SetLabelText(const char* text) override;

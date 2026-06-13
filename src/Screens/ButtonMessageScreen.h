@@ -21,7 +21,6 @@ private:
     lv_obj_t* ledObject(uint8_t index);
 
 public:
-    static ButtonMessageScreen* instance;
     ButtonMessageScreen();
 
     virtual void SetLabelText(const char* text) override;

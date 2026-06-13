@@ -6,6 +6,7 @@
 class IRGBScreen
 {
 public:
+    static IRGBScreen* instance;
     virtual ~IRGBScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

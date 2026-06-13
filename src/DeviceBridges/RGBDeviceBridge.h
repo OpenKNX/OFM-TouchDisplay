@@ -5,7 +5,7 @@
 
 class RGBDeviceBridge : public RGBBridge
 {
-    IRGBScreen& _screen = *RGBScreen::instance;
+    IRGBScreen& _screen = *IRGBScreen::instance;
     DetailDevicePage& _detailDevicePage;
 
     void buttonClicked();

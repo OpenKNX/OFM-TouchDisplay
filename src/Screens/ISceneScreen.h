@@ -5,6 +5,7 @@
 class ISceneScreen
 {
 public:
+    static ISceneScreen* instance;
     virtual ~ISceneScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

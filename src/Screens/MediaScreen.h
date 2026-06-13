@@ -27,8 +27,6 @@ private:
     static void OnNextAction(lv_event_t* e);
 
 public:
-    static MediaScreen* instance;
-
     MediaScreen();
 
     virtual void SetLabelText(const char* text) override;

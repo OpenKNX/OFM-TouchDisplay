@@ -2,7 +2,7 @@
 #include "../ImageLoader.h"
 
 
-JalousieScreen* JalousieScreen::instance = nullptr;
+IJalousieScreen* IJalousieScreen::instance = nullptr;
 
 JalousieScreen::JalousieScreen()
 {

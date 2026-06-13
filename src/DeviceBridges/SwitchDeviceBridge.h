@@ -8,7 +8,7 @@
 class SwitchDeviceBridge : public SwitchBridge
 {
     DetailDevicePage& _detailDevicePage;
-    ISwitchScreen& _screen = *SwitchScreen::instance;
+    ISwitchScreen& _screen = *ISwitchScreen::instance;
 public:
     SwitchDeviceBridge(DetailDevicePage& detailDevicePage);
     virtual ~SwitchDeviceBridge() override;

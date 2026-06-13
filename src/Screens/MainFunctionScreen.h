@@ -15,7 +15,6 @@ private:
     static void OnScreenPressed(lv_event_t* e);
 
 public:
-    static MainFunctionScreen* instance;
     MainFunctionScreen();
 
     virtual void SetLabelText(const char* text) override;

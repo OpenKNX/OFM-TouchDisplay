@@ -1,6 +1,6 @@
 #include "DateTimeScreen.h"
 
-DateTimeScreen* DateTimeScreen::instance = nullptr;
+IDateTimeScreen* IDateTimeScreen::instance = nullptr;
 
 DateTimeScreen::DateTimeScreen()
 {

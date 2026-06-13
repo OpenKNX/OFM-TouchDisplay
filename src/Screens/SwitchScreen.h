@@ -15,8 +15,6 @@ private:
     static void OnPrimaryAction(lv_event_t* e);
 
 public:
-    static SwitchScreen* instance;
-
     SwitchScreen();
 
     virtual void SetLabelText(const char* text) override;

@@ -20,8 +20,6 @@ private:
     static void OnMainAction(lv_event_t* e);
 
 public:
-    static FanScreen* instance;
-
     FanScreen();
 
     virtual void SetLabelText(const char* text) override;

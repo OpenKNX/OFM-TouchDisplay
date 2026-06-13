@@ -5,6 +5,7 @@
 class IDateTimeScreen
 {
 public:
+    static IDateTimeScreen* instance;
     virtual ~IDateTimeScreen() = default;
     virtual void SetWeekdayText(const char* text) = 0;
     virtual void SetDateText(const char* text) = 0;

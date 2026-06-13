@@ -3,7 +3,7 @@
 
 #include "../ImageLoader.h"
 
-RGBScreen* RGBScreen::instance = nullptr;
+IRGBScreen* IRGBScreen::instance = nullptr;
 
 RGBScreen::RGBScreen()
 {

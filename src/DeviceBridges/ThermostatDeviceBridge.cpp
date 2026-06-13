@@ -2,12 +2,12 @@
 #include "../TouchDisplayModule.h"
 
 ThermostatDeviceBridge::ThermostatDeviceBridge(DetailDevicePage& detailDevicePage)
-    : ThermostatDeviceBridge(*ThermostatScreen::instance, detailDevicePage)
+    : ThermostatDeviceBridge(*IThermostatScreen::instance, detailDevicePage)
 {
 
 }
 
-ThermostatDeviceBridge::ThermostatDeviceBridge(ThermostatScreen& screen, DetailDevicePage& detailDevicePage)
+ThermostatDeviceBridge::ThermostatDeviceBridge(IThermostatScreen& screen, DetailDevicePage& detailDevicePage)
     : _screen(screen), _detailDevicePage(detailDevicePage)
 {
 }

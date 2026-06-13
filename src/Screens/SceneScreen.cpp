@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-SceneScreen* SceneScreen::instance = nullptr;
+ISceneScreen* ISceneScreen::instance = nullptr;
 
 SceneScreen::SceneScreen()
 {

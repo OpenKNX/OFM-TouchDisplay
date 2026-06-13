@@ -18,7 +18,6 @@ private:
     static void OnScreenPressed(lv_event_t* e);
 
 public:
-    static DateTimeScreen* instance;
     DateTimeScreen();
 
     virtual void SetWeekdayText(const char* text) override;

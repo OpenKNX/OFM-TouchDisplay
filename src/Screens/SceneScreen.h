@@ -17,8 +17,6 @@ private:
     static void OnPrimaryActionReleased(lv_event_t* e);
 
 public:
-    static SceneScreen* instance;
-
     SceneScreen();
 
     virtual void SetLabelText(const char* text) override;

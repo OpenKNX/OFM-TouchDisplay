@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-SwitchScreen* SwitchScreen::instance = nullptr;
+ISwitchScreen* ISwitchScreen::instance = nullptr;
 
 SwitchScreen::SwitchScreen()
 {

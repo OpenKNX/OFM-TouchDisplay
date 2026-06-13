@@ -6,6 +6,7 @@
 class IDimmerScreen
 {
 public:
+    static IDimmerScreen* instance;
     virtual ~IDimmerScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

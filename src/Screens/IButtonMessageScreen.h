@@ -8,6 +8,7 @@ class DisplayLed;
 class IButtonMessageScreen
 {
 public:
+    static IButtonMessageScreen* instance;
     virtual ~IButtonMessageScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetMessageText(const char* text) = 0;

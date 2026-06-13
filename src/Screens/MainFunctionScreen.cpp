@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-MainFunctionScreen* MainFunctionScreen::instance = nullptr;
+IMainFunctionScreen* IMainFunctionScreen::instance = nullptr;
 
 MainFunctionScreen::MainFunctionScreen() 
 {

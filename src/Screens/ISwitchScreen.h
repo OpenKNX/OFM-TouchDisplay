@@ -5,6 +5,7 @@
 class ISwitchScreen
 {
 public:
+    static ISwitchScreen* instance;
     virtual ~ISwitchScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

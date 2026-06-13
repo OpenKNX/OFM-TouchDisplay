@@ -21,7 +21,6 @@ private:
     static void OnPercentageChangeCompleted(lv_event_t* e);
 
 public:
-    static DoorWindowScreen* instance;
     DoorWindowScreen();
     void setSliderDirection(DoorWindowSliderDirection direction);
 

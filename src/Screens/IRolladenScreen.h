@@ -6,6 +6,7 @@
 class IRolladenScreen
 {
 public:
+    static IRolladenScreen* instance;
     virtual ~IRolladenScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

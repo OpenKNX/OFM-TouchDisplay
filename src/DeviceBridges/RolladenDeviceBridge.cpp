@@ -1,7 +1,7 @@
 #include "RolladenDeviceBridge.h"
 
 RolladenDeviceBridge::RolladenDeviceBridge(DetailDevicePage& detailDevicePage)
-    : RolladenDeviceBridge(*RolladenScreen::instance, detailDevicePage)
+    : RolladenDeviceBridge(*IRolladenScreen::instance, detailDevicePage)
 {
 
 }

@@ -8,7 +8,7 @@
 class DimmerDeviceBridge : public DimmerBridge
 {
     DetailDevicePage& _detailDevicePage;
-    IDimmerScreen& _screen = *DimmerScreen::instance;
+    IDimmerScreen& _screen = *IDimmerScreen::instance;
     unsigned long _lastSliderPressing = 0;
     uint8_t _lastSendValue = 255;
 public:

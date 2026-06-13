@@ -5,6 +5,7 @@
 class IMainFunctionScreen
 {
 public:
+    static IMainFunctionScreen* instance;
     virtual ~IMainFunctionScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

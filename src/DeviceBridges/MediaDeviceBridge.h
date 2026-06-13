@@ -8,7 +8,7 @@
 class MediaDeviceBridge : public MediaBridge
 {
     DetailDevicePage& _detailDevicePage;
-    IMediaScreen& _screen = *MediaScreen::instance;
+    IMediaScreen& _screen = *IMediaScreen::instance;
     unsigned long _lastSliderPressing = 0;
     uint8_t _lastSendValue = 255;
 public:

@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-DoorWindowScreen* DoorWindowScreen::instance = nullptr;
+IDoorWindowScreen* IDoorWindowScreen::instance = nullptr;
 
 DoorWindowScreen::DoorWindowScreen()
 {

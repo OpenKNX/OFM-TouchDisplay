@@ -2,7 +2,7 @@
 
 #include "../ImageLoader.h"
 
-FanScreen* FanScreen::instance = nullptr;
+IFanScreen* IFanScreen::instance = nullptr;
 
 FanScreen::FanScreen() 
 {

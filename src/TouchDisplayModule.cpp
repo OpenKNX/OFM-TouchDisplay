@@ -369,24 +369,24 @@ void TouchDisplayModule::setup(bool configured)
    
     updateTheme();
     MessageScreen::instance = new MessageScreen();
-    MainFunctionScreen::instance = new MainFunctionScreen();
-    DateTimeScreen::instance = new DateTimeScreen();
+    IMainFunctionScreen::instance = new MainFunctionScreen();
+    IDateTimeScreen::instance = new DateTimeScreen();
     CellScreen2::instance = new CellScreen2();
     CellScreen3::instance = new CellScreen3();
     CellScreen4::instance = new CellScreen4();
-    SwitchScreen::instance = new SwitchScreen();
-    DimmerScreen::instance = new DimmerScreen();
-    ButtonMessageScreen::instance = new ButtonMessageScreen();
-    AlarmScreen::instance = new AlarmScreen();
-    RolladenScreen::instance = new RolladenScreen();
-    JalousieScreen::instance = new JalousieScreen();
-    FanScreen::instance = new FanScreen();
-    RGBScreen::instance = new RGBScreen();
-    DoorWindowScreen::instance = new DoorWindowScreen();
-    LockScreen::instance = new LockScreen();
-    SceneScreen::instance = new SceneScreen();
-    ThermostatScreen::instance = new ThermostatScreen();
-    MediaScreen::instance = new MediaScreen();
+    ISwitchScreen::instance = new SwitchScreen();
+    IDimmerScreen::instance = new DimmerScreen();
+    IButtonMessageScreen::instance = new ButtonMessageScreen();
+    IAlarmScreen::instance = new AlarmScreen();
+    IRolladenScreen::instance = new RolladenScreen();
+    IJalousieScreen::instance = new JalousieScreen();
+    IFanScreen::instance = new FanScreen();
+    IRGBScreen::instance = new RGBScreen();
+    IDoorWindowScreen::instance = new DoorWindowScreen();
+    ILockScreen::instance = new LockScreen();
+    ISceneScreen::instance = new SceneScreen();
+    IThermostatScreen::instance = new ThermostatScreen();
+    IMediaScreen::instance = new MediaScreen();
 
     if (!configured || ParamTCH_SensorKeys)
     {

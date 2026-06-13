@@ -6,7 +6,7 @@
 
 class JalousieDeviceBridge : public RolladenDeviceBridge
 {
-    IJalousieScreen& _jalousieScreen = *JalousieScreen::instance;
+    IJalousieScreen& _jalousieScreen = *IJalousieScreen::instance;
     void auxPercentageChangeCompleted();
     
  public:

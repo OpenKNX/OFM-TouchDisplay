@@ -2,7 +2,7 @@
 
 #include "../DisplayLed.h"
 
-ButtonMessageScreen* ButtonMessageScreen::instance = nullptr;
+IButtonMessageScreen* IButtonMessageScreen::instance = nullptr;
 
 ButtonMessageScreen::ButtonMessageScreen()
 {

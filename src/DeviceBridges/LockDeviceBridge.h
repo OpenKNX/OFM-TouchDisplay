@@ -6,7 +6,7 @@
 class LockDeviceBridge : public LockBridge
 {
     DetailDevicePage& _detailDevicePage;
-    ILockScreen& _screen = *LockScreen::instance;
+    ILockScreen& _screen = *ILockScreen::instance;
     bool _automatic = false;
     uint8_t _lockOpenDirection = 0;
  public:

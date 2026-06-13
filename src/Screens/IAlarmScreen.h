@@ -5,6 +5,7 @@
 class IAlarmScreen
 {
 public:
+    static IAlarmScreen* instance;
     virtual ~IAlarmScreen() = default;
     virtual void SetLabelText(const char* text) = 0;
     virtual void SetValueText(const char* text) = 0;

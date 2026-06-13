@@ -1,7 +1,7 @@
 #include "MediaScreen.h"
 #include "../ImageLoader.h"
 
-MediaScreen* MediaScreen::instance = nullptr;
+IMediaScreen* IMediaScreen::instance = nullptr;
 
 MediaScreen::MediaScreen()
 {
