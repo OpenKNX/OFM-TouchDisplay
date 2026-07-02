@@ -59,10 +59,10 @@ void Page::handleLoop(bool configured)
 
 void Page::errorInSetup(const char* label,  const char* message)
 {
-    MessageScreen& screen = *MessageScreen::instance;
-    lv_label_set_text(screen.label, label);
-    lv_label_set_text(screen.message, message);
-    lv_disp_load_scr(screen.screen);
+    IMessageScreen& screen = *IMessageScreen::instance;
+    screen.SetLabelText(label);
+    screen.SetMessageText(message);
+    screen.Show();
 }
 
 Page* Page::createErrorPage(const char* message, uint8_t channelIndex)

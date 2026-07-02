@@ -7,9 +7,9 @@ const char* DeactivatedPage::pageType()
 
 void DeactivatedPage::setup()
 {
-    lv_label_set_text(screen.label, "");
-    lv_label_set_text(screen.message, "Seite ist deaktiviert");
-    screen.show();
+    screen.SetLabelText("");
+    screen.SetMessageText("Seite ist deaktiviert");
+    screen.Show();
 }
 
 std::string DeactivatedPage::name()

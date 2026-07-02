@@ -5,7 +5,7 @@
 
 class DeactivatedPage : public Page
 {
-    MessageScreen& screen = *MessageScreen::instance;
+    IMessageScreen& screen = *MessageScreen::instance;
 protected:
     virtual const char* pageType() override;
     virtual void setup() override;

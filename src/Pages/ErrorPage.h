@@ -6,7 +6,7 @@
 
 class ErrorPage : public Page
 {
-    MessageScreen& message = *MessageScreen::instance;
+    IMessageScreen& message = *MessageScreen::instance;
     std::string _message;
 public:
     virtual const char* pageType() override;

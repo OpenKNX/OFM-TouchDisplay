@@ -368,7 +368,7 @@ void TouchDisplayModule::setup(bool configured)
     touchInit();
    
     updateTheme();
-    MessageScreen::instance = new MessageScreen();
+    IMessageScreen::instance = new MessageScreen();
     IMainFunctionScreen::instance = new MainFunctionScreen();
     IDateTimeScreen::instance = new DateTimeScreen();
     CellScreen2::instance = new CellScreen2();
