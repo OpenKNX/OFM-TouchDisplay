@@ -1,6 +1,5 @@
 #include "DeviceMainFunctionCell.h"
 #include "CellParameterDefines.h"
-#include "../Screens/CellScreen.h"
 #include "SmartHomeBridgeModule.h"
 #include "../ImageLoader.h"
 #include "../TouchDisplayModule.h"
@@ -115,3 +114,4 @@ void DeviceMainFunctionCell::handleClick(int function, uint8_t jumpToPage, uint8
         return;
     }
 }
+

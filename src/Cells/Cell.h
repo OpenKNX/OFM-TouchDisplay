@@ -2,7 +2,7 @@
 #include "OpenKNX.h"
 #include "lvgl.h"
 
-#include "../Screens/ICellObject.h"
+#include "Screens/ICellObject.h"
 
 class Cell
 {
@@ -26,4 +26,5 @@ public:
     virtual void shortPressed() {};
     virtual void longPressed() {};
 };
+
 

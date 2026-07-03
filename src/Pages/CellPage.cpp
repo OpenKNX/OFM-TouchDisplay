@@ -1,6 +1,8 @@
 #include "CellPage.h"
-#include "../Cells/Cell.h"
-#include "../Screens/CellScreen.h"
+#include "Cells/Cell.h"
+#include "Screens/ICellScreen.h"
+#include "Screens/ICellObject.h"
+#include "Screens/ICellScreenFactory.h"
 #include "ISO8859_15ToUTF8.h"
 
 const char* CellPage::pageType()
@@ -17,20 +19,11 @@ void CellPage::setup()
         errorInSetup(name().c_str(), "Seite hat keine Felder");
         return;
     }
-    switch (_numberOfCells)
+    _screen = ICellScreenFactory::instance->getCellScreen(_numberOfCells);
+    if (_screen == nullptr)
     {
-    case 2:
-        _screen = CellScreen2::instance;
-        break;
-    case 3:
-        _screen = CellScreen3::instance;
-        break;
-    case 4:
-        _screen = CellScreen4::instance;
-        break;
-    default:
         errorInSetup(name().c_str(), "Zellenanzahl nicht unterstützt");
-        break;
+        return;
     }
   
     _cells = new Cell*[_numberOfCells];    

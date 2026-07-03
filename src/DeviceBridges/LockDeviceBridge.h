@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Lock/KnxChannelLock.h"
-#include "../Screens/LockScreen.h"
+#include "../Screens/ILockScreen.h"
 
 class LockDeviceBridge : public LockBridge
 {

@@ -2,7 +2,7 @@
 
 #include "OpenKNX.h"
 #include "Page.h"
-#include "../Screens/ButtonMessageScreen.h"
+#include "Screens/IButtonMessageScreen.h"
 
 class ProgButtonPage : public Page
 {

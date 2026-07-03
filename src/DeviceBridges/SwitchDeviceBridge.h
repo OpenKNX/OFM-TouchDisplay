@@ -2,7 +2,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Switch/KnxChannelSwitch.h"
-#include "../Screens/SwitchScreen.h"
+#include "Screens/ISwitchScreen.h"
 
 
 class SwitchDeviceBridge : public SwitchBridge

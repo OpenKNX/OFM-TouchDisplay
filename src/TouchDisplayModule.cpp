@@ -3,22 +3,7 @@
 #include "lvgl.h"
 //#include "lv_xiao_round_screen.h"
 #include "knxprod.h"
-#include "./Screens/CellScreen.h"
-#include "./Screens/MainFunctionScreen.h"
-#include "./Screens/DateTimeScreen.h"
-#include "./Screens/SwitchScreen.h"
-#include "./Screens/DimmerScreen.h"
-#include "./Screens/MessageScreen.h"
-#include "./Screens/AlarmScreen.h"
-#include "./Screens/RolladenScreen.h"
-#include "./Screens/JalousieScreen.h"
-#include "./Screens/FanScreen.h"
-#include "./Screens/DoorWindowScreen.h"
-#include "./Screens/LockScreen.h"
-#include "./Screens/SceneScreen.h"
-#include "./Screens/ThermostatScreen.h"
-#include "./Screens/RGBScreen.h"
-#include "./Screens/MediaScreen.h"
+#include "TouchDisplayScreenFactory.h"
 #include "./Pages/Page.h"
 #include "./Pages/ProgButtonPage.h"
 #include "./ImageLoader.h"
@@ -368,25 +353,7 @@ void TouchDisplayModule::setup(bool configured)
     touchInit();
    
     updateTheme();
-    IMessageScreen::instance = new MessageScreen();
-    IMainFunctionScreen::instance = new MainFunctionScreen();
-    IDateTimeScreen::instance = new DateTimeScreen();
-    CellScreen2::instance = new CellScreen2();
-    CellScreen3::instance = new CellScreen3();
-    CellScreen4::instance = new CellScreen4();
-    ISwitchScreen::instance = new SwitchScreen();
-    IDimmerScreen::instance = new DimmerScreen();
-    IButtonMessageScreen::instance = new ButtonMessageScreen();
-    IAlarmScreen::instance = new AlarmScreen();
-    IRolladenScreen::instance = new RolladenScreen();
-    IJalousieScreen::instance = new JalousieScreen();
-    IFanScreen::instance = new FanScreen();
-    IRGBScreen::instance = new RGBScreen();
-    IDoorWindowScreen::instance = new DoorWindowScreen();
-    ILockScreen::instance = new LockScreen();
-    ISceneScreen::instance = new SceneScreen();
-    IThermostatScreen::instance = new ThermostatScreen();
-    IMediaScreen::instance = new MediaScreen();
+    touchDisplayScreenFactory().createScreens();
 
     if (!configured || ParamTCH_SensorKeys)
     {
@@ -477,19 +444,19 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
     {
     case 0:
         dark = false;
-        Screen::removeBackgroundColor();
+        touchDisplayScreenFactory().removeBackgroundColor();
         break;
     case 1:
         dark = true;
-        Screen::removeBackgroundColor();
+        touchDisplayScreenFactory().removeBackgroundColor();
         break;
     case 2:
         dark = true;
-        Screen::setBackgroundColor(lv_color_black());
+        touchDisplayScreenFactory().setBackgroundColor(0,0,0);
         break;
     case 3:
         dark = false;
-        Screen::setBackgroundColor(lv_color_make(255, 255, 255));
+        touchDisplayScreenFactory().setBackgroundColor(255, 255, 255);
         break;
     }
     lv_palette_t main = day ? getPaletteFromConfig(ParamTCH_ColorPaletteDay) : getPaletteFromConfig(ParamTCH_ColorPaletteNight);

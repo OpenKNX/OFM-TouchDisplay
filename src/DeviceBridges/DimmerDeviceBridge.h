@@ -2,7 +2,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Dimmer/KnxChannelDimmer.h"
-#include "../Screens/DimmerScreen.h"
+#include "../Screens/IDimmerScreen.h"
 
 
 class DimmerDeviceBridge : public DimmerBridge

@@ -2,7 +2,7 @@
 #include "../Pages/DetailDevicePage.h"
 #include "RolladenDeviceBridge.h"
 #include "Jalousie/KnxChannelJalousie.h"
-#include "../Screens/JalousieScreen.h"
+#include "../Screens/IJalousieScreen.h"
 
 class JalousieDeviceBridge : public RolladenDeviceBridge
 {

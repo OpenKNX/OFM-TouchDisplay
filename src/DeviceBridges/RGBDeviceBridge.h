@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "RGB/KnxChannelRGB.h"
-#include "../Screens/RGBScreen.h"
+#include "../Screens/IRGBScreen.h"
 
 class RGBDeviceBridge : public RGBBridge
 {

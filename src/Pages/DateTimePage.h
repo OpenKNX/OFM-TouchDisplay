@@ -1,6 +1,6 @@
 #pragma once
 #include "Page.h"
-#include "../Screens/DateTimeScreen.h"
+#include "Screens/IDateTimeScreen.h"
 
 class DateTimePage : public Page
 {

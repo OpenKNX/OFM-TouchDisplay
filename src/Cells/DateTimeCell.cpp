@@ -1,6 +1,5 @@
 #include "DateTimeCell.h"
 #include "CellParameterDefines.h"
-#include "../Screens/CellScreen.h"
 #include "../ImageLoader.h"
 #include "../TouchDisplayModule.h"
 #include "SmartHomeBridgeModule.h"

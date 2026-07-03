@@ -2,7 +2,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Media/KnxChannelMedia.h"
-#include "../Screens/MediaScreen.h"
+#include "../Screens/IMediaScreen.h"
 
 
 class MediaDeviceBridge : public MediaBridge

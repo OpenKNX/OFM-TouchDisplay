@@ -7,7 +7,7 @@
 #include "MainFunctionPage.h"
 #include "ProgButtonPage.h"
 #include "../TouchDisplayModule.h"
-#include "../Screens/MessageScreen.h"
+#include "Screens/IMessageScreen.h"
 
 Page* Page::_currentPage = nullptr;
 Page* Page::_pageToSet = nullptr;
@@ -172,3 +172,4 @@ void Page::init(uint8_t channelIndex)
 Page::~Page()
 {
 }
+

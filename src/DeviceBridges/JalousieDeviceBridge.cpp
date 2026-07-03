@@ -1,7 +1,7 @@
 #include "JalousieDeviceBridge.h"
 
 JalousieDeviceBridge::JalousieDeviceBridge(DetailDevicePage& detailDevicePage)
-    : RolladenDeviceBridge(*static_cast<JalousieScreen*>(IJalousieScreen::instance), detailDevicePage)
+    : RolladenDeviceBridge(*IRolladenScreen::instance, detailDevicePage)
 {
 }
 

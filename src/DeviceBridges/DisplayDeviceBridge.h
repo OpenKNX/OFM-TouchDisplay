@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Display/KnxChannelDisplay.h"
-#include "../Screens/MainFunctionScreen.h"
+#include "../Screens/IMainFunctionScreen.h"
 
 class DisplayDeviceBridge : public DeviceBridge
 {

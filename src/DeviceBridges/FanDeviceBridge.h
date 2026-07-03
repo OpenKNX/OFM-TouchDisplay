@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Fan/KnxChannelFan.h"
-#include "../Screens/FanScreen.h"
+#include "../Screens/IFanScreen.h"
 
 class FanDeviceBridge : public FanBridge
 {

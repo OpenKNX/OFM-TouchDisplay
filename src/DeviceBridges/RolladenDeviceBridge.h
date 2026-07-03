@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Rolladen/KnxChannelRolladen.h"
-#include "../Screens/RolladenScreen.h"
+#include "../Screens/IRolladenScreen.h"
 
 class RolladenDeviceBridge : public RolladenBridge
 {

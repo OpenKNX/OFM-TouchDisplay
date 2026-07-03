@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Alarm/KnxChannelAlarm.h"
-#include "../Screens/AlarmScreen.h"
+#include "../Screens/IAlarmScreen.h"
 
 class AlarmDeviceBridge : public AlarmBridge
 {

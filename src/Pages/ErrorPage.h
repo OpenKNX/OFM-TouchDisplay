@@ -2,11 +2,11 @@
 
 #include "OpenKNX.h"
 #include "Page.h"
-#include "../Screens/MessageScreen.h"
+#include "Screens/IMessageScreen.h"
 
 class ErrorPage : public Page
 {
-    IMessageScreen& message = *MessageScreen::instance;
+    IMessageScreen& message = *IMessageScreen::instance;
     std::string _message;
 public:
     virtual const char* pageType() override;

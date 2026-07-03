@@ -1,11 +1,11 @@
 #pragma once
 #include "Page.h"
-#include "../Screens/MessageScreen.h"
+#include "Screens/IMessageScreen.h"
 
 
 class DeactivatedPage : public Page
 {
-    IMessageScreen& screen = *MessageScreen::instance;
+    IMessageScreen& screen = *IMessageScreen::instance;
 protected:
     virtual const char* pageType() override;
     virtual void setup() override;

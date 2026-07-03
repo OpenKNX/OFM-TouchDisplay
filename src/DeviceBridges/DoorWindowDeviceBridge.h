@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "DoorWindow/KnxChannelDoorWindow.h"
-#include "../Screens/DoorWindowScreen.h"
+#include "../Screens/IDoorWindowScreen.h"
 
 class DoorWindowDeviceBridge : public DoorWindowBridge
 {

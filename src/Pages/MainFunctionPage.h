@@ -1,6 +1,6 @@
 #pragma once
 #include "Page.h"
-#include "../Screens/MainFunctionScreen.h"
+#include "../Screens/IMainFunctionScreen.h"
 #include "SmartHomeBridgeModule.h"
 
 class MainFunctionPage : public Page
@@ -9,7 +9,6 @@ private:
     IMainFunctionScreen& _screen = *IMainFunctionScreen::instance;
     virtual const char* pageType() override;
     MainFunctionChangedHandler _handler;
-    lv_event_cb_t _eventPressed = nullptr;
     KnxChannelBase* _device = nullptr;
     bool _clickStarted = false;
   

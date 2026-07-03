@@ -1,7 +1,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Thermostat/KnxChannelThermostat.h"
-#include "../Screens/ThermostatScreen.h"
+#include "../Screens/IThermostatScreen.h"
 
 class ThermostatDeviceBridge : public ThermostatBridge
 {

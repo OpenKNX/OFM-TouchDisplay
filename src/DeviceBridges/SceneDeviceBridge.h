@@ -2,7 +2,7 @@
 #pragma once
 #include "../Pages/DetailDevicePage.h"
 #include "Scene/KnxChannelScene.h"
-#include "../Screens/SceneScreen.h"
+#include "../Screens/ISceneScreen.h"
 
 
 class SceneDeviceBridge : public SceneBridge
