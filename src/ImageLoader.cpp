@@ -9,6 +9,7 @@
 #include "../Images/left.c"
 #include "../Images/right.c"
 #include "../Images/stop.c"
+#include "../Images/home.c"
 #include "../Images/Type10.c"
 #include "../Images/Type11.c"
 #include "../Images/Type12.c"
@@ -268,6 +269,10 @@ void ImageLoader::loadImage(lv_obj_t* imageObject, std::string fileName, bool us
     else if (lowerFileName == "stop.png")
     {
         lv_img_set_src(imageObject, &stop);
+    }
+    else if (lowerFileName == "home.png")
+    {
+        lv_img_set_src(imageObject, &home);
     }
     else if (lowerFileName == "opening_lr.png")
     {

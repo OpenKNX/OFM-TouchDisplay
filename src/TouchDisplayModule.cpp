@@ -65,7 +65,7 @@ void TouchDisplayModule::setup()
         KoTCH_PageEnabledH.requestObjectRead();
 
     logDebugP("Default Page: %d", _defaultPage);
-    showFirstPage();
+    showDefaultPage();
     Module::setup();
 }
 
@@ -140,19 +140,19 @@ void TouchDisplayModule::processInputKo(GroupObject &ko)
             if (!pageEnabled(page))
             {
                 _channelIndex = 255;
-                showFirstPage();
+                showDefaultPage();
             }   
         }
         else
         {
-            showFirstPage();
+            showDefaultPage();
         }
         break;
     }
     }
 }
 
-void TouchDisplayModule::showFirstPage()
+void TouchDisplayModule::showDefaultPage()
 {
     if (pageEnabled(_defaultPage))
         activatePage(_defaultPage);
@@ -662,7 +662,7 @@ void TouchDisplayModule::loop(bool configured)
             if (_progMode)
                 showProgButtonPage();
             else
-                showFirstPage();
+                showDefaultPage();
         }
     }
 

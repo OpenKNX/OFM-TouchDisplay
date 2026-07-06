@@ -60,7 +60,7 @@ private:
 #else
 	static void lv_log(const char *buf);
 #endif
-	void showFirstPage();
+	void showDefaultPage();
 	void resetDisplayTimeout();
 	bool pageEnabled(uint8_t page);
 	void checkPageEnabledChanged();
