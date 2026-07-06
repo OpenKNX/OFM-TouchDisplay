@@ -371,16 +371,8 @@ void TouchDisplayModule::setup(bool configured)
     {
         if (ParamTCH_Slide)
         {
-            auto gestureLayer = lv_obj_create(lv_layer_top());
-            const int gestureLayerHeight = 50;
-            lv_obj_clear_flag(gestureLayer, LV_OBJ_FLAG_SCROLLABLE);
-            lv_obj_set_y(gestureLayer, LV_VER_RES - gestureLayerHeight);
-            lv_obj_set_size(gestureLayer, LV_HOR_RES, gestureLayerHeight);
-            lv_obj_set_style_border_width(gestureLayer, 0, 0);
-            lv_obj_set_style_opa(gestureLayer, LV_OPA_0, 0);
-            lv_obj_clear_flag(gestureLayer, LV_OBJ_FLAG_GESTURE_BUBBLE);
-            lv_obj_add_event_cb(gestureLayer, [](lv_event_t *e)
-            { ((TouchDisplayModule *)lv_event_get_user_data(e))->handleGesture(e); }, LV_EVENT_GESTURE, this);
+            if (IScreenNavigation::instance != nullptr)
+                IScreenNavigation::instance->init(this);
         }
     }
     _displayOffRectangle = lv_obj_create(lv_layer_top());
@@ -477,7 +469,7 @@ void TouchDisplayModule::setTheme(uint8_t themeSelection, bool day)
  //   lv_obj_add_state(btn, LV_STATE_CHECKED);
     _colorActive = lv_color_make(255,255,0); //  lv_obj_get_style_bg_color(btn, LV_PART_MAIN);
 #else
-    _colorActive = lv_obj_get_style_bg_color(btn, LV_PART_MAIN | LV_STATE_CHECKED);
+    _colorActive = lv_obj_get_style_bg_color(btn, static_cast<lv_style_selector_t>(LV_PART_MAIN) | static_cast<lv_style_selector_t>(LV_STATE_CHECKED));
 #endif
     lv_obj_del(btn); 
 
@@ -617,34 +609,6 @@ void TouchDisplayModule::display(bool on)
     }
     if (knx.configured())
         KoTCH_DisplayOnOffState.value(_displayOn, DPT_State);
-}
-
-void TouchDisplayModule::handleGesture(lv_event_t *event)
-{
-    logDebugP("Gesture event");
-    if (!_displayOn)
-    {
-        lv_event_stop_bubbling(event);
-        lv_indev_wait_release(lv_indev_get_act());
-        display(true);
-        return;
-    }
-    TouchDisplayModule::resetDisplayTimeout();
-
-    if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
-    {
-        logDebug("Gesture", "Left");
-        lv_event_stop_bubbling(event);
-        lv_indev_wait_release(lv_indev_get_act());
-        openknxTouchDisplayModule.nextPage();
-    }
-    else if (lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
-    {
-        logDebug("Gesture", "Right");
-        lv_event_stop_bubbling(event);
-        lv_indev_wait_release(lv_indev_get_act());
-        openknxTouchDisplayModule.previousPage();
-    }
 }
 
 void TouchDisplayModule::interruptTouchLeft()

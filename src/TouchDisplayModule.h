@@ -1,13 +1,17 @@
 #pragma once
 #include "OpenKNX.h"
+#include "IScreenNavigation.h"
 #include <lvgl.h>
  
 bool touchIsPressedForLgvl();
 
 class Page;
+class ScreenNavigation;
 
 class TouchDisplayModule : public OpenKNX::Module
 {
+	friend class ScreenNavigation;
+
 	uint8_t _channelIndex = 255; // current active channel, do not rename, because var name is used in macros
 	uint8_t _setPageDelayed = 255;
 	bool _setPageDelayedActiveFromSetPageKo = false;
@@ -56,7 +60,6 @@ private:
 #else
 	static void lv_log(const char *buf);
 #endif
-	void handleGesture(lv_event_t *event);
 	void showFirstPage();
 	void resetDisplayTimeout();
 	bool pageEnabled(uint8_t page);
