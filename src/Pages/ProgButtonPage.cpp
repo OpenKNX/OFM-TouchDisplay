@@ -51,7 +51,12 @@ void ProgButtonPage::setup()
     
     std::string message;
     message += "v" + openknx.info.humanFirmwareVersion() + "   " + openknx.info.humanFirmwareNumber().c_str();
-    message += (const char*)u8"\nOpenKNX Touch Round";
+    message += "\nOpenKNX ";
+#ifdef OPENKNX_DISPLAY_NAME
+    message += OPENKNX_DISPLAY_NAME;
+#else
+    message += MAIN_FirmwareName;
+#endif
     if (!knx.configured())
         message += (const char*)u8"\nBitte übertragen Sie die\nETS Applikation";
     _screen.SetMessageText(message.c_str());

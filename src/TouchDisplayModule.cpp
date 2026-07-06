@@ -376,7 +376,10 @@ void TouchDisplayModule::setup(bool configured)
         }
     }
     _displayOffRectangle = lv_obj_create(lv_layer_top());
-    lv_obj_set_size(_displayOffRectangle, LV_HOR_RES, LV_VER_RES);
+    lv_obj_t *activeScreen = lv_screen_active();
+    lv_obj_set_size(_displayOffRectangle,
+                    lv_obj_get_width(activeScreen),
+                    lv_obj_get_height(activeScreen));
     lv_obj_set_style_bg_color(_displayOffRectangle, lv_color_black(), 0);
     lv_obj_set_style_border_width(_displayOffRectangle, 0, 0);
     lv_obj_add_flag(_displayOffRectangle, LV_OBJ_FLAG_HIDDEN);
