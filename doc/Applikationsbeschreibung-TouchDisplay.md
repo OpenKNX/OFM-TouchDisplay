@@ -245,10 +245,27 @@ Hier kann man zwischen verschiedenen Seitenarten wählen.
 Neben der [Beschreibung](#beschreibung) und der [Seitentyp](#seitentyp)-Auswahl stehen folgende Einstellungen zur Verfügung:
 
 <!-- DOC -->
+### Navigationsleiste 
+
+Gibt an, ob und wo eine Navigationsleiste eingeblendet werden soll.
+
+- Deaktivert
+- Links
+- Rechts
+- Oben
+- Unten
+
+<!-- DOCEND -->
+Diese Option ist nicht bei allen Geräten verfügbar.
+
+<!-- DOC -->
 ### Seite über Blättern erreichbar
 
 Gibt an, ob die Seite über Blättern erreicht werden kann.
 Wird Nein angewählt, kann die Seite trotzdem über das Kommunikationsobjekt "Gehe zu Seite" oder über den Absprung eines Display-Feldes bei dem Seitentyp "Mehrere Felder" angezeigt werden.
+
+<!-- DOCEND -->
+Diese Option ist nicht bei allen Geräten verfügbar.
 
 <!-- DOC -->
 ### Seitenfreigabe über Objekt

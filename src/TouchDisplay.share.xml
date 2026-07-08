@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-model href="../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
+<?xml-model href="../../../../Organization/knxprod-support/knx_project_20/knx-editor.xsd" type="application/xml" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<KNX xmlns="http://knx.org/xml/project/20" xmlns:op="http://github.com/OpenKNX/OpenKNXproducer">
 
   <op:config name="%TCH_TabName%" value="Touch-Display" />
   <op:config name="%TCH_NumberOfCells%" value="4" />
+  <op:config name="%TCH_UseNavigationBar%" value="0" />
+  <op:config name="%TCH_UsePageSwitchWithWipe%" value="1" />
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
 
@@ -36,6 +38,16 @@
                   <Enumeration Text="6 Felder" Value="6" Id="%ENID%" />
                   <Enumeration Text="7 Felder" Value="7" Id="%ENID%" />
                   <Enumeration Text="9 Felder" Value="9" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+
+              <ParameterType Id="%AID%_PT-TCHNavigationBar" Name="TCHNavigationBar" op:headerExport="enum">
+                <TypeRestriction Base="Value" SizeInBit="4">
+                  <Enumeration Text="Deaktivert" Value="0" Id="%ENID%" op:headerName="Disabled" />
+                  <Enumeration Text="Links" Value="1" Id="%ENID%" op:headerName="Left" />
+                  <Enumeration Text="Rechts" Value="2" Id="%ENID%" op:headerName="Right" />
+                  <Enumeration Text="Oben" Value="3" Id="%ENID%" op:headerName="Top" />
+                  <Enumeration Text="Unten" Value="4" Id="%ENID%" op:headerName="Bottom" />
                 </TypeRestriction>
               </ParameterType>
 
@@ -235,7 +247,13 @@
               <!-- Always 0 -->
 							<Parameter Id="%AID%_P-%TT%00019" Name="Always0" ParameterType="%AID%_PT-OnOffYesNo" Text="Always0" Value="0"  Access="None"/> 
           
-              <Union SizeInBit="104">
+              <!-- Use Navigation Bar  0 -->
+							<Parameter Id="%AID%_P-%TT%00022" Name="UseNavigationBar" ParameterType="%AID%_PT-OnOffYesNo" Text="UseNavigationBar" Value="%TCH_UseNavigationBar%"  Access="None"/> 
+          
+              <!-- Use Page Switch With Wipe  0 -->
+              <Parameter Id="%AID%_P-%TT%00023" Name="UsePageSwitchWithWipe" ParameterType="%AID%_PT-OnOffYesNo" Text="UsePageSwitchWithWipe" Value="%TCH_UsePageSwitchWithWipe%"  Access="None"/>
+
+              <Union SizeInBit="112">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <!-- Visible Channels -->
                 <Parameter Offset="0" BitOffset="0" Id="%AID%_UP-%TT%00000" Name="VisibleChannels" ParameterType="%AID%_PT-TCHNumChannels"  Text="Verfügbare Seiten" Value="0" SuffixText=" von %N%" />
@@ -281,7 +299,10 @@
                 <Parameter Offset="11" BitOffset="0"  Id="%AID%_UP-%TT%00017" Name="ColorPaletteNight" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bedienelemente" Value="19" />
                 <!-- Color Palette Night ON  -->
                 <Parameter Offset="12" BitOffset="0"  Id="%AID%_UP-%TT%00018" Name="ColorPaletteNightOn" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bild EIN" Value="14" />
-                <!-- Next Id="%AID%_UP-%TT%00022" -->
+                <!-- Navigation Bar -->
+                <Parameter Offset="13" BitOffset="0"  Id="%AID%_UP-%TT%00024" Name="NavigationBar" ParameterType="%AID%_PT-TCHNavigationBar" Text="Navigationsleiste" Value="1" /> 
+                <!--  4 bits free -->
+                <!-- Next Id="%AID%_UP-%TT%00025" -->
               </Union>
 
             </Parameters>
@@ -330,6 +351,12 @@
               <ParameterRef Id="%AID%_UP-%TT%00020_R-%TT%0002001" RefId="%AID%_UP-%TT%00020" />
               <!-- KO Default page turn on display -->
               <ParameterRef Id="%AID%_UP-%TT%00021_R-%TT%0002101" RefId="%AID%_UP-%TT%00021" />
+              <!-- Use Navigation Bar -->
+              <ParameterRef Id="%AID%_P-%TT%00022_R-%TT%0002201" RefId="%AID%_P-%TT%00022" />
+              <!-- Use Page Switch With Wipe -->
+              <ParameterRef Id="%AID%_P-%TT%00023_R-%TT%0002301" RefId="%AID%_P-%TT%00023" />
+              <!-- Navigation Bar -->
+              <ParameterRef Id="%AID%_UP-%TT%00024_R-%TT%0002401" RefId="%AID%_UP-%TT%00024" />
             </ParameterRefs>
             <ComObjectTable>
             	<!-- Display On/Off -->
@@ -427,9 +454,23 @@
                     <ParameterRefRef IndentLevel="2" RefId="%AID%_UP-%TT%00012_R-%TT%0001201" HelpContext="%DOC%" />
                   </when>
                 </choose>
-                <!-- Slide -->
-                <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00014_R-%TT%0001401" HelpContext="%DOC%" />
                 
+                <!-- Use Navigation Bar -->
+                <choose ParamRefId="%AID%_P-%TT%00022_R-%TT%0002201">
+                  <when test="1">
+                    <!-- Navigation Bar -->
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00024_R-%TT%0002401" HelpContext="%DOC%" />
+                  </when>
+                </choose> 
+
+                <!-- Use Use Page Switch With Wipe -->
+                <choose ParamRefId="%AID%_P-%TT%00023_R-%TT%0002301">
+                  <when test="1">
+                    <!-- Slide -->
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00014_R-%TT%0001401" HelpContext="%DOC%" />
+                  </when>
+                </choose>
+
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="Basiseinstellungen" UIHint="Headline" />
 
