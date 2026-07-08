@@ -3,6 +3,7 @@
 <KNX xmlns:op="http://github.com/OpenKNX/OpenKNXproducer" xmlns="http://knx.org/xml/project/20" CreatedBy="KNX MT" ToolVersion="5.1.255.16695">
 
   <op:config name="%TCH_TabName%" value="Touch-Display" />
+  <op:config name="%TCH_NumberOfCells%" value="4" />
   <ManufacturerData>
     <Manufacturer RefId="M-00FA">
 
@@ -10,7 +11,7 @@
       <ApplicationPrograms>
         <ApplicationProgram Id="%AID%" ApplicationNumber="200" ApplicationVersion="1" ProgramType="ApplicationProgram" MaskVersion="MV-07B0" Name="TCH" LoadProcedureStyle="MergedProcedure" PeiType="0" DefaultLanguage="de" DynamicTableManagement="false" Linkable="false" MinEtsVersion="4.0">
         
-          <op:part href="TouchDisplay.CellDefinition.xml" name="CellDefintion" instances="4">
+          <op:part href="TouchDisplay.CellDefinition.xml" name="CellDefintion" instances="%TCH_NumberOfCells%">
 				    <op:param name="%N%" value="1" />
             <op:param name="%OFFSET%" value="40" increment="5"/>
 					</op:part>
@@ -27,14 +28,25 @@
                 </TypeRestriction>
               </ParameterType>
 
-              <ParameterType Id="%AID%_PT-TCHNumbeOfFields" Name="TCHNumbeOfFields">
+              <ParameterType Id="%AID%_PT-TCHNumbeOfFields9" Name="TCHNumbeOfFields9">
+                <TypeRestriction Base="Value" SizeInBit="8">
+                  <Enumeration Text="2 Felder" Value="2" Id="%ENID%" />
+                  <Enumeration Text="3 Felder" Value="3" Id="%ENID%" />
+                  <Enumeration Text="4 Felder" Value="4" Id="%ENID%" />
+                  <Enumeration Text="6 Felder" Value="6" Id="%ENID%" />
+                  <Enumeration Text="7 Felder" Value="7" Id="%ENID%" />
+                  <Enumeration Text="9 Felder" Value="9" Id="%ENID%" />
+                </TypeRestriction>
+              </ParameterType>
+
+
+              <ParameterType Id="%AID%_PT-TCHNumbeOfFields4" Name="TCHNumbeOfFields4">
                 <TypeRestriction Base="Value" SizeInBit="8">
                   <Enumeration Text="2 Felder" Value="2" Id="%ENID%" />
                   <Enumeration Text="3 Felder" Value="3" Id="%ENID%" />
                   <Enumeration Text="4 Felder" Value="4" Id="%ENID%" />
                 </TypeRestriction>
               </ParameterType>
-
 
               <ParameterType Id="%AID%_PT-TCHCellType" Name="TCHCellType">
                 <TypeRestriction Base="Value" SizeInBit="8">

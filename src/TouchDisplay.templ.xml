@@ -22,7 +22,7 @@
                 <!-- Page Enabled -->
                 <Parameter Offset="1" BitOffset="3" Id="%AID%_UP-%TT%%CC%003" Name="CH%C%PageEnabled" ParameterType="%AID%_PT-TCHPageEnabled" Text="Seitenfreigabe über Objekt" Value="0" />
                 <!-- Number of fields -->
-                <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%004" Name="CH%C%NumbeOfFields" ParameterType="%AID%_PT-TCHNumbeOfFields" Text="Layout" Value="4" />
+                <Parameter Offset="2" BitOffset="0" Id="%AID%_UP-%TT%%CC%004" Name="CH%C%NumbeOfFields" ParameterType="%AID%_PT-TCHNumbeOfFields%TCH_NumberOfCells%" Text="Layout" Value="4" />
                 <!-- Page Name -->
                 <Parameter Offset="3" BitOffset="0" Id="%AID%_UP-%TT%%CC%005" Name="CH%C%PageName" ParameterType="%AID%_PT-TCHPageName" Text="Name" Value="Seite %C%" />
                 <!-- 25 chars + '\0' = 26 byes -->
