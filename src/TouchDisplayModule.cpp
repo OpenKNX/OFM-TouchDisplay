@@ -369,11 +369,9 @@ void TouchDisplayModule::setup(bool configured)
 
     if (configured)
     {
-        if (ParamTCH_Slide)
-        {
-            if (IScreenNavigation::instance != nullptr)
-                IScreenNavigation::instance->init(this);
-        }
+        if (IScreenNavigation::instance != nullptr)
+            IScreenNavigation::instance->init(this);
+        
     }
     _displayOffRectangle = lv_obj_create(lv_layer_top());
     lv_obj_t *activeScreen = lv_screen_active();

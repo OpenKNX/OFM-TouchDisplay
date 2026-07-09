@@ -247,12 +247,6 @@
               <!-- Always 0 -->
 							<Parameter Id="%AID%_P-%TT%00019" Name="Always0" ParameterType="%AID%_PT-OnOffYesNo" Text="Always0" Value="0"  Access="None"/> 
           
-              <!-- Use Navigation Bar  0 -->
-							<Parameter Id="%AID%_P-%TT%00022" Name="UseNavigationBar" ParameterType="%AID%_PT-OnOffYesNo" Text="UseNavigationBar" Value="%TCH_UseNavigationBar%"  Access="None"/> 
-          
-              <!-- Use Page Switch With Wipe  0 -->
-              <Parameter Id="%AID%_P-%TT%00023" Name="UsePageSwitchWithWipe" ParameterType="%AID%_PT-OnOffYesNo" Text="UsePageSwitchWithWipe" Value="%TCH_UsePageSwitchWithWipe%"  Access="None"/>
-
               <Union SizeInBit="112">
                 <Memory CodeSegment="%AID%_RS-04-00000" Offset="0" BitOffset="0" />
                 <!-- Visible Channels -->
@@ -300,9 +294,9 @@
                 <!-- Color Palette Night ON  -->
                 <Parameter Offset="12" BitOffset="0"  Id="%AID%_UP-%TT%00018" Name="ColorPaletteNightOn" ParameterType="%AID%_PT-TCHColorPalette" Text="Farbe Bild EIN" Value="14" />
                 <!-- Navigation Bar -->
-                <Parameter Offset="13" BitOffset="0"  Id="%AID%_UP-%TT%00024" Name="NavigationBar" ParameterType="%AID%_PT-TCHNavigationBar" Text="Navigationsleiste" Value="1" /> 
+                <Parameter Offset="13" BitOffset="0"  Id="%AID%_UP-%TT%00022" Name="NavigationBar" ParameterType="%AID%_PT-TCHNavigationBar" Text="Navigationsleiste" Value="2" /> 
                 <!--  4 bits free -->
-                <!-- Next Id="%AID%_UP-%TT%00025" -->
+                <!-- Next Id="%AID%_UP-%TT%00023" -->
               </Union>
 
             </Parameters>
@@ -351,12 +345,8 @@
               <ParameterRef Id="%AID%_UP-%TT%00020_R-%TT%0002001" RefId="%AID%_UP-%TT%00020" />
               <!-- KO Default page turn on display -->
               <ParameterRef Id="%AID%_UP-%TT%00021_R-%TT%0002101" RefId="%AID%_UP-%TT%00021" />
-              <!-- Use Navigation Bar -->
-              <ParameterRef Id="%AID%_P-%TT%00022_R-%TT%0002201" RefId="%AID%_P-%TT%00022" />
-              <!-- Use Page Switch With Wipe -->
-              <ParameterRef Id="%AID%_P-%TT%00023_R-%TT%0002301" RefId="%AID%_P-%TT%00023" />
               <!-- Navigation Bar -->
-              <ParameterRef Id="%AID%_UP-%TT%00024_R-%TT%0002401" RefId="%AID%_UP-%TT%00024" />
+              <ParameterRef Id="%AID%_UP-%TT%00022_R-%TT%0002201" RefId="%AID%_UP-%TT%00022" />
             </ParameterRefs>
             <ComObjectTable>
             	<!-- Display On/Off -->
@@ -439,6 +429,9 @@
             <Channel Id="%AID%_CH-%PREFIX%" Name="BasicChannel" Number="%PREFIX%" Text="%TCH_TabName%" Icon="animation-outline">
               <ParameterBlock Id="%AID%_PB-nnn" Name="Basic" Text="Allgemein" Icon="cog-outline" HelpContext="TCH-Touch-Display" >
 
+                <!-- Always 0 -->
+                <ParameterRefRef RefId="%AID%_P-%TT%00019_R-%TT%0001901" />
+
                 <ParameterSeparator Id="%AID%_PS-nnn" Text="%TCH_TabName%" UIHint="Headline" />
 								<ParameterSeparator Id="%AID%_PS-nnn" Text="Version: %ModuleVersion%" />
 								<ParameterSeparator Id="%AID%_PS-nnn" Text="" UIHint="HorizontalRuler" />
@@ -455,17 +448,17 @@
                   </when>
                 </choose>
                 
-                <!-- Use Navigation Bar -->
-                <choose ParamRefId="%AID%_P-%TT%00022_R-%TT%0002201">
-                  <when test="1">
+                <!-- Always 0 -->
+                <choose ParamRefId="%AID%_P-%TT%00019_R-%TT%0001901">
+                  <when test="!=%TCH_UseNavigationBar%">
                     <!-- Navigation Bar -->
-                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00024_R-%TT%0002401" HelpContext="%DOC%" />
+                    <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00022_R-%TT%0002201" HelpContext="%DOC%" />
                   </when>
                 </choose> 
 
-                <!-- Use Use Page Switch With Wipe -->
-                <choose ParamRefId="%AID%_P-%TT%00023_R-%TT%0002301">
-                  <when test="1">
+                <!-- Always 0 -->
+                <choose ParamRefId="%AID%_P-%TT%00019_R-%TT%0001901">
+                  <when test="!=%TCH_UsePageSwitchWithWipe%">
                     <!-- Slide -->
                     <ParameterRefRef IndentLevel="1" RefId="%AID%_UP-%TT%00014_R-%TT%0001401" HelpContext="%DOC%" />
                   </when>
