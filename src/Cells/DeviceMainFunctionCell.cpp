@@ -28,6 +28,7 @@ void DeviceMainFunctionCell::setup()
     KnxChannelBase& device = *_device;
     ICellObject& cellObject = *_cellObject;
     cellObject.SetLabelText(device.getNameInUTF8());
+    cellObject.SetPreferValueDisplay(device.mainFunctionPreferValueDisplay());
     
     cellObject.RegisterPressed([this]() { _clickStarted = true; });
  
@@ -47,15 +48,10 @@ void DeviceMainFunctionCell::setup()
 void DeviceMainFunctionCell::channelValueChanged(KnxChannelBase& channel)
 {
     ICellObject& cellObject = *_cellObject;
-    if (channel.mainFunctionPreferValueDisplay())
-    {
-        cellObject.SetValueText(channel.currentValueAsString().c_str());
-    }
-    else
-    {
-        auto image = channel.mainFunctionImage();
-        cellObject.SetImage(image.imageFile.c_str(), image.allowRecolor, channel.mainFunctionValue());
-    }
+    const std::string valueText = channel.currentValueAsString();
+    const auto image = channel.mainFunctionImage();
+    cellObject.SetValueText(valueText.c_str());
+    cellObject.SetMainFunctionImage(image.imageFile.c_str(), image.allowRecolor, channel.mainFunctionValue());
 }
 
 void DeviceMainFunctionCell::shortPressed()
